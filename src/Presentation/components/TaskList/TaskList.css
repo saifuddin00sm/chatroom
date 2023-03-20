@@ -1,0 +1,160 @@
+.task_list_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  position: fixed;
+  width: 370px;
+  min-height: 100vh;
+  right: 0;
+  top: 0px;
+  background: #f4f4f5;
+  border-left: 1px solid #e4e4e7;
+  font-family: "Inter", sans-serif;
+  z-index: -1;
+}
+
+/* SEARCH CONTAINER STYLE STARTED HERE */
+
+.task_list_container .search_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 66px;
+  padding: 16px 24px 16px 16px;
+}
+
+.task_list_container .search_left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 16px;
+  gap: 8px;
+  width: 297.91px;
+  height: 42px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.task_list_container .search_container button {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+}
+/* SEARCH CONTAINER STYLE ENDED HERE */
+
+/* ALL TASKS BOX STYLE STARTED HERE */
+
+.all_tasks_box {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ALL TASKS BOX STYLE ENDED HERE */
+
+/* TASK CARD STYLE STARTED HERE */
+
+.task_card {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 16px;
+  gap: 4px;
+  width: 330px;
+  height: 110px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+.task_card .tag_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 3px;
+  width: 101px;
+  height: 28px;
+  background: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  color: #344054;
+}
+
+.task_card .task_title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  color: #2b2b2b;
+  margin: 0;
+}
+
+.task_card .task_desc {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #424242;
+  margin: 0;
+}
+
+/* TASK CARD STYLE ENDED HERE */
+
+/* PAGINATION STYLE STARTED HERE */
+
+.pagination_container {
+  position: absolute;
+  width: 370px;
+  height: 64px;
+  right: 0;
+  bottom: 0;
+  background: #f4f4f5;
+  padding: 11px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-left: 1px solid #e4e4e7;
+}
+
+.pagination_container .prev-btn,
+.next-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  font-size: 22px;
+}
+
+.pagination_container .item {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: rgba(26, 26, 26, 0.5);
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.pagination_container .item.active {
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  color: #1a1a1a;
+  font-family: 600;
+}
+
+/* PAGINATION STYLE ENDED HERE */

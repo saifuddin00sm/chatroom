@@ -1,0 +1,141 @@
+.chat_list_container {
+  /* position: fixed; */
+  width: 298px;
+  min-height: 100vh;
+  /* left: 78px;
+  top: 0px; */
+  background: #f9fafb;
+  font-family: "Inter", sans-serif;
+  border-right: 1px solid #e4e4e7;
+}
+
+/* SEARCH CONTAINER STYLE STARTED HERE */
+
+.chat_list_container .search_container {
+  width: 100%;
+  display: flex;
+  padding: 12px 15px;
+  gap: 12px;
+}
+
+.chat_list_container .search_left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 16px;
+  width: 220px;
+  height: 42px;
+  background: #f9fafb;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+}
+
+.chat_list_container .search_left img {
+  width: 18px;
+}
+
+.chat_list_container .search_container .add_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+/* SEARCH CONTAINER STYLE ENDED HERE */
+
+/* CHAT BOX STYLE STARTED HERE */
+
+.all_chats_container {
+  overflow-y: scroll;
+  width: 100%;
+  height: calc(100vh - 66px);
+}
+
+.all_chats_container::-webkit-scrollbar {
+  appearance: none;
+  display: none;
+}
+
+.chat_list_container .chat_box_container {
+  border-bottom: 1px solid #ebebeb;
+  padding: 16px 15px;
+}
+
+.chat_list_container .chat_box {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  gap: 36px;
+  cursor: pointer;
+}
+
+.chat_list_container .chat_box_left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chat_list_container .user_avatar_box {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.chat_list_container .user_avatar_box img {
+  border-radius: 8px;
+}
+
+.chat_list_container .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 38px;
+}
+
+.chat_list_container .user_name {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #2b2b2b;
+  margin: 0;
+}
+
+.chat_list_container .last_text {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #8f8f8f;
+  margin: 0;
+}
+
+.chat_list_container .chat_box_right {
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.chat_list_container .date_time {
+  margin: 0;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: right;
+  color: #8d8d8d;
+}
+
+.chat_list_container .pin_icon {
+  cursor: pointer;
+  width: 16px;
+}
+
+/* CHAT BOX STYLE ENDED HERE */

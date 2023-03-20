@@ -1,0 +1,126 @@
+.message{
+    width: 50%;
+}
+
+.msg_main{
+    padding: 10px 15px;
+    margin-bottom: 25px;
+    text-align: left;
+    display: inline-block;
+}
+
+.receiver_msg{
+    background-color: #d3f8df;
+    border-radius: 8px 0px 8px 8px;
+    
+}
+
+.sender_msg{
+    background-color: #f2f3f6;
+    border-radius: 0 8px 8px;
+}
+
+.sender_msg .msg_img > img {
+    border-radius: 0 8px 8px;
+}
+.receiver_msg .msg_img > img {
+    border-radius: 8px 0px 8px 8px;
+}
+
+.msg_text{
+    color: #2b2b2b;
+    font-family:  "Inter", Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0;
+    word-wrap: break-word;
+    word-break: break-all;
+    max-width: 100%;
+    width: auto;
+}
+
+.right{
+    margin-right: auto;
+    display: flex;
+    justify-content: flex-start;
+
+}
+
+.left{
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.msg_file{
+    border-radius: 8px 0 8px 8px;
+    align-items: center;
+    gap: 8px;
+    /* padding: 10px 14px; */
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: #2b2b2b;
+}
+
+.msg_file > img{
+    height: 28px;
+    min-width: 20.36px;
+    object-fit: cover;
+    position: relative;
+}
+.content-3 {
+    align-items: flex-start;
+    display: flex;
+    gap: 16px;
+    position: relative;
+    width: 207px;
+  }
+
+  .supporting-text {
+    align-self: stretch;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: relative;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  .text {
+    align-self: stretch;
+    letter-spacing: 0;
+    line-height: 20px;
+    margin-top: -1.00px;
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .text-and-supporting-text {
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .content {
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+  }
+
+.msg_img{
+    height: 200px;
+    width: 290px;
+}
+.msg_img > img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
