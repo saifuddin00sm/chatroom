@@ -106,7 +106,7 @@ const Login = () => {
                     <label htmlFor="remember">Remember for 30 days</label>
                   </div>
 
-                  <p className="forgotPass">Forgot Password</p>
+                  <Link to="forgot-password" className="forgotPass">Forgot Password</Link>
                 </div>
 
                 <div className="form-inputs">

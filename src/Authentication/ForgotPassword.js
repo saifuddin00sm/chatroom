@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useAuthContext } from "../context/authContext.js";
 import InputBox from "./InputBox/InputBox.js";
 import "./Authentication.css";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const {
@@ -164,7 +165,7 @@ const Signup = () => {
               <div className="text-center mt-3">
                 <p>
                   Don’t have an account? {' '}
-                  <span className="forgotPass">Sign Up</span>
+                  <Link to="create-account" className="forgotPass">Sign Up</Link>
                 </p>
               </div>
             </form>

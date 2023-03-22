@@ -3,6 +3,7 @@ import { useAuthContext } from "../context/authContext.js";
 import InputBox from "./InputBox/InputBox.js";
 import socialIcon from "../assets/img/social-icon.svg";
 import "./Authentication.css";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const {
@@ -164,8 +165,8 @@ const Signup = () => {
 
               <div className="text-center mt-3">
                 <p>
-                  Don’t have an account? {' '}
-                  <span className="forgotPass">Sign Up</span>
+                  Already have an account? {' '}
+                  <Link to="login" className="forgotPass">Sign In</Link>
                 </p>
               </div>
 
