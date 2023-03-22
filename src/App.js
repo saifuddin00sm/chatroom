@@ -8,6 +8,7 @@ import { GetAuthContextProvider } from "./context/authContext";
 import Login from "./Authentication/Login";
 import Signup from "./Authentication/Signup";
 import ForgotPassword from "./Authentication/ForgotPassword";
+import LandingPage from "./Presentation/components/LandingPage/LandingPage";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <GetChatContextProvider>
           <Routes>
             {/* <Route path="auth" element={<Authentication />} /> */}
-            <Route path="/" exact element={<Dashboard />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/chat" exact element={<Dashboard />} />
             <Route path="login" exact element={<Login />} />
             <Route path="create-account" exact element={<Signup />} />
             <Route path="forgot-password" exact element={<ForgotPassword />} />
