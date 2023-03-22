@@ -48,22 +48,18 @@ const Login = () => {
       <div className="row">
         <div className="sideBar col-3">
           <div className="container">
-            <div>
-              <h2 className="sideBar-logo">LOGO HERE</h2>
-              <div className="features-items">
-                {/* {featuresItems.map(({ text, head }, index) => (
-                <div className="mb-5" key={index}>
-                  <div className="feature-head">{head}</div>
-                  <div className="feature-para">{text}</div>
+            <div className="auth-left-main">
+              <div>
+                <h2 className="sideBar-logo">TASKING.AI</h2>
+                <div className="features-items">
+                  <h3 className="sideBar-content">Task-oriented Multimodal AI Assistant</h3>
                 </div>
-              ))} */}
-                this is sidebar
+              </div>
+              <div className="copyright text-center p-4 text-dark">
+                <p>&#64; Copyright, XXX 2023</p>
+              </div>
               </div>
             </div>
-            <div className="copyright p-4 text-white">
-              <p>&#64; Copyright, XXX 2023</p>
-            </div>
-          </div>
         </div>
         <div className="form-box col-9">
           <div className="container">
@@ -125,8 +121,10 @@ const Login = () => {
 
                 <div className="text-center mt-3">
                   <p>
-                    Don’t have an account? {" "}
-                    <Link style={{textDecoration: 'none'}} to='signup'><span className="forgotPass">Sign Up</span></Link>
+                    Don’t have an account?{" "}
+                    <Link style={{ textDecoration: "none" }} to="signup">
+                      <span className="forgotPass">Sign Up</span>
+                    </Link>
                   </p>
                 </div>
 
