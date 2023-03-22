@@ -179,16 +179,16 @@ export const GetAuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const localToken = localStorage.getItem("token");
-    if (localToken) {
-      if (localToken === token) {
-        navigate("/");
-      } else {
-        navigate("auth");
-      }
-    } else {
-      navigate("auth");
-    }
+    // const localToken = localStorage.getItem("token");
+    // if (localToken) {
+    //   if (localToken === token) {
+    //     navigate("/");
+    //   } else {
+    //     navigate("login");
+    //   }
+    // } else {
+    //   navigate("login");
+    // }
   }, [token]);
 
   useEffect(() => {
@@ -208,7 +208,7 @@ export const GetAuthContextProvider = ({ children }) => {
 
         const res = await verifyToken.json();
         if (res.status === "error") {
-          navigate("auth");
+          navigate("login");
           setShowAlert(res?.error_msg);
           localStorage.removeItem('token');
         } else {
@@ -219,12 +219,12 @@ export const GetAuthContextProvider = ({ children }) => {
         console.log(error);
       }
     }
-    if (localToken) {
-      checkToken(localToken);
-      setToken(localToken);
-    }else{
-        navigate('auth');
-    }
+    // if (localToken) {
+    //   checkToken(localToken);
+    //   setToken(localToken);
+    // }else{
+    //     navigate('login');
+    // }
   }, []);
 
   return (

@@ -157,11 +157,10 @@ const ChatInput = () => {
       // Prevent default "Enter" behavior
       event.preventDefault();
       // this part send the messages with files when hit "Enter"
-    } else if (event.key === 'Enter') {
+    } else if (event.key === "Enter") {
       handlMsgSubmit(event);
     }
   };
-  
 
   return (
     <div className="chat_input_container">

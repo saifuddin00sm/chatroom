@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import ChatInput from "../ChatInput/ChatInput";
 import ChatViewHeader from "./ChatViewHeader";
 import "./ChatView.css";
@@ -8,7 +8,7 @@ import { useGetChatContext } from "../../../context/getChatContext";
 const ChatView = () => {
   const { chatInfo, chatInfoLoading, loadMoreMsgs} = useGetChatContext();
   const { chat_id, bot_id, latest_msg_list, chat_name, pinned } = chatInfo;
-  const { user_id } = JSON.parse(localStorage.getItem("user_info"));
+  const userData  = JSON.parse(localStorage.getItem("user_info"));
   const divRef = useRef(null);
 
   const handleScroll = () => {
@@ -51,7 +51,7 @@ const ChatView = () => {
             {Array.isArray(latest_msg_list) ? (
               latest_msg_list.map((item) => {
                 let msg;
-                if (item?.sender_id === user_id) {
+                if (item?.sender_id === userData?.user_id) {
                   msg = (
                     <MessageBox
                       key={item?.msg_id}
