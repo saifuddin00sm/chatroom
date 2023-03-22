@@ -41,7 +41,7 @@ const Login = () => {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [showAlert]);
+  }, [setShowAlert]);
 
   return (
     <div>
