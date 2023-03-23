@@ -166,7 +166,7 @@ const Signup = () => {
               <div className="text-center mt-3">
                 <p>
                   Already have an account? {' '}
-                  <Link to="login" className="forgotPass">Sign In</Link>
+                  <Link to="/login" className="forgotPass">Sign In</Link>
                 </p>
               </div>
 

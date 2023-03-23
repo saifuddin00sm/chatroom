@@ -19,9 +19,9 @@ function App() {
             {/* <Route path="auth" element={<Authentication />} /> */}
             <Route path="/" element={<LandingPage />} />
             <Route path="/chat" exact element={<Dashboard />} />
-            <Route path="login" exact element={<Login />} />
-            <Route path="create-account" exact element={<Signup />} />
-            <Route path="forgot-password" exact element={<ForgotPassword />} />
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/create-account" exact element={<Signup />} />
+            <Route path="/forgot-password" exact element={<ForgotPassword />} />
           </Routes>
           <ToastContainer />
         </GetChatContextProvider>

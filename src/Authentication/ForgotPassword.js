@@ -61,7 +61,7 @@ const Signup = () => {
     return () => {
       clearTimeout(timeOut);
     };
-  }, [showAlert]);
+  }, [setShowAlert]);
 
   return (
     <div className="row">
@@ -165,7 +165,7 @@ const Signup = () => {
               <div className="text-center mt-3">
                 <p>
                   Don’t have an account? {' '}
-                  <Link to="create-account" className="forgotPass">Sign Up</Link>
+                  <Link to="/create-account" className="forgotPass">Sign Up</Link>
                 </p>
               </div>
             </form>

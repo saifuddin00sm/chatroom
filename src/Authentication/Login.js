@@ -106,7 +106,7 @@ const Login = () => {
                     <label htmlFor="remember">Remember for 30 days</label>
                   </div>
 
-                  <Link to="forgot-password" className="forgotPass">Forgot Password</Link>
+                  <Link to="/forgot-password" className="forgotPass">Forgot Password</Link>
                 </div>
 
                 <div className="form-inputs">
@@ -122,7 +122,7 @@ const Login = () => {
                 <div className="text-center mt-3">
                   <p>
                     Don’t have an account?{" "}
-                    <Link style={{ textDecoration: "none" }} to="signup">
+                    <Link style={{ textDecoration: "none" }} to="/create-account">
                       <span className="forgotPass">Sign Up</span>
                     </Link>
                   </p>

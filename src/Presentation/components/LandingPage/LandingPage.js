@@ -11,10 +11,10 @@ const LandingPage = () => {
         <h4 className="landing_logo">Tasking.ai</h4>
         <div className="sign_in_btn row gap-2">
           <button className="col signin_btn">
-            <Link to="login">Sign In</Link>
+            <Link to="/login">Sign In</Link>
           </button>
           <button className="col signup_btn">
-            <Link to="create-account">Sign Up</Link>
+            <Link to="/create-account">Sign Up</Link>
           </button>
         </div>
       </header>
@@ -30,7 +30,7 @@ const LandingPage = () => {
             Revolution
           </p>
           <button className="sign_up_now" >
-            <Link to="create-account">Sign Up now</Link>
+            <Link to="/create-account">Sign Up now</Link>
           </button>
         </div>
       </section>
