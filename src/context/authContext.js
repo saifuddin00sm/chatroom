@@ -195,7 +195,7 @@ export const GetAuthContextProvider = ({ children }) => {
 
         const res = await verifyToken.json();
         if (res.status === "error") {
-          navigate("/login");
+          navigate("/");
           setShowAlert(res?.error_msg);
           localStorage.removeItem('token');
         } else {
@@ -215,11 +215,11 @@ export const GetAuthContextProvider = ({ children }) => {
         navigate('/chat')
       } 
       else {
-        navigate("/login");
+        navigate("/");
       }
     }
     else{
-        navigate('/login');
+        navigate('/');
     }
   }, [token]);
 

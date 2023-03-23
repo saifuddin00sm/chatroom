@@ -4,9 +4,10 @@ import ChatViewHeader from "./ChatViewHeader";
 import "./ChatView.css";
 import MessageBox from "./MessageBox";
 import { useGetChatContext } from "../../../context/getChatContext";
+import loadingAnim from '../../../assets/img/load-more-msg-anim.gif';
 
 const ChatView = () => {
-  const { chatInfo, chatInfoLoading, loadMoreMsgs} = useGetChatContext();
+  const { chatInfo, chatInfoLoading, loadMoreMsgs, moreMsgLoading} = useGetChatContext();
   const { chat_id, bot_id, latest_msg_list, chat_name, pinned } = chatInfo;
   const userData  = JSON.parse(localStorage.getItem("user_info"));
   const divRef = useRef(null);
@@ -48,35 +49,43 @@ const ChatView = () => {
             pinned={pinned}
           />
           <div className="msg_box" ref={divRef} onScroll={handleScroll}>
-            {Array.isArray(latest_msg_list) ? (
-              latest_msg_list.map((item) => {
-                let msg;
-                if (item?.sender_id === userData?.user_id) {
-                  msg = (
-                    <MessageBox
-                      key={item?.msg_id}
-                      type="receiver_msg"
-                      position="left"
-                      messageItems={item}
-                    />
-                  );
-                } else {
-                  msg = (
-                    <MessageBox
-                      key={item?.msg_id}
-                      type="sender_msg"
-                      position="right"
-                      messageItems={item}
-                    />
-                  );
-                }
-                return msg;
-              })
-            ) : (
-              <h5 style={{ textAlign: "center", marginTop: "50px" }}>
-                No Messages found!
-              </h5>
-            )}
+            {moreMsgLoading && <div className="d-flex justify-center align-center gap-2 loading-giff">
+              <img style={{height: '20px', width: '20px', borderRadius: '100%'}} src={
+                loadingAnim
+              } alt="loading animation"/>
+              <p className="mb-0" style={{fontSize: '13px'}}>Loading previous messages</p>
+            </div>}
+            <div className="msg_container">
+              {Array.isArray(latest_msg_list) ? (
+                latest_msg_list.map((item) => {
+                  let msg;
+                  if (item?.sender_id === userData?.user_id) {
+                    msg = (
+                      <MessageBox
+                        key={item?.msg_id}
+                        type="receiver_msg"
+                        position="left"
+                        messageItems={item}
+                      />
+                    );
+                  } else {
+                    msg = (
+                      <MessageBox
+                        key={item?.msg_id}
+                        type="sender_msg"
+                        position="right"
+                        messageItems={item}
+                      />
+                    );
+                  }
+                  return msg;
+                })
+              ) : (
+                <h5 style={{ textAlign: "center", marginTop: "50px" }}>
+                  No Messages found!
+                </h5>
+              )}
+            </div>
           </div>
           <div className="chat_view_bottom">
             <ChatInput />

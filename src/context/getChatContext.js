@@ -21,6 +21,7 @@ export const GetChatContextProvider = ({ children }) => {
   const [chatInfoLoading, setChatInfoLoading] = useState(false);
   const [chatInfo, setChatInfo] = useState({});
   const [socket, setSocket] = useState(null);
+  const [moreMsgLoading, setMoreMsgLoading] = useState(false)
   const toastId = useRef(null);
 
   const socketActions = async (message) => {
@@ -141,10 +142,7 @@ export const GetChatContextProvider = ({ children }) => {
         : 0;
 
       if (topMsgIndex < 1) return;
-      toastId.current = toast.loading("Getting more messages...", {
-        position: "top-center",
-        closeOnClick: true,
-      });
+      setMoreMsgLoading(true);
       const token = localStorage.getItem("token");
       const formData = new FormData();
 
@@ -164,7 +162,6 @@ export const GetChatContextProvider = ({ children }) => {
 
       if (res.ok) {
         if (data.status === "success") {
-          toast.dismiss(toastId.current);
           setChatInfo((prev) => {
             if (
               prev.latest_msg_list !== null &&
@@ -190,12 +187,9 @@ export const GetChatContextProvider = ({ children }) => {
               return { ...prev, latest_msg_list: [...data.msg_list] };
             }
           });
-          toast.success("Messages loaded!", {
-            position: "top-center",
-            theme: "colored",
-            autoClose: 1000,
-          });
+          setMoreMsgLoading(false)
         } else {
+          setMoreMsgLoading(false)
           toast.error(data.error_msg, {
             position: "top-center",
             theme: "colored",
@@ -203,6 +197,7 @@ export const GetChatContextProvider = ({ children }) => {
           });
         }
       } else {
+        setMoreMsgLoading(false)
         toast.error("faild to get data", {
           position: "top-center",
           theme: "colored",
@@ -210,6 +205,7 @@ export const GetChatContextProvider = ({ children }) => {
         });
       }
     } catch (error) {
+      setMoreMsgLoading(false)
       toast.error(error.message, {
         position: "top-center",
         theme: "colored",
@@ -338,6 +334,7 @@ export const GetChatContextProvider = ({ children }) => {
         connectSocket,
         disconnectSocket,
         loadMoreMsgs,
+        moreMsgLoading
       }}
     >
       {children}
