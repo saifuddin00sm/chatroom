@@ -8,6 +8,7 @@ import Login from "./Authentication/Login";
 import Signup from "./Authentication/Signup";
 import ForgotPassword from "./Authentication/ForgotPassword";
 import LandingPage from "./Presentation/components/LandingPage/LandingPage";
+import PageNotFound from "./Presentation/components/PageNotFound/PageNotFound";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <GetChatContextProvider>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/*" element={<div><h1>Page not found</h1></div>} />
+            <Route path="/*" element={<PageNotFound />} />
             <Route path="/chat" exact element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/create-account" element={<Signup />} />

@@ -21,8 +21,7 @@ export const GetChatContextProvider = ({ children }) => {
   const [chatInfoLoading, setChatInfoLoading] = useState(false);
   const [chatInfo, setChatInfo] = useState({});
   const [socket, setSocket] = useState(null);
-  const [moreMsgLoading, setMoreMsgLoading] = useState(false)
-  const toastId = useRef(null);
+  const [moreMsgLoading, setMoreMsgLoading] = useState(false);
 
   const socketActions = async (message) => {
     if (socket) {
