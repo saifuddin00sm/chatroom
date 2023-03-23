@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Authentication from "./Authentication/Authentication";
 import { ChatList, ChatView, SIdeMenu } from "./Presentation/index";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -16,8 +15,7 @@ function App() {
       <GetAuthContextProvider>
         <GetChatContextProvider>
           <Routes>
-            {/* <Route path="auth" element={<Authentication />} /> */}
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" exact element={<LandingPage />} />
             <Route path="/chat" exact element={<Dashboard />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/create-account" exact element={<Signup />} />

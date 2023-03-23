@@ -179,19 +179,6 @@ export const GetAuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // const localToken = localStorage.getItem("token");
-    // if (localToken) {
-    //   if (localToken === token) {
-    //     navigate("/");
-    //   } else {
-    //     navigate("login");
-    //   }
-    // } else {
-    //   navigate("login");
-    // }
-  }, [token]);
-
-  useEffect(() => {
     setTimeout(() => {
       setShowAlert("");
     }, 2000);
@@ -208,24 +195,33 @@ export const GetAuthContextProvider = ({ children }) => {
 
         const res = await verifyToken.json();
         if (res.status === "error") {
-          navigate("login");
+          navigate("/login");
           setShowAlert(res?.error_msg);
           localStorage.removeItem('token');
         } else {
-          navigate("/");
+          navigate("/chat");
+          console.log(res.user_info)
           localStorage.setItem("user_info", JSON.stringify(res.user_info));
         }
       } catch (error) {
         console.log(error);
       }
     }
-    // if (localToken) {
-    //   checkToken(localToken);
-    //   setToken(localToken);
-    // }else{
-    //     navigate('login');
-    // }
-  }, []);
+    if (localToken) {
+      checkToken(localToken);
+      setToken(localToken);
+
+      if (localToken === token) {
+        navigate('/chat')
+      } 
+      else {
+        navigate("/login");
+      }
+    }
+    else{
+        navigate('/login');
+    }
+  }, [token]);
 
   return (
     <AuthContext.Provider
