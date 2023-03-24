@@ -114,7 +114,17 @@ const ChatList = () => {
           )}
         </div>
         <div className="chats_bottom">
-        <div className="chat_bottom_items">credit left</div>
+        <div className="chat_bottom_items row align-items-center">
+        <div className="col-2">img</div>
+          <div className="col-10">
+              <div className="credit_heading d-flex justify-content-between">
+                <p className="mb-0">Credit Left</p>
+                <p className="mb-0">400/500</p>
+              </div>
+              <progress className="credit_progress" value="400" max="500"></progress>
+          </div> 
+        </div>
+       
         <div className="chat_bottom_items">Upgrade now</div>
         <div className="chat_bottom_items">Invite a friend</div>
         <div className="chat_bottom_items">Settings</div>

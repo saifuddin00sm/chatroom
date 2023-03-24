@@ -174,3 +174,21 @@ align-items: center;
   border-bottom: 1px solid #d9d9d9;
 }
 /* CHAT BOX STYLE ENDED HERE */
+
+
+.credit_progress {
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  background-color: #eee;
+}
+
+.credit_progress::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+.credit_progress::-webkit-progress-value {
+  background-color: #087443;
+  border-radius: 5px;
+}
