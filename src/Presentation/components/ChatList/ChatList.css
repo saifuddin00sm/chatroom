@@ -1,6 +1,6 @@
 .chat_list_container {
   /* position: fixed; */
-  width: 298px;
+  width: 300px;
   min-height: 100vh;
   /* left: 78px;
   top: 0px; */
@@ -14,7 +14,8 @@
 .chat_list_container .search_container {
   width: 100%;
   display: flex;
-  padding: 12px 15px;
+  padding: 11px 15px;
+  border-bottom: 1px solid #d9d9d9;
   gap: 12px;
 }
 
@@ -22,17 +23,39 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 5px 16px;
   width: 220px;
   height: 42px;
   background: #f9fafb;
-  border: 1px solid #e4e4e7;
+  /* border: 1px solid #e4e4e7;
+  border-radius: 8px; */
+}
+.chat_list_container .search_left .user_name{
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+color: #2B2B2B;
+}
+.chat_list_container .search_left .profile_img {
   border-radius: 8px;
+  padding: 8px;
+  color: #ffff;
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 32px;
+/* identical to box height, or 160% */
+display: flex;
+justify-content: center;
+align-items: center;
+  width: 42px;
+  height: 42px;
+  background-color: #087443;
 }
 
-.chat_list_container .search_left img {
-  width: 18px;
-}
 
 .chat_list_container .search_container .add_btn {
   display: flex;
@@ -52,9 +75,12 @@
 /* CHAT BOX STYLE STARTED HERE */
 
 .all_chats_container {
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 100%;
   height: calc(100vh - 66px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .all_chats_container::-webkit-scrollbar {
@@ -138,4 +164,13 @@
   width: 16px;
 }
 
+
+.chats_bottom{
+/* padding: 10px; */
+}
+
+.chat_bottom_items{
+  padding: 16px 15px;
+  border-bottom: 1px solid #d9d9d9;
+}
 /* CHAT BOX STYLE ENDED HERE */
