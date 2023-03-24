@@ -5,6 +5,7 @@ import "./ChatView.css";
 import MessageBox from "./MessageBox";
 import { useGetChatContext } from "../../../context/getChatContext";
 import loadingAnim from '../../../assets/img/load-more-msg-anim.gif';
+import chatLoading from '../../../assets/img/chat-loading.gif';
 
 const ChatView = () => {
   const { chatInfo, chatInfoLoading, loadMoreMsgs, moreMsgLoading} = useGetChatContext();
@@ -41,7 +42,7 @@ const ChatView = () => {
       {chatInfoLoading ? (
         // <div className="loader" style={{ width: "80px", height: "80px" }}></div>
       <div className="loading_screen">
-        <img scr="" alt="loading img" />
+        <img className="mb-3" src={chatLoading} alt="chat loading" />
         <p>
         Tasking.ai
         </p>

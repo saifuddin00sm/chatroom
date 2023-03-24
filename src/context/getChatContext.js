@@ -268,6 +268,10 @@ export const GetChatContextProvider = ({ children }) => {
     }
   };
 
+  const handleDeleteChat = ()=> {
+    //TODO: Make "Delete_chat" api call
+  }
+
   useEffect(() => {
     if (chatList.length) {
       let msgs = Array.isArray(chatList[0].latest_msg_list)
@@ -333,7 +337,8 @@ export const GetChatContextProvider = ({ children }) => {
         connectSocket,
         disconnectSocket,
         loadMoreMsgs,
-        moreMsgLoading
+        moreMsgLoading,
+        handleDeleteChat
       }}
     >
       {children}

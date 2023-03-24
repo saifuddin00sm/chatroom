@@ -179,7 +179,9 @@ export const GetAuthContextProvider = ({ children }) => {
   };
 
 
+  // Logs out the user with cleaning localStorage
   const handleLogout = ()=> {
+    //TODO: Make logout api call here
     localStorage.removeItem('token');
     setToken('');
   }

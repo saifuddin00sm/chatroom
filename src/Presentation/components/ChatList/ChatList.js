@@ -7,12 +7,17 @@ import "./ChatList.css";
 import { useGetChatContext } from "../../../context/getChatContext";
 import { useAuthContext } from "../../../context/authContext";
 import formatTime from "../../../utils/formatTime";
+import upgradeIcons from "../../../assets/img/Upgrade-Outline.png";
+import inviteIcons from "../../../assets/img/Invite-Outline.png";
+import settingIcons from "../../../assets/img/setting.png";
+import logoutIcons from "../../../assets/img/logout.png";
+import creditIcon from "../../../assets/img/credit1.png";
 
 const ChatList = () => {
-  const { chatList, getChatList, chatLoading, handleChat} =
+  const { chatList, getChatList, chatLoading, handleChat } =
     useGetChatContext();
-    const {handleLogout} = useAuthContext();
-    const userInfo =  JSON.parse(localStorage.getItem('user_info'));
+  const { handleLogout } = useAuthContext();
+  const userInfo = JSON.parse(localStorage.getItem("user_info"));
 
   useEffect(() => {
     getChatList();
@@ -20,14 +25,13 @@ const ChatList = () => {
 
   return (
     <div className="chat_list_container">
-
       <div className="search_container">
         <div className="search_left">
           <div className="profile_img">
             {userInfo?.first_name?.charAt(0) + userInfo?.last_name?.charAt(0)}
           </div>
           <div className="user_name">
-            {userInfo?.first_name +" "+ userInfo?.last_name}
+            {userInfo?.first_name + " " + userInfo?.last_name}
             {/* Saif uddin */}
           </div>
         </div>
@@ -38,13 +42,18 @@ const ChatList = () => {
 
       {/* CHAT BOX */}
       <div className="all_chats_container">
-        <div style={{display: chatLoading && 'flex', justifyContent: chatLoading && 'center'}}>
+        <div
+          style={{
+            display: chatLoading && "flex",
+            justifyContent: chatLoading && "center",
+          }}
+        >
           {chatLoading ? (
             <div
               style={{
                 width: "45px",
                 height: "45px",
-                marginTop: '20px'
+                marginTop: "20px",
               }}
               className="loader"
             ></div>
@@ -84,8 +93,8 @@ const ChatList = () => {
                                   ?.msg_type === "file"
                               ? latest_msg_list[latest_msg_list?.length - 1]
                                   ?.file_name
-                              : "No Messages" : 'No Messages'
-                            }
+                              : "No Messages"
+                            : "No Messages"}
                         </p>
                       </div>
                     </div>
@@ -113,24 +122,49 @@ const ChatList = () => {
           )}
         </div>
         <div className="chats_bottom">
-        <div className="chat_bottom_items row align-items-center">
-        <div className="col-2">img</div>
-          <div className="col-10">
+          <div className="chat_bottom_items d-flex gap-2 align-items-center">
+            <div style={{ width: "36px", height: "36px" }}>
+              <img style={{height: '100%', width: '100%', objectFit: 'cover'}} src={creditIcon} alt="" />
+            </div>
+            <div className="col-10">
               <div className="credit_heading d-flex justify-content-between">
                 <p className="mb-0">Credit Left</p>
                 <p className="mb-0">400/500</p>
               </div>
-              <progress className="credit_progress" value="400" max="500"></progress>
-          </div> 
-        </div>
-       
-        <div className="chat_bottom_items"><button class="chat_bottom_buttons">Upgrade now</button></div>
-        <div className="chat_bottom_items"><button class="chat_bottom_buttons">Invite a friend</button></div>
-        <div className="chat_bottom_items"><button class="chat_bottom_buttons">Settings</button></div>
-        <div className="chat_bottom_items"><button onClick={handleLogout} class="chat_bottom_buttons">Logout</button></div>
-      </div>
-      </div>
+              <progress
+                className="credit_progress"
+                value="400"
+                max="500"
+              ></progress>
+            </div>
+          </div>
 
+          <div className="chat_bottom_items">
+            <button class="chat_bottom_buttons">
+              <img src={upgradeIcons} alt="" />
+              <span>Upgrade now</span>
+            </button>
+          </div>
+          <div className="chat_bottom_items">
+            <button class="chat_bottom_buttons">
+              <img src={inviteIcons} alt="" />
+              <span>Invite a friend</span>
+            </button>
+          </div>
+          <div className="chat_bottom_items">
+            <button class="chat_bottom_buttons">
+              <img src={settingIcons} alt="" />
+              <span>Settings</span>
+            </button>
+          </div>
+          <div className="chat_bottom_items">
+            <button onClick={handleLogout} class="chat_bottom_buttons">
+              <img src={logoutIcons} alt="" />
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

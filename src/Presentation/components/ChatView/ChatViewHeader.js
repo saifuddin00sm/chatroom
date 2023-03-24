@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import user_avatar from "../../../assets/img/bots_avatar.jpg";
+// import user_avatar from "../../../assets/img/bots_avatar.jpg";
 import pin_icon_2 from "../../../assets/img/pin_icon_2.png";
 import pin_filled_icon from "../../../assets/img/pin-filled.svg";
 import three_dots_icon from "../../../assets/img/three_dots_icon.png";
-import { IoIosArrowForward } from "react-icons/io";
+// import { IoIosArrowForward } from "react-icons/io";
 import { useGetChatContext } from "../../../context/getChatContext";
 import "./ChatViewHeader";
 
@@ -25,15 +25,15 @@ const ChatViewHeader = ({ chatName, agentName, chatId, pinned }) => {
   return (
     <div className="chat_view_header">
       <div className="chat_view_header_left">
-        <div className="avatar_container">
+        {/* <div className="avatar_container">
           <img
             src={user_avatar}
             alt="User_Avatar"
             className="img-fluid w-100 h-100"
           />
-        </div>
-        <p className="user_name">{agentName}</p>
-        <IoIosArrowForward className="right_arrow_icon" />
+        </div> */}
+        {/* <p className="user_name">{agentName}</p>
+        <IoIosArrowForward className="right_arrow_icon" /> */}
         <form onSubmit={(e)=> updateInfo(e, inputVal, chatId, 'name')}>
           <input
             onChange={(e)=> setInputVal(e.target.value)}
