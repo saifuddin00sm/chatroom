@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./MessageBox.css";
 import { Lightbox } from "react-modal-image";
+import Menus from "./Menus";
 import csvIcon from "../../../assets/img/CSV.png";
 import docIcon from "../../../assets/img/DOC.png";
 import docxIcon from "../../../assets/img/DOCX.png";
@@ -12,10 +13,11 @@ import txtIcon from "../../../assets/img/TXT.png";
 import xlsIcon from "../../../assets/img/XLS.png";
 import xlsxIcon from "../../../assets/img/XLSX.png";
 
-const MessageBox = ({ type, position, messageItems }) => {
+const MessageBox = ({ type, position, messageItems}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [sizeOfFile, setSizeOfFile] = useState("");
+  const [menusItems, setMenusItems] = useState(false);
 
   const handleModal = (url) => {
     setIsOpen(true);
@@ -58,8 +60,13 @@ const MessageBox = ({ type, position, messageItems }) => {
     <>
       <div className={`message ${position}`}>
         <div className={`msg_main ${type}`} style={{padding: `${messageItems?.msg_type === 'image' && 0}`}}>
+          {menusItems && <Menus />}
           {messageItems?.msg_type === "text" ? (
-            <p className="msg_text">{messageItems?.text}</p>
+            <p onContextMenu={()=> {
+              if(type==='sender_msg'){
+                setMenusItems(true);
+              }
+            }} className="msg_text">{messageItems?.text}</p>
           ) : messageItems?.msg_type === "image" ? (
             <div
               className="msg_img"

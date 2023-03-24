@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import user_avatar from "../../../assets/img/bots_avatar.jpg";
 import pin_icon_2 from "../../../assets/img/pin_icon_2.png";
 import pin_filled_icon from "../../../assets/img/pin-filled.svg";
 import three_dots_icon from "../../../assets/img/three_dots_icon.png";
