@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
-import search_icon from "../../../assets/img/search_icon.png";
 import add_icon from "../../../assets/img/add_icon.png";
-import user_avatar from "../../../assets/img/bots_avatar.jpg";
 import pin_icon from "../../../assets/img/pin_icon.png";
 import pin_filled_icon from "../../../assets/img/pin-filled.svg";
-import Input from "../../common/Input/Input";
 // import ChatListModel from "../../../models/ChatListModel";
 import "./ChatList.css";
 import { useGetChatContext } from "../../../context/getChatContext";
+import { useAuthContext } from "../../../context/authContext";
 import formatTime from "../../../utils/formatTime";
 
 const ChatList = () => {
   const { chatList, getChatList, chatLoading, handleChat} =
     useGetChatContext();
+    const {handleLogout} = useAuthContext();
     const userInfo =  JSON.parse(localStorage.getItem('user_info'));
 
   useEffect(() => {
@@ -125,10 +124,10 @@ const ChatList = () => {
           </div> 
         </div>
        
-        <div className="chat_bottom_items">Upgrade now</div>
-        <div className="chat_bottom_items">Invite a friend</div>
-        <div className="chat_bottom_items">Settings</div>
-        <div className="chat_bottom_items">Logout</div>
+        <div className="chat_bottom_items"><button class="chat_bottom_buttons">Upgrade now</button></div>
+        <div className="chat_bottom_items"><button class="chat_bottom_buttons">Invite a friend</button></div>
+        <div className="chat_bottom_items"><button class="chat_bottom_buttons">Settings</button></div>
+        <div className="chat_bottom_items"><button onClick={handleLogout} class="chat_bottom_buttons">Logout</button></div>
       </div>
       </div>
 

@@ -164,17 +164,28 @@ align-items: center;
   width: 16px;
 }
 
-
-.chats_bottom{
-/* padding: 10px; */
-}
-
 .chat_bottom_items{
-  padding: 16px 15px;
+  padding: 12px 15px;
   border-bottom: 1px solid #d9d9d9;
 }
 /* CHAT BOX STYLE ENDED HERE */
 
+
+.chats_bottom .chat_bottom_buttons{
+  border: none;
+  outline: none;
+  transition: all .2s;
+  padding: 8px 15px;
+  border-radius: 5px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+}
+
+.chats_bottom .chat_bottom_buttons:hover{
+  background: #087443;
+  color: #fff;
+}
 
 .credit_progress {
   width: 100%;

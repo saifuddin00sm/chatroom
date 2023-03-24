@@ -178,6 +178,12 @@ export const GetAuthContextProvider = ({ children }) => {
     }
   };
 
+
+  const handleLogout = ()=> {
+    localStorage.removeItem('token');
+    setToken('');
+  }
+
   useEffect(() => {
     setTimeout(() => {
       setShowAlert("");
@@ -238,6 +244,7 @@ export const GetAuthContextProvider = ({ children }) => {
         handleResetPass,
         isVerified,
         verifyLoding,
+        handleLogout
       }}
     >
       {children}
