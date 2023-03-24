@@ -130,3 +130,16 @@
 .chat_header_input:focus {
   border: 2px solid #cccc;
 }
+
+.loading_screen{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 28px;
+line-height: 34px;
+
+text-align: center;
+
+color: #099250;
+text-transform: uppercase;
+}

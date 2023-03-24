@@ -39,7 +39,13 @@ const ChatView = () => {
       }`}
     >
       {chatInfoLoading ? (
-        <div className="loader" style={{ width: "80px", height: "80px" }}></div>
+        // <div className="loader" style={{ width: "80px", height: "80px" }}></div>
+      <div className="loading_screen">
+        <img scr="" alt="loading img" />
+        <p>
+        Tasking.ai
+        </p>
+      </div>
       ) : (
         <>
           <ChatViewHeader
