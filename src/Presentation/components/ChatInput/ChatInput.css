@@ -127,3 +127,11 @@
   height: 100%;
   width: 100%;
 }
+
+.replyMsg{
+  border-bottom: 1px solid;
+  padding: 7px 11px;
+  font-style: italic;
+  border-radius: 4px;
+  background: #eee;
+}

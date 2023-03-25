@@ -15,6 +15,7 @@ import txtIcon from "../../../assets/img/TXT.png";
 import xlsIcon from "../../../assets/img/XLS.png";
 import xlsxIcon from "../../../assets/img/XLSX.png";
 import closeIcon from "../../../assets/img/closeIcon.png";
+import replyIcon from "../../../assets/img/reply-icon.svg";
 import { baseUrl, uploadMsgFileUrl, uploadMsgImgUrl } from "../../../urls/urls";
 import { useGetChatContext } from "../../../context/getChatContext";
 
@@ -228,7 +229,9 @@ const ChatInput = () => {
               ))
             : ""}
         </div>
-        {replyMsg && <div>{replyMsg}</div>}
+        {replyMsg && <div className="replyMsg">
+          <img src={replyIcon} alt="" /> {" "}
+          <span>{replyMsg}</span></div>}
         <textarea
           value={textInputVal}
           onKeyDown={handleKeyDown}
