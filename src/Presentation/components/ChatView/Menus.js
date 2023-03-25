@@ -1,7 +1,7 @@
 import React from "react";
 import copyIcon from "../../../assets/img/copy-icon.svg";
 import downloadIcon from "../../../assets/img/download-arrow.svg";
-import replyIcon from "../../../assets/img/reply-icon.svg";
+// import replyIcon from "../../../assets/img/reply-icon.svg";
 import { useGetChatContext } from "../../../context/getChatContext";
 import {VscReply} from 'react-icons/vsc'
 

@@ -18,12 +18,14 @@ import closeIcon from "../../../assets/img/closeIcon.png";
 import replyIcon from "../../../assets/img/reply-icon.svg";
 import { baseUrl, uploadMsgFileUrl, uploadMsgImgUrl } from "../../../urls/urls";
 import { useGetChatContext } from "../../../context/getChatContext";
+import {FaRegTimesCircle} from 'react-icons/fa'
 
 const ChatInput = () => {
   const [inputItem, setInputItem] = useState([]);
   const [textInputVal, setTextInputVal] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState([]);
-  const { chatInfo, socketActions, replyMsg, handleReplyMsg } = useGetChatContext();
+  const { chatInfo, socketActions, replyMsg, handleReplyMsg } =
+    useGetChatContext();
 
   // Upload the files to the server when user selects any file ex: (img, doc, xls) etc...
   const handleFiles = async (e) => {
@@ -138,7 +140,7 @@ const ChatInput = () => {
     setTextInputVal("");
     setInputItem([]);
     setUploadSuccess([]);
-    handleReplyMsg('')
+    handleReplyMsg("");
   };
 
   // This function creates new lines when pressed crtl+enter key
@@ -229,9 +231,17 @@ const ChatInput = () => {
               ))
             : ""}
         </div>
-        {replyMsg && <div className="replyMsg">
-          <img src={replyIcon} alt="" /> {" "}
-          <span>{replyMsg}</span></div>}
+        {replyMsg && (
+          <div className="replyMsg">
+            <div>
+              <img src={replyIcon} alt="" />
+              <span>{replyMsg}</span>
+            </div>
+            <div onClick={()=> handleReplyMsg('')} style={{cursor: 'pointer'}}>
+              <FaRegTimesCircle style={{height: '18px', width: '18px'}} />
+            </div>
+          </div>
+        )}
         <textarea
           value={textInputVal}
           onKeyDown={handleKeyDown}
