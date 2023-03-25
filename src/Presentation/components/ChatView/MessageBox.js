@@ -62,7 +62,8 @@ const MessageBox = ({ type, position, messageItems}) => {
         <div className={`msg_main ${type}`} style={{padding: `${messageItems?.msg_type === 'image' && 0}`}}>
           {menusItems && <Menus />}
           {messageItems?.msg_type === "text" ? (
-            <p onContextMenu={()=> {
+            <p onContextMenu={(e)=> {
+              e.preventDefault();
               if(type==='sender_msg'){
                 setMenusItems(true);
               }
