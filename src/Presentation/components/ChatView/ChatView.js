@@ -12,21 +12,6 @@ const ChatView = () => {
   const { chat_id, bot_id, latest_msg_list, chat_name, pinned } = chatInfo;
   const userData  = JSON.parse(localStorage.getItem("user_info"));
   const divRef = useRef(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(true);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (divRef.current && !divRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
-      }
-    }
-
-    window.addEventListener("click", handleClickOutside);
-
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
-  }, [divRef]);
 
   const handleScroll = () => {
     const { scrollTop} = divRef.current;

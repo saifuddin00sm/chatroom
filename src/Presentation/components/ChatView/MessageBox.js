@@ -56,17 +56,22 @@ const MessageBox = ({ type, position, messageItems}) => {
     }
   }, [messageItems]);
 
+  window.addEventListener('click', function(){
+    setMenusItems(false)
+  })
+
   return (
     <>
       <div className={`message ${position}`}>
-        <div className={`msg_main ${type}`} style={{padding: `${messageItems?.msg_type === 'image' && 0}`}}>
-          {menusItems && <Menus />}
-          {messageItems?.msg_type === "text" ? (
-            <p onContextMenu={()=> {
+        <div onContextMenu={(e)=> {
+              e.preventDefault();
               if(type==='sender_msg'){
                 setMenusItems(true);
               }
-            }} className="msg_text">{messageItems?.text}</p>
+            }}  className={`msg_main ${type}`} style={{padding: `${messageItems?.msg_type === 'image' && 0}`}}>
+          {menusItems && <Menus msgs={messageItems}/>}
+          {messageItems?.msg_type === "text" ? (
+            <p className="msg_text">{messageItems?.text}</p>
           ) : messageItems?.msg_type === "image" ? (
             <div
               className="msg_img"

@@ -22,6 +22,12 @@ export const GetChatContextProvider = ({ children }) => {
   const [chatInfo, setChatInfo] = useState({});
   const [socket, setSocket] = useState(null);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
+  const [replyMsg, setReplyMsg] = useState('');
+
+
+  const handleReplyMsg = (msg)=> {
+      setReplyMsg(msg);
+  }
 
   const socketActions = async (message) => {
     if (socket) {
@@ -338,7 +344,9 @@ export const GetChatContextProvider = ({ children }) => {
         disconnectSocket,
         loadMoreMsgs,
         moreMsgLoading,
-        handleDeleteChat
+        handleDeleteChat,
+        handleReplyMsg,
+        replyMsg
       }}
     >
       {children}

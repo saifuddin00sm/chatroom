@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import gallery_icon from "../../../assets/img/gallery_icon.png";
 import attach_icon from "../../../assets/img/attach_icon.png";
 import send_icon from "../../../assets/img/send_icon.png";
@@ -22,7 +22,7 @@ const ChatInput = () => {
   const [inputItem, setInputItem] = useState([]);
   const [textInputVal, setTextInputVal] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState([]);
-  const { chatInfo, socketActions } = useGetChatContext();
+  const { chatInfo, socketActions, replyMsg, handleReplyMsg } = useGetChatContext();
 
   // Upload the files to the server when user selects any file ex: (img, doc, xls) etc...
   const handleFiles = async (e) => {
@@ -137,6 +137,7 @@ const ChatInput = () => {
     setTextInputVal("");
     setInputItem([]);
     setUploadSuccess([]);
+    handleReplyMsg('')
   };
 
   // This function creates new lines when pressed crtl+enter key
@@ -227,6 +228,7 @@ const ChatInput = () => {
               ))
             : ""}
         </div>
+        {replyMsg && <div>{replyMsg}</div>}
         <textarea
           value={textInputVal}
           onKeyDown={handleKeyDown}
