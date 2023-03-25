@@ -3,6 +3,7 @@ import copyIcon from "../../../assets/img/copy-icon.svg";
 import downloadIcon from "../../../assets/img/download-arrow.svg";
 import replyIcon from "../../../assets/img/reply-icon.svg";
 import { useGetChatContext } from "../../../context/getChatContext";
+import {VscReply} from 'react-icons/vsc'
 
 const Menus = ({ msgs }) => {
   const {handleReplyMsg} = useGetChatContext();
@@ -45,7 +46,7 @@ const Menus = ({ msgs }) => {
         </li>: ''}
         <li onClick={()=> handleReplyMsg(msgs.text)} className="d-flex gap-2 align-items-center">
           <div>
-            <img src={replyIcon} alt="" />
+            <VscReply />
           </div>
           <div>
             <span>Reply</span>

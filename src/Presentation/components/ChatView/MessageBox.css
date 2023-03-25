@@ -141,6 +141,10 @@
     padding-left: 0;
     margin-bottom: 0;
 }
+.menus ul li{
+    cursor: pointer;
+    margin-bottom: 5px;
+}
 
 .menus::after {
     content: "";
