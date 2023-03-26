@@ -18,7 +18,7 @@ import closeIcon from "../../../assets/img/closeIcon.png";
 import replyIcon from "../../../assets/img/reply-icon.svg";
 import { baseUrl, uploadMsgFileUrl, uploadMsgImgUrl } from "../../../urls/urls";
 import { useGetChatContext } from "../../../context/getChatContext";
-import {FaRegTimesCircle} from 'react-icons/fa'
+import { FaRegTimesCircle } from "react-icons/fa";
 
 const ChatInput = () => {
   const [inputItem, setInputItem] = useState([]);
@@ -140,7 +140,7 @@ const ChatInput = () => {
     setTextInputVal("");
     setInputItem([]);
     setUploadSuccess([]);
-    handleReplyMsg("");
+    handleReplyMsg(null);
   };
 
   // This function creates new lines when pressed crtl+enter key
@@ -233,12 +233,21 @@ const ChatInput = () => {
         </div>
         {replyMsg && (
           <div className="replyMsg">
-            <div>
-              <img src={replyIcon} alt="" />
-              <span>{replyMsg}</span>
+            <div className="d-flex gap-2">
+              <div><img src={replyIcon} alt="" /></div>
+              {replyMsg.type === "text" ? (
+                <span>{replyMsg.msg}</span>
+              ) : replyMsg.type === "image" ? (
+                <img src={replyMsg.msg} alt={replyMsg.alt} />
+              ) : replyMsg.type === 'file' && (
+                <span>{replyMsg.msg}</span>
+              )}
             </div>
-            <div onClick={()=> handleReplyMsg('')} style={{cursor: 'pointer'}}>
-              <FaRegTimesCircle style={{height: '18px', width: '18px'}} />
+            <div
+              onClick={() => handleReplyMsg(null)}
+              style={{ cursor: "pointer" }}
+            >
+              <FaRegTimesCircle style={{ height: "18px", width: "18px" }} />
             </div>
           </div>
         )}

@@ -22,7 +22,7 @@ export const GetChatContextProvider = ({ children }) => {
   const [chatInfo, setChatInfo] = useState({});
   const [socket, setSocket] = useState(null);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
-  const [replyMsg, setReplyMsg] = useState('');
+  const [replyMsg, setReplyMsg] = useState(null);
 
 
   const handleReplyMsg = (msg)=> {
@@ -60,6 +60,7 @@ export const GetChatContextProvider = ({ children }) => {
               : null;
             setChatInfo({ ...res.chat_info, latest_msg_list: msgs });
             setChatInfoLoading(false);
+            handleReplyMsg(null);
           } else {
             toast.error(res.error_msg, {
               position: "top-center",
