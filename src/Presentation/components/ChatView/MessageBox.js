@@ -12,12 +12,14 @@ import pptxIcon from "../../../assets/img/PPTX.png";
 import txtIcon from "../../../assets/img/TXT.png";
 import xlsIcon from "../../../assets/img/XLS.png";
 import xlsxIcon from "../../../assets/img/XLSX.png";
+import { useGetChatContext } from "../../../context/getChatContext";
 
-const MessageBox = ({ type, position, messageItems}) => {
+const MessageBox = ({ type, position, messageItems }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [sizeOfFile, setSizeOfFile] = useState("");
   const [menusItems, setMenusItems] = useState(false);
+  const { showReplyBox } = useGetChatContext();
 
   const handleModal = (url) => {
     setIsOpen(true);
@@ -56,73 +58,88 @@ const MessageBox = ({ type, position, messageItems}) => {
     }
   }, [messageItems]);
 
-  window.addEventListener('click', function(){
-    setMenusItems(false)
-  })
+  window.addEventListener("click", function () {
+    setMenusItems(false);
+  });
+
 
   return (
     <>
-      <div className={`message ${position}`}>
-        <div onContextMenu={(e)=> {
+      <div className="msg_parent">
+        <div className={`message ${position}`}>
+          <div
+            onContextMenu={(e) => {
               e.preventDefault();
-              if(type==='sender_msg'){
+              if (type === "sender_msg") {
                 setMenusItems(true);
               }
-            }}  className={`msg_main ${type}`} style={{padding: `${messageItems?.msg_type === 'image' && 0}`}}>
-          {menusItems && <Menus msgs={messageItems}/>}
-          {messageItems?.msg_type === "text" ? (
-            <p className="msg_text">{messageItems?.text}</p>
-          ) : messageItems?.msg_type === "image" ? (
-            <div
-              className="msg_img"
-              onClick={() => handleModal(messageItems?.image_url)}
-            >
-              <img
-                src={messageItems?.image_url}
-                alt={messageItems?.image_name}
-              />
-            </div>
-          ) : (
-            <a href={messageItems?.file_url} download className="msg_file">
-              <img
-                src={
-                  messageItems?.file_name.includes(".csv")
-                    ? csvIcon
-                    : messageItems?.file_name.includes(".doc")
-                    ? docIcon
-                    : messageItems?.file_name.includes(".docx")
-                    ? docxIcon
-                    : messageItems?.file_name.includes(".pdf")
-                    ? pdfIcon
-                    : messageItems?.file_name.includes(".ppt")
-                    ? pptIcon
-                    : messageItems?.file_name.includes(".pptx")
-                    ? pptxIcon
-                    : messageItems?.file_name.includes(".txt")
-                    ? txtIcon
-                    : messageItems?.file_name.includes(".xls")
-                    ? xlsIcon
-                    : messageItems?.file_name.includes(".xlsx")
-                    ? xlsxIcon
-                    : otherIcon
-                }
-                alt="doc-img"
-              />
-              <div className="content-3">
-                <div className="content">
-                  <div className="text-and-supporting-text">
-                    <div className="text inter-medium-oxford-blue-14px">
-                      {messageItems?.file_name}
-                    </div>
-                    <div className="supporting-text inter-normal-fiord-14px">
-                      {sizeOfFile + "MB"}
+            }}
+            className={`msg_main ${type}`}
+            style={{ padding: `${messageItems?.msg_type === "image" && 0}` }}
+          >
+            {menusItems && <Menus msgs={messageItems} />}
+            {messageItems?.msg_type === "text" ? (
+              <p className="msg_text">{messageItems?.text}</p>
+            ) : messageItems?.msg_type === "image" ? (
+              <div
+                className="msg_img"
+                onClick={() => handleModal(messageItems?.image_url)}
+              >
+                <img
+                  src={messageItems?.image_url}
+                  alt={messageItems?.image_name}
+                />
+              </div>
+            ) : messageItems?.msg_type === "file" &&
+              messageItems?.file_name.includes(".mp3") ? (
+              <div>
+                <audio controls src={messageItems?.file_url} />
+              </div>
+            ) : (
+              <a href={messageItems?.file_url} download className="msg_file">
+                <img
+                  src={
+                    messageItems?.file_name.includes(".csv")
+                      ? csvIcon
+                      : messageItems?.file_name.includes(".doc")
+                      ? docIcon
+                      : messageItems?.file_name.includes(".docx")
+                      ? docxIcon
+                      : messageItems?.file_name.includes(".pdf")
+                      ? pdfIcon
+                      : messageItems?.file_name.includes(".ppt")
+                      ? pptIcon
+                      : messageItems?.file_name.includes(".pptx")
+                      ? pptxIcon
+                      : messageItems?.file_name.includes(".txt")
+                      ? txtIcon
+                      : messageItems?.file_name.includes(".xls")
+                      ? xlsIcon
+                      : messageItems?.file_name.includes(".xlsx")
+                      ? xlsxIcon
+                      : otherIcon
+                  }
+                  alt="doc-img"
+                />
+                <div className="content-3">
+                  <div className="content">
+                    <div className="text-and-supporting-text">
+                      <div className="text inter-medium-oxford-blue-14px">
+                        {messageItems?.file_name}
+                      </div>
+                      <div className="supporting-text inter-normal-fiord-14px">
+                        {sizeOfFile + "MB"}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          )}
+              </a>
+            )}
+          </div>
         </div>
+        {type === "receiver_msg" && showReplyBox && (
+          <div className="reply_box">{showReplyBox.msg}</div>
+        )}
       </div>
       {isOpen && (
         <Lightbox

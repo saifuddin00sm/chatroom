@@ -22,16 +22,17 @@ const ChatView = () => {
   };
 
 
-  // useEffect(() => {
-  //   // This will automatically scroll to the bottom of the div when it loads or updates
-  //   if (!chatInfoLoading) {
-  //     const { scrollHeight, clientHeight } = divRef.current;
-  //     divRef.current.scrollTo({
-  //       top: scrollHeight - clientHeight,
-  //     });
-  //   }
-  // }, [chatInfoLoading]);
+  useEffect(() => {
+    // This will automatically scroll to the bottom of the div when it loads or updates
+    if (!chatInfoLoading) {
+      const { scrollHeight, clientHeight } = divRef.current;
+      divRef.current.scrollTo({
+        top: scrollHeight - clientHeight,
+      });
+    }
+  }, [chatInfoLoading]);
   
+  // console.log(latest_msg_list)
 
   return (
     <div

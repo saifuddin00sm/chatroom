@@ -2,6 +2,7 @@ import { useContext, createContext, useState, useEffect } from "react";
 import {
   baseUrl,
   loginUrl,
+  logoutUrl,
   registerUrl,
   updatePasswordUrl,
   verificationCodeUrl,
@@ -180,10 +181,30 @@ export const GetAuthContextProvider = ({ children }) => {
 
 
   // Logs out the user with cleaning localStorage
-  const handleLogout = ()=> {
-    //TODO: Make logout api call here
-    localStorage.removeItem('token');
-    setToken('');
+  const handleLogout = async ()=> {
+    const localToken = localStorage.getItem("token");
+    try {
+      const res = await fetch(baseUrl + logoutUrl, {
+        method: "POST",
+        headers: {'Authorization': `Bearer ${localToken}` },
+      });
+
+      const resText = await res.json();
+
+   if(res.ok){
+    if(resText.status === 'success'){
+      console.log('res', resText)
+      localStorage.removeItem('token');
+      setToken('');
+    }else{
+      console.log(resText.error_msg);
+    }
+   }else{
+    console.log('server error')
+   }
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
   useEffect(() => {
@@ -208,7 +229,7 @@ export const GetAuthContextProvider = ({ children }) => {
           localStorage.removeItem('token');
         } else {
           navigate("/chat");
-          console.log(res.user_info)
+          console.log(res)
           localStorage.setItem("user_info", JSON.stringify(res.user_info));
         }
       } catch (error) {

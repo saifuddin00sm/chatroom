@@ -1,10 +1,13 @@
+.msg_parent{
+    margin-bottom: 20px;
+}
 .message{
     width: 50%;
 }
 
 .msg_main{
     padding: 10px 15px;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
     text-align: left;
     display: inline-block;
     position: relative;
@@ -155,4 +158,10 @@
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent #c3c7d1 transparent;
+  }
+
+  .reply_box{
+    margin-right: auto;
+    display: flex;
+    justify-content: flex-end;
   }

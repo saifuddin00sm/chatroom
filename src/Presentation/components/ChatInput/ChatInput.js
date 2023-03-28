@@ -24,7 +24,7 @@ const ChatInput = () => {
   const [inputItem, setInputItem] = useState([]);
   const [textInputVal, setTextInputVal] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState([]);
-  const { chatInfo, socketActions, replyMsg, handleReplyMsg } =
+  const { chatInfo, socketActions, replyMsg, handleReplyMsg ,setShowReplyBox} =
     useGetChatContext();
 
   // Upload the files to the server when user selects any file ex: (img, doc, xls) etc...
@@ -135,11 +135,13 @@ const ChatInput = () => {
 
     // Socket send message handler
     socketActions(msgObj);
+    // console.log(msgList)
 
     // Clear the old states once submit the message to the socket.io
     setTextInputVal("");
     setInputItem([]);
     setUploadSuccess([]);
+    setShowReplyBox(replyMsg);
     handleReplyMsg(null);
   };
 

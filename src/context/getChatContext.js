@@ -1,6 +1,7 @@
 import { useContext, createContext, useState, useEffect, useRef } from "react";
 import {
   baseUrl,
+  deleteChatUrl,
   getChatInfoUrl,
   getChatListUrl,
   getMsgsUrl,
@@ -23,11 +24,11 @@ export const GetChatContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
   const [replyMsg, setReplyMsg] = useState(null);
+  const [showReplyBox, setShowReplyBox] = useState(null);
 
-
-  const handleReplyMsg = (msg)=> {
-      setReplyMsg(msg);
-  }
+  const handleReplyMsg = (msg) => {
+    setReplyMsg(msg);
+  };
 
   const socketActions = async (message) => {
     if (socket) {
@@ -193,9 +194,9 @@ export const GetChatContextProvider = ({ children }) => {
               return { ...prev, latest_msg_list: [...data.msg_list] };
             }
           });
-          setMoreMsgLoading(false)
+          setMoreMsgLoading(false);
         } else {
-          setMoreMsgLoading(false)
+          setMoreMsgLoading(false);
           toast.error(data.error_msg, {
             position: "top-center",
             theme: "colored",
@@ -203,7 +204,7 @@ export const GetChatContextProvider = ({ children }) => {
           });
         }
       } else {
-        setMoreMsgLoading(false)
+        setMoreMsgLoading(false);
         toast.error("faild to get data", {
           position: "top-center",
           theme: "colored",
@@ -211,7 +212,7 @@ export const GetChatContextProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      setMoreMsgLoading(false)
+      setMoreMsgLoading(false);
       toast.error(error.message, {
         position: "top-center",
         theme: "colored",
@@ -275,9 +276,42 @@ export const GetChatContextProvider = ({ children }) => {
     }
   };
 
-  const handleDeleteChat = ()=> {
-    //TODO: Make "Delete_chat" api call
-  }
+  const handleDeleteChat = async (chatId) => {
+    const localToken = localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append("chat_id", chatId);
+
+    setChatLoading(true)
+
+    try {
+      const res = await fetch(baseUrl + deleteChatUrl, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${localToken}` },
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if(res.ok){
+        if(data.status === 'success'){
+            setChatlist(chatList.filter((f)=> (f.chat_id !== chatId)));
+
+            toast.success('Chat deleted', {position: 'top-center', autoClose:2000})
+            setChatLoading(false)
+
+        }else {
+          toast.error(data?.error_msg, {position:'top-center', theme:'colored', autoClose: 3000})
+              setChatLoading(false)
+        }
+      }else {
+        toast.error('server error', {position:'top-center', theme:'colored', autoClose: 3000})
+            setChatLoading(false)
+      }
+    } catch (error) {
+      toast.error(error.message, {position:'top-center', theme:'colored', autoClose: 3000});
+          setChatLoading(false)
+    }
+  };
 
   useEffect(() => {
     if (chatList.length) {
@@ -347,7 +381,9 @@ export const GetChatContextProvider = ({ children }) => {
         moreMsgLoading,
         handleDeleteChat,
         handleReplyMsg,
-        replyMsg
+        replyMsg,
+        showReplyBox,
+        setShowReplyBox,
       }}
     >
       {children}

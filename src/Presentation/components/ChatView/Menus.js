@@ -4,6 +4,7 @@ import downloadIcon from "../../../assets/img/download-arrow.svg";
 // import replyIcon from "../../../assets/img/reply-icon.svg";
 import { useGetChatContext } from "../../../context/getChatContext";
 import { VscReply } from "react-icons/vsc";
+import {toast} from 'react-toastify';
 
 const Menus = ({ msgs }) => {
   const { handleReplyMsg } = useGetChatContext();
@@ -17,6 +18,11 @@ const Menus = ({ msgs }) => {
     tempElement.setSelectionRange(0, 99999);
     document.execCommand("copy");
     document.body.removeChild(tempElement);
+    toast.success('Copied to clipboard', {
+      position: "top-center",
+      // theme: "colored",
+      autoClose: 500,
+    });
   }
 
   // const replyMsgHandler = ()=> {
