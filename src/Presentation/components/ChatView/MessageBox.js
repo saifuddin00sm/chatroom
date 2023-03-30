@@ -136,7 +136,7 @@ const MessageBox = ({ type, position, messageItems }) => {
           </div>
         </div>
         {type === "receiver_msg" &&
-          messageItems?.reply_to_msg_content !== null && (
+         messageItems.reply_to_msg_content && messageItems?.reply_to_msg_content !== null && (
             <div className="reply_box">
               <div><img style={{height: '24px', width: '24px'}} src={replyIcon} alt="" /></div>
               {messageItems?.reply_to_msg_type === "image" ? (
