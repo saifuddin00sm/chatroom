@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import ChatInput from "../ChatInput/ChatInput";
 import ChatViewHeader from "./ChatViewHeader";
 import "./ChatView.css";
