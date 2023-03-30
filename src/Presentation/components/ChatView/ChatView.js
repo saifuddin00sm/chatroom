@@ -31,8 +31,6 @@ const ChatView = () => {
       });
     }
   }, [chatInfoLoading]);
-  
-  // console.log(latest_msg_list)
 
   return (
     <div

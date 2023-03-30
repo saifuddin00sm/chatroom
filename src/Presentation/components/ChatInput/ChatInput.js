@@ -24,7 +24,7 @@ const ChatInput = () => {
   const [inputItem, setInputItem] = useState([]);
   const [textInputVal, setTextInputVal] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState([]);
-  const { chatInfo, socketActions, replyMsg, handleReplyMsg ,setShowReplyBox} =
+  const { chatInfo, socketActions, replyMsg, handleReplyMsg } =
     useGetChatContext();
 
   // Upload the files to the server when user selects any file ex: (img, doc, xls) etc...
@@ -93,11 +93,17 @@ const ChatInput = () => {
         return {
           msg_type: "image",
           image_id: uploadSuccess[index]?.image_id,
+          reply_to_msg_id: replyMsg?.msgId || null,
+          reply_to_msg_type: replyMsg?.type || null,
+          reply_to_msg_content: replyMsg?.msg || null,
         };
       } else {
         return {
           msg_type: "file",
           file_id: uploadSuccess[index]?.file_id,
+          reply_to_msg_id: replyMsg?.msgId || null,
+          reply_to_msg_type: replyMsg?.type || null,
+          reply_to_msg_content: replyMsg?.msg || null,
         };
       }
     });
@@ -111,6 +117,9 @@ const ChatInput = () => {
           {
             msg_type: "text",
             text: textInputVal,
+            reply_to_msg_id: replyMsg?.msgId || null,
+            reply_to_msg_type: replyMsg?.type || null,
+            reply_to_msg_content: replyMsg?.msg || null,
           },
         ];
       } else {
@@ -121,6 +130,9 @@ const ChatInput = () => {
         {
           msg_type: "text",
           text: textInputVal,
+          reply_to_msg_id: replyMsg?.msgId || null,
+          reply_to_msg_type: replyMsg?.type || null,
+          reply_to_msg_content: replyMsg?.msg || null,
         },
       ];
     }
@@ -141,7 +153,7 @@ const ChatInput = () => {
     setTextInputVal("");
     setInputItem([]);
     setUploadSuccess([]);
-    setShowReplyBox(replyMsg);
+    // setShowReplyBox(replyMsg);
     handleReplyMsg(null);
   };
 
@@ -171,6 +183,13 @@ const ChatInput = () => {
   return (
     <div className="chat_input_container">
       <form onSubmit={handlMsgSubmit} className="chat_input_content">
+        <textarea
+          value={textInputVal}
+          onKeyDown={handleKeyDown}
+          onChange={(e) => setTextInputVal(e.target.value)}
+          placeholder="Send a message"
+          rows={3}
+        ></textarea>
         <div className="file_container">
           {inputItem.length
             ? inputItem.map((files, index) => (
@@ -236,13 +255,19 @@ const ChatInput = () => {
         {replyMsg && (
           <div className="replyMsg">
             <div className="d-flex gap-2">
-              <div><img src={replyIcon} alt="" /></div>
+              <div>
+                <img src={replyIcon} alt="" />
+              </div>
               {replyMsg.type === "text" ? (
                 <span>{replyMsg.msg}</span>
               ) : replyMsg.type === "image" ? (
-                <img src={replyMsg.msg} alt={replyMsg.alt} />
-              ) : replyMsg.type === 'file' && (
-                <span>{replyMsg.msg}</span>
+                <img
+                  style={{ height: "24px", width: "24px" }}
+                  src={replyMsg.msg}
+                  alt={replyMsg.alt}
+                />
+              ) : (
+                replyMsg.type === "file" && <span>{replyMsg.msg}</span>
               )}
             </div>
             <div
@@ -253,13 +278,6 @@ const ChatInput = () => {
             </div>
           </div>
         )}
-        <textarea
-          value={textInputVal}
-          onKeyDown={handleKeyDown}
-          onChange={(e) => setTextInputVal(e.target.value)}
-          placeholder="Send a message"
-          rows={3}
-        ></textarea>
 
         <div className="chat_input_btn_container">
           <div className="chat_input_btn_left">

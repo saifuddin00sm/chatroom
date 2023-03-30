@@ -24,7 +24,6 @@ export const GetChatContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
   const [replyMsg, setReplyMsg] = useState(null);
-  const [showReplyBox, setShowReplyBox] = useState(null);
 
   const handleReplyMsg = (msg) => {
     setReplyMsg(msg);
@@ -382,8 +381,6 @@ export const GetChatContextProvider = ({ children }) => {
         handleDeleteChat,
         handleReplyMsg,
         replyMsg,
-        showReplyBox,
-        setShowReplyBox,
       }}
     >
       {children}

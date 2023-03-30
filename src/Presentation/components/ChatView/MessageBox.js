@@ -12,14 +12,13 @@ import pptxIcon from "../../../assets/img/PPTX.png";
 import txtIcon from "../../../assets/img/TXT.png";
 import xlsIcon from "../../../assets/img/XLS.png";
 import xlsxIcon from "../../../assets/img/XLSX.png";
-import { useGetChatContext } from "../../../context/getChatContext";
+import replyIcon from "../../../assets/img/reply-icon.svg";
 
 const MessageBox = ({ type, position, messageItems }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [sizeOfFile, setSizeOfFile] = useState("");
   const [menusItems, setMenusItems] = useState(false);
-  const { showReplyBox } = useGetChatContext();
 
   const handleModal = (url) => {
     setIsOpen(true);
@@ -61,7 +60,6 @@ const MessageBox = ({ type, position, messageItems }) => {
   window.addEventListener("click", function () {
     setMenusItems(false);
   });
-
 
   return (
     <>
@@ -137,9 +135,23 @@ const MessageBox = ({ type, position, messageItems }) => {
             )}
           </div>
         </div>
-        {type === "receiver_msg" && showReplyBox && (
-          <div className="reply_box">{showReplyBox.msg}</div>
-        )}
+        {type === "receiver_msg" &&
+          messageItems?.reply_to_msg_content !== null && (
+            <div className="reply_box">
+              <div><img style={{height: '24px', width: '24px'}} src={replyIcon} alt="" /></div>
+              {messageItems?.reply_to_msg_type === "image" ? (
+                <img
+                  style={{ width: "48px", height: "32px", objectFit:'cover' }}
+                  src={messageItems?.reply_to_msg_content}
+                  alt=""
+                />
+              ) : messageItems?.reply_to_msg_type === "file" ? (
+                <div className="reply_type_text">{messageItems?.reply_to_msg_content}</div>
+              ) : (
+                <div className="reply_type_text">{messageItems?.reply_to_msg_content}</div>
+              )}
+            </div>
+          )}
       </div>
       {isOpen && (
         <Lightbox

@@ -223,7 +223,7 @@ export const GetAuthContextProvider = ({ children }) => {
         });
 
         const res = await verifyToken.json();
-        if (res.status === "error") {
+        if (res.status === "error" || !res.user_info) {
           navigate("/");
           setShowAlert(res?.error_msg);
           localStorage.removeItem('token');

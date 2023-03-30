@@ -129,14 +129,13 @@
 }
 
 .replyMsg{
-  border-bottom: 1px solid;
   padding: 7px 11px;
-  font-style: italic;
-  border-radius: 4px;
-  background: #eee;
   display: flex;
     justify-content: space-between;
     align-items: self-start;
 
     gap: 5px;
+    background: #F2F4F7;
+border-radius: 0px 8px 8px 8px;
+margin: 12px 0px;
 }
