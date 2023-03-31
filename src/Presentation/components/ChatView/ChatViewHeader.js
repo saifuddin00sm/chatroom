@@ -6,10 +6,13 @@ import pin_filled_icon from "../../../assets/img/pin-filled.svg";
 import { useGetChatContext } from "../../../context/getChatContext";
 import "./ChatViewHeader";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const ChatViewHeader = ({ chatName, agentName, chatId, pinned }) => {
   const [inputVal, setInputVal] = useState("");
-  const { updateInfo, handleDeleteChat } = useGetChatContext();
+  const { updateInfo, handleDeleteChat, chatLoading } = useGetChatContext();
+  const [showModal, setShowModal] = useState({ isOpen: false, chatId: "" });
 
   const handlePin = () => {
     const pins = pinned ? false : true;
@@ -21,46 +24,111 @@ const ChatViewHeader = ({ chatName, agentName, chatId, pinned }) => {
   }, [chatName, pinned]);
 
   return (
-    <div className="chat_view_header">
-      <div className="chat_view_header_left">
-        {/* <div className="avatar_container">
-          <img
-            src={user_avatar}
-            alt="User_Avatar"
-            className="img-fluid w-100 h-100"
-          />
-        </div> */}
-        {/* <p className="user_name">{agentName}</p>
-        <IoIosArrowForward className="right_arrow_icon" /> */}
-        <form onSubmit={(e) => updateInfo(e, inputVal, chatId, "name")}>
-          <input
-            onChange={(e) => setInputVal(e.target.value)}
-            className="chat_header_input"
-            value={inputVal}
-            style={{ width: "230px" }}
-          />
-        </form>
-      </div>
-      <div className="chat_view_header_right">
-        <div onClick={handlePin}>
-          <img
-            src={pinned ? pin_filled_icon : pin_icon_2}
-            alt="pin_icon"
-            className="img-fluid w-100 h-100"
-          />
+    <>
+      <div className="chat_view_header">
+        <div className="chat_view_header_left">
+          <form onSubmit={(e) => updateInfo(e, inputVal, chatId, "name")}>
+            <input
+              onChange={(e) => setInputVal(e.target.value)}
+              className="chat_header_input"
+              value={inputVal}
+              style={{ width: "230px" }}
+            />
+          </form>
         </div>
-        <div onClick={()=> handleDeleteChat(chatId)} style={{cursor: 'pointer'}}>
-          {/* <img
-            src={three_dots_icon}
-            alt="menu_icon"
-            className="img-fluid w-100 h-100"
-          /> */}
-          <RiDeleteBin6Line
-            style={{ height: "23px", width: "23px", color: "#747070" }}
-          />
+        <div className="chat_view_header_right">
+          <div onClick={handlePin}>
+            <img
+              src={pinned ? pin_filled_icon : pin_icon_2}
+              alt="pin_icon"
+              className="img-fluid w-100 h-100"
+            />
+          </div>
+          <div
+            onClick={() => setShowModal({ isOpen: true, chatId: chatId })}
+            style={{ cursor: "pointer" }}
+          >
+            <RiDeleteBin6Line
+              style={{ height: "23px", width: "23px", color: "#747070" }}
+            />
+          </div>
         </div>
       </div>
-    </div>
+
+      <Modal
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        show={showModal.isOpen}
+        onHide={() => setShowModal({ ...showModal, isOpen: false })}
+      >
+        <Modal.Header closeButton>
+          <div
+            style={{
+              padding: "10px",
+              background: "#FEE4E2",
+              borderRadius: "100%",
+            }}
+          >
+            <RiDeleteBin6Line
+              style={{ height: "23px", width: "23px", color: "#D92D20" }}
+            />
+          </div>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            {chatLoading ? (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "95px",
+                  width: "100%",
+                }}
+              >
+                <div className="loader"></div>
+              </div>
+            ) : (
+              <>
+                {" "}
+                <h4 className="modal_header_text">Delete Chat</h4>
+                <p className="modal_body_text">
+                  Are you sure you want to delete this chat? This action cannot
+                  be undone.
+                </p>
+              </>
+            )}
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <div
+            className="d-flex justify-content-between"
+            style={{ width: "100%" }}
+          >
+            <Button
+              variant="outlined"
+              style={{ border: "1px solid #ccc" }}
+              onClick={() => setShowModal({ ...showModal, isOpen: false })}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="danger"
+              onClick={() => {
+                handleDeleteChat(showModal.chatId);
+                if (chatLoading === false) {
+                  setTimeout(() => {
+                    setShowModal({ ...showModal, isOpen: false });
+                  }, 2000);
+                }
+              }}
+            >
+              Confirm
+            </Button>
+          </div>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 };
 

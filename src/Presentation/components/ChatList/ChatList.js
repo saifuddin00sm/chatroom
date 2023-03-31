@@ -14,7 +14,7 @@ import logoutIcons from "../../../assets/img/logout.png";
 import creditIcon from "../../../assets/img/credit1.png";
 
 const ChatList = () => {
-  const { chatList, getChatList, chatLoading, handleChat } =
+  const { chatList, getChatList, chatLoading, handleChat, addNewChat } =
     useGetChatContext();
   const { handleLogout } = useAuthContext();
   const userInfo = JSON.parse(localStorage.getItem("user_info"));
@@ -35,7 +35,7 @@ const ChatList = () => {
             {/* Saif uddin */}
           </div>
         </div>
-        <button className="add_btn">
+        <button onClick={addNewChat} className="add_btn">
           <img src={add_icon} alt="Add_Icon" className="img-fluid" />
         </button>
       </div>
@@ -43,9 +43,11 @@ const ChatList = () => {
       {/* CHAT BOX */}
       <div className="all_chats_container">
         <div
+        className="chat_box_main"
           style={{
             display: chatLoading && "flex",
             justifyContent: chatLoading && "center",
+            overflowY: 'auto'
           }}
         >
           {chatLoading ? (

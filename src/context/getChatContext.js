@@ -1,5 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import {
+  addChatUrl,
   baseUrl,
   deleteChatUrl,
   getChatInfoUrl,
@@ -24,6 +25,7 @@ export const GetChatContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
   const [replyMsg, setReplyMsg] = useState(null);
+  // const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleReplyMsg = (msg) => {
     setReplyMsg(msg);
@@ -275,12 +277,54 @@ export const GetChatContextProvider = ({ children }) => {
     }
   };
 
+
+
+  const addNewChat = async ()=> {
+    const userInfo = JSON.parse(localStorage.getItem('user_info'));
+    const localToken = localStorage.getItem('token');
+
+    const spaceId = userInfo?.current_space_id;
+
+    const formData = new FormData();
+
+    formData.append('space_id', spaceId);
+    formData.append('bot_id', 'tfajwm1qko0prx82');
+    formData.append('chat_name', 'new chat');
+
+    try {
+      const res = await fetch(baseUrl + addChatUrl, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localToken}`,
+        },
+        body: formData
+      });
+
+      
+      if(res.ok){
+        const data = await res.json();
+        if(data.status === 'success'){
+          getChatList();
+        }else{
+          toast.error(data?.error_msg, {position:'top-center', theme:'colored', autoClose: 3000})
+        }
+      }else{
+        toast.error('server error', {position:'top-center', theme:'colored', autoClose: 3000})
+      }
+
+    } catch (error) {
+      
+      toast.error(error.message, {position:'top-center', theme:'colored', autoClose: 3000})
+      
+    }
+  }
+
   const handleDeleteChat = async (chatId) => {
     const localToken = localStorage.getItem("token");
     const formData = new FormData();
     formData.append("chat_id", chatId);
 
-    setChatLoading(true)
+    setChatLoading(true);
 
     try {
       const res = await fetch(baseUrl + deleteChatUrl, {
@@ -381,6 +425,7 @@ export const GetChatContextProvider = ({ children }) => {
         handleDeleteChat,
         handleReplyMsg,
         replyMsg,
+        addNewChat
       }}
     >
       {children}

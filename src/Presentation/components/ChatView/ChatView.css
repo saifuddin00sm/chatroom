@@ -143,3 +143,31 @@ text-align: center;
 color: #099250;
 text-transform: uppercase;
 }
+
+.modal_body_text{
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+/* or 143% */
+
+
+/* Gray/600 */
+
+color: #475467;
+}
+
+.modal_header_text{
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 28px;
+/* identical to box height, or 156% */
+
+
+/* Gray/900 */
+
+color: #101828;
+}
