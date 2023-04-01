@@ -146,25 +146,25 @@ const ChatList = () => {
               </div>
             </div>
             <div className="chat_bottom_items">
-              <button onClick={()=> setIsUpgradeModal(true)} class="chat_bottom_buttons">
+              <button onClick={()=> setIsUpgradeModal(true)} className="chat_bottom_buttons">
                 <img src={upgradeIcons} alt="" />
                 <span>Upgrade now</span>
               </button>
             </div>
             <div className="chat_bottom_items">
-              <button onClick={()=> setIsInviteModal(true)} class="chat_bottom_buttons">
+              <button onClick={()=> setIsInviteModal(true)} className="chat_bottom_buttons">
                 <img src={inviteIcons} alt="" />
                 <span>Invite a friend</span>
               </button>
             </div>
             <div className="chat_bottom_items">
-              <button class="chat_bottom_buttons">
+              <button className="chat_bottom_buttons">
                 <img src={settingIcons} alt="" />
                 <span>Settings</span>
               </button>
             </div>
             <div className="chat_bottom_items">
-              <button onClick={handleLogout} class="chat_bottom_buttons">
+              <button onClick={handleLogout} className="chat_bottom_buttons">
                 <img src={logoutIcons} alt="" />
                 <span>Logout</span>
               </button>

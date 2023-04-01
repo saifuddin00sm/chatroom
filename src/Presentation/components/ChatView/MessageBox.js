@@ -13,6 +13,7 @@ import txtIcon from "../../../assets/img/TXT.png";
 import xlsIcon from "../../../assets/img/XLS.png";
 import xlsxIcon from "../../../assets/img/XLSX.png";
 import replyIcon from "../../../assets/img/reply-icon.svg";
+import Music from "./Music";
 
 const MessageBox = ({ type, position, messageItems, formattedDate }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,7 +65,12 @@ const MessageBox = ({ type, position, messageItems, formattedDate }) => {
   return (
     <>
       <div className="msg_parent">
-        <p class="msg_time" style={{textAlign: position === 'left' ? 'right': 'left'}}>{formattedDate()}</p>
+        <p
+          className="msg_time"
+          style={{ textAlign: position === "left" ? "right" : "left" }}
+        >
+          {formattedDate()}
+        </p>
         <div className={`message ${position}`}>
           <div
             onContextMenu={(e) => {
@@ -74,7 +80,7 @@ const MessageBox = ({ type, position, messageItems, formattedDate }) => {
               }
             }}
             className={`msg_main ${type}`}
-            style={{ padding: `${messageItems?.msg_type === "image" && 0}` }}
+            style={{ padding: `${messageItems?.msg_type === "image" ? 0 : messageItems?.file_name?.includes(".mp3") && 0}` }}
           >
             {menusItems && <Menus msgs={messageItems} />}
             {messageItems?.msg_type === "text" ? (
@@ -92,7 +98,8 @@ const MessageBox = ({ type, position, messageItems, formattedDate }) => {
             ) : messageItems?.msg_type === "file" &&
               messageItems?.file_name.includes(".mp3") ? (
               <div>
-                <audio controls src={messageItems?.file_url} />
+                {/* <audio controls src={messageItems?.file_url} /> */}
+                <Music file={messageItems?.file_url}/>
               </div>
             ) : (
               <a href={messageItems?.file_url} download className="msg_file">
@@ -137,19 +144,30 @@ const MessageBox = ({ type, position, messageItems, formattedDate }) => {
           </div>
         </div>
         {type === "receiver_msg" &&
-         messageItems.reply_to_msg_content && messageItems?.reply_to_msg_content !== null && (
+          messageItems.reply_to_msg_content &&
+          messageItems?.reply_to_msg_content !== null && (
             <div className="reply_box">
-              <div><img style={{height: '24px', width: '24px'}} src={replyIcon} alt="" /></div>
+              <div>
+                <img
+                  style={{ height: "24px", width: "24px" }}
+                  src={replyIcon}
+                  alt=""
+                />
+              </div>
               {messageItems?.reply_to_msg_type === "image" ? (
                 <img
-                  style={{ width: "48px", height: "32px", objectFit:'cover' }}
+                  style={{ width: "48px", height: "32px", objectFit: "cover" }}
                   src={messageItems?.reply_to_msg_content}
                   alt=""
                 />
               ) : messageItems?.reply_to_msg_type === "file" ? (
-                <div className="reply_type_text">{messageItems?.reply_to_msg_content}</div>
+                <div className="reply_type_text">
+                  {messageItems?.reply_to_msg_content}
+                </div>
               ) : (
-                <div className="reply_type_text">{messageItems?.reply_to_msg_content}</div>
+                <div className="reply_type_text">
+                  {messageItems?.reply_to_msg_content}
+                </div>
               )}
             </div>
           )}

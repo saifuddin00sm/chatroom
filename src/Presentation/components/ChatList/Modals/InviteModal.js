@@ -30,7 +30,7 @@ const copyLinkHandler = ()=> {
           </div>
         </div>
         <div>
-          <div class="input_container">
+          <div className="input_container">
             <input ref={inputRef} disabled type="text" value="xxx.com/as34ods"  />
             <button onClick={copyLinkHandler}>
               <span><MdContentCopy /></span> <span>Copy Link</span>

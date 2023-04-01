@@ -32,7 +32,6 @@ const ChatView = () => {
     }
   }, [chatInfoLoading]);
 
-  console.log(latest_msg_list);
   return (
     <div
       className={`chat_view_containers ${
