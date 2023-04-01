@@ -19,6 +19,7 @@ import replyIcon from "../../../assets/img/reply-icon.svg";
 import { baseUrl, uploadMsgFileUrl, uploadMsgImgUrl } from "../../../urls/urls";
 import { useGetChatContext } from "../../../context/getChatContext";
 import { FaRegTimesCircle } from "react-icons/fa";
+import {MdOutlineKeyboardVoice} from 'react-icons/md'
 
 const ChatInput = () => {
   const [inputItem, setInputItem] = useState([]);
@@ -301,6 +302,18 @@ const ChatInput = () => {
                 type="file"
                 accept=".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt, .csv"
                 onKeyDown={handleKeyDown}
+              />
+            </div>
+            <div className="buttons">
+              {/* <img src={attach_icon} alt="" className="img-fluid" /> */}
+              <MdOutlineKeyboardVoice style={{height: '19px', width: '19px'}} />
+              <input
+                // onChange={handleFiles}
+                className="file_input"
+                name="file"
+                type="file"
+                // accept=".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt, .csv"
+                // onKeyDown={handleKeyDown}
               />
             </div>
           </div>

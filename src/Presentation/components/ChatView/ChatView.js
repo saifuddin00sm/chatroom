@@ -4,23 +4,23 @@ import ChatViewHeader from "./ChatViewHeader";
 import "./ChatView.css";
 import MessageBox from "./MessageBox";
 import { useGetChatContext } from "../../../context/getChatContext";
-import loadingAnim from '../../../assets/img/load-more-msg-anim.gif';
-import chatLoading from '../../../assets/img/chat-loading.gif';
+import loadingAnim from "../../../assets/img/load-more-msg-anim.gif";
+import chatLoading from "../../../assets/img/chat-loading.gif";
 
 const ChatView = () => {
-  const { chatInfo, chatInfoLoading, loadMoreMsgs, moreMsgLoading} = useGetChatContext();
+  const { chatInfo, chatInfoLoading, loadMoreMsgs, moreMsgLoading } =
+    useGetChatContext();
   const { chat_id, bot_id, latest_msg_list, chat_name, pinned } = chatInfo;
-  const userData  = JSON.parse(localStorage.getItem("user_info"));
+  const userData = JSON.parse(localStorage.getItem("user_info"));
   const divRef = useRef(null);
 
   const handleScroll = () => {
-    const { scrollTop} = divRef.current;
+    const { scrollTop } = divRef.current;
     if (scrollTop === 0) {
       // User has scrolled to the top of the div
       loadMoreMsgs();
     }
   };
-
 
   useEffect(() => {
     // This will automatically scroll to the bottom of the div when it loads or updates
@@ -40,12 +40,10 @@ const ChatView = () => {
     >
       {chatInfoLoading ? (
         // <div className="loader" style={{ width: "80px", height: "80px" }}></div>
-      <div className="loading_screen">
-        <img className="mb-3" src={chatLoading} alt="chat loading" />
-        <p>
-        Tasking.ai
-        </p>
-      </div>
+        <div className="loading_screen">
+          <img className="mb-3" src={chatLoading} alt="chat loading" />
+          <p>Tasking.ai</p>
+        </div>
       ) : (
         <>
           <ChatViewHeader
@@ -55,16 +53,50 @@ const ChatView = () => {
             pinned={pinned}
           />
           <div className="msg_box" ref={divRef} onScroll={handleScroll}>
-            {moreMsgLoading && <div className="d-flex justify-center align-center gap-2 loading-giff">
-              <img style={{height: '20px', width: '20px', borderRadius: '100%'}} src={
-                loadingAnim
-              } alt="loading animation"/>
-              <p className="mb-0" style={{fontSize: '13px'}}>Loading previous messages</p>
-            </div>}
+            {moreMsgLoading && (
+              <div className="d-flex justify-center align-center gap-2 loading-giff">
+                <img
+                  style={{
+                    height: "20px",
+                    width: "20px",
+                    borderRadius: "100%",
+                  }}
+                  src={loadingAnim}
+                  alt="loading animation"
+                />
+                <p className="mb-0" style={{ fontSize: "13px" }}>
+                  Loading previous messages
+                </p>
+              </div>
+            )}
             <div className="msg_container">
               {Array.isArray(latest_msg_list) ? (
                 latest_msg_list.map((item) => {
                   let msg;
+                  const date = new Date(item?.backend_utc_timestamp);
+
+                  const formatDate = () => {
+                    let formattedDate;
+                    if (date.getDay() !== new Date().getDay()) {
+                      // format the date as "2:20pm, March 3"
+                      formattedDate = date.toLocaleString("en-US", {
+                        hour: "numeric",
+                        minute: "numeric",
+                        hour12: true,
+                        month: "long",
+                        day: "numeric",
+                      });
+                      return formattedDate;
+                    } else {
+                      // format the date as "16:20"
+                      formattedDate = date.toLocaleString("en-US", {
+                        hour: "numeric",
+                        minute: "numeric",
+                      });
+                      return formattedDate;
+                    }
+                  };
+
                   if (item?.sender_id === userData?.user_id) {
                     msg = (
                       <MessageBox
@@ -72,6 +104,7 @@ const ChatView = () => {
                         type="receiver_msg"
                         position="left"
                         messageItems={item}
+                        formattedDate={formatDate}
                       />
                     );
                   } else {
@@ -81,6 +114,7 @@ const ChatView = () => {
                         type="sender_msg"
                         position="right"
                         messageItems={item}
+                        formattedDate={formatDate}
                       />
                     );
                   }

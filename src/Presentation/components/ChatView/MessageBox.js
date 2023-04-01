@@ -14,7 +14,7 @@ import xlsIcon from "../../../assets/img/XLS.png";
 import xlsxIcon from "../../../assets/img/XLSX.png";
 import replyIcon from "../../../assets/img/reply-icon.svg";
 
-const MessageBox = ({ type, position, messageItems }) => {
+const MessageBox = ({ type, position, messageItems, formattedDate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [sizeOfFile, setSizeOfFile] = useState("");
@@ -64,6 +64,7 @@ const MessageBox = ({ type, position, messageItems }) => {
   return (
     <>
       <div className="msg_parent">
+        <p class="msg_time" style={{textAlign: position === 'left' ? 'right': 'left'}}>{formattedDate()}</p>
         <div className={`message ${position}`}>
           <div
             onContextMenu={(e) => {
