@@ -1,0 +1,172 @@
+/* Modal styles */
+.plans_main {
+  position: relative;
+  /* background-color: red; */
+}
+
+/* .plans_container{
+    display: flex;
+  } */
+
+.vertical_line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  background-color: #d9d9d9;
+  border-radius: 2px;
+  height: 100%;
+}
+.starter {
+  /* background-color: blue; */
+  width: 100%;
+  padding: 20px 30px;
+}
+
+.pro {
+  width: 100%;
+  padding: 20px 30px;
+}
+
+.starter_advantages_list {
+  list-style: none;
+  padding-left: 0;
+  margin: 40px 0;
+}
+.pro_advantages_list {
+  list-style: none;
+  padding-left: 0;
+  margin: 40px 0;
+}
+
+.pro_advantages_list li,
+.starter_advantages_list li {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 20px;
+  color: #424242;
+}
+
+.footer_button {
+  width: 100%;
+  background: #099250;
+  border: 1px solid #099250;
+  /* Shadow/xs */
+
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  padding: 12px 10px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  /* Base/White */
+
+  color: #ffffff;
+  outline: none;
+}
+
+.current_plan_btn {
+  background-color: #f2f4f7;
+  color: #aeaeae;
+  border: 0;
+}
+
+.sub_head {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  /* identical to box height, or 125% */
+
+  text-align: center;
+
+  color: #2b2b2b;
+}
+
+.header {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 60px;
+  /* identical to box height, or 125% */
+
+  text-align: center;
+  letter-spacing: -0.02em;
+
+  color: #2b2b2b;
+}
+
+/* invite modal stylings */
+
+.invite_header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.invite_header p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 40px;
+  /* identical to box height, or 143% */
+
+  text-align: center;
+
+  color: #2b2b2b;
+}
+
+.input_container button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  width: 137px;
+  height: 44px;
+
+  background: #099250;
+  border: 1px solid #099250;
+  /* Shadow/xs */
+  gap: 6px;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+}
+.input_container input {
+  border: 1px solid #D0D5DD;
+  border-radius: 5px;
+  padding: 8px 15px;
+  width: 100%;
+}
+.input_container{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.invite_bottom_txt{
+  
+font-family: 'Inter';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 30px;
+/* identical to box height, or 188% */
+
+text-align: center;
+
+color: #2B2B2B;
+}
