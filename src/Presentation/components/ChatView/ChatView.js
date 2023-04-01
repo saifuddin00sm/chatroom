@@ -32,6 +32,7 @@ const ChatView = () => {
     }
   }, [chatInfoLoading]);
 
+  console.log(latest_msg_list);
   return (
     <div
       className={`chat_view_containers ${
@@ -73,28 +74,48 @@ const ChatView = () => {
               {Array.isArray(latest_msg_list) ? (
                 latest_msg_list.map((item) => {
                   let msg;
-                  const date = new Date(item?.backend_utc_timestamp);
+                  const inputDate = new Date(item?.backend_utc_timestamp);
+                  const currentDate = new Date();
 
                   const formatDate = () => {
                     let formattedDate;
-                    if (date.getDay() !== new Date().getDay()) {
-                      // format the date as "2:20pm, March 3"
-                      formattedDate = date.toLocaleString("en-US", {
-                        hour: "numeric",
-                        minute: "numeric",
-                        hour12: true,
-                        month: "long",
-                        day: "numeric",
-                      });
-                      return formattedDate;
+                    if (inputDate.getDay() !== currentDate.getDay()) {
+                      // If the input date is in the future, format it as "2:20pm, March 3"
+                      const monthNames = [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December",
+                      ];
+                      const monthIndex = inputDate.getMonth();
+                      const month = monthNames[monthIndex];
+                      const day = inputDate.getDate();
+                      const hour = inputDate.getHours();
+                      const minute = inputDate.getMinutes();
+                      const ampm = hour >= 12 ? "pm" : "am";
+                      const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
+                      const formattedMinute =
+                        minute < 10 ? "0" + minute : minute;
+                      formattedDate = `${formattedHour}:${formattedMinute}${ampm}, ${month} ${day}`;
                     } else {
-                      // format the date as "16:20"
-                      formattedDate = date.toLocaleString("en-US", {
-                        hour: "numeric",
-                        minute: "numeric",
-                      });
-                      return formattedDate;
+                      // If the input date is in the past or present, format it as "16:20"
+                      const hour = inputDate.getHours();
+                      const minute = inputDate.getMinutes();
+                      const formattedHour = hour < 10 ? "0" + hour : hour;
+                      const formattedMinute =
+                        minute < 10 ? "0" + minute : minute;
+                      formattedDate = `${formattedHour}:${formattedMinute}`;
                     }
+
+                    return formattedDate;
                   };
 
                   if (item?.sender_id === userData?.user_id) {
