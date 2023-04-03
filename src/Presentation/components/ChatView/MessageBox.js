@@ -156,7 +156,7 @@ const MessageBox = ({ type, position, messageItems, formattedDate }) => {
               </div>
               {messageItems?.reply_to_msg_type === "image" ? (
                 <img
-                  style={{ width: "48px", height: "32px", objectFit: "cover" }}
+                  style={{ width: "48px", height: "32px", objectFit: "cover", borderRadius: "0px 4px 8px 8px" }}
                   src={messageItems?.reply_to_msg_content}
                   alt=""
                 />

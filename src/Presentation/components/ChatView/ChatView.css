@@ -70,6 +70,7 @@
 .msg_box {
   height: 70vh;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 10px;
   position: relative;
 }
@@ -89,7 +90,7 @@
 
 /* width */
 .msg_box::-webkit-scrollbar {
-  width: 5px;
+  width: 1px;
 }
 
 /* Track */
@@ -100,7 +101,7 @@
 
 /* Handle */
 .msg_box::-webkit-scrollbar-thumb {
-  background: black;
+  background: rgb(160, 160, 160);
   border-radius: 10px;
 }
 

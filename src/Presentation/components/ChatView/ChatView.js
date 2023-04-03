@@ -7,6 +7,7 @@ import { useGetChatContext } from "../../../context/getChatContext";
 import loadingAnim from "../../../assets/img/load-more-msg-anim.gif";
 import chatLoading from "../../../assets/img/chat-loading.gif";
 import { baseUrl, cleanChatContextUrl } from "../../../urls/urls";
+import moment from 'moment';
 
 const ChatView = () => {
   const [isCleanLoading, setIsCleanLoading] = useState(false)
@@ -115,45 +116,24 @@ const ChatView = () => {
               {Array.isArray(latest_msg_list) ? (
                 latest_msg_list.map((item) => {
                   let msg;
-                  const inputDate = new Date(item?.backend_utc_timestamp);
-                  const currentDate = new Date();
+              
+                  const formatDate = () => { 
+                  let formattedDate;
 
-                  const formatDate = () => {
-                    let formattedDate;
-                    if (inputDate.getDay() !== currentDate.getDay()) {
-                      // If the input date is in the future, format it as "2:20pm, March 3"
-                      const monthNames = [
-                        "January",
-                        "February",
-                        "March",
-                        "April",
-                        "May",
-                        "June",
-                        "July",
-                        "August",
-                        "September",
-                        "October",
-                        "November",
-                        "December",
-                      ];
-                      const monthIndex = inputDate.getMonth();
-                      const month = monthNames[monthIndex];
-                      const day = inputDate.getDate();
-                      const hour = inputDate.getHours();
-                      const minute = inputDate.getMinutes();
-                      const ampm = hour >= 12 ? "pm" : "am";
-                      const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
-                      const formattedMinute =
-                        minute < 10 ? "0" + minute : minute;
-                      formattedDate = `${formattedHour}:${formattedMinute}${ampm}, ${month} ${day}`;
-                    } else {
-                      // If the input date is in the past or present, format it as "16:20"
-                      const hour = inputDate.getHours();
-                      const minute = inputDate.getMinutes();
-                      const formattedHour = hour < 10 ? "0" + hour : hour;
-                      const formattedMinute =
-                        minute < 10 ? "0" + minute : minute;
-                      formattedDate = `${formattedHour}:${formattedMinute}`;
+                  const dateStr = item?.backend_utc_timestamp;
+                  const utcDate = moment.utc(dateStr);
+                  const localDate = utcDate.local().format();
+
+                  const date = moment(localDate);
+                  const today = moment(new Date()).day();
+                  const mmDate = date.format('h:mma, MMMM D');
+                  const time =  date.format('h:mma');
+                  const dayOfWeek = date.day();
+
+                    if(dayOfWeek !== today){
+                      formattedDate = mmDate;
+                    }else{
+                      formattedDate = time;
                     }
 
                     return formattedDate;
