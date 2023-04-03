@@ -17,7 +17,7 @@ function App() {
         <GetChatContextProvider>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/*" element={<PageNotFound />} />
+            <Route path="/page-not-found" element={<PageNotFound />} />
             <Route path="/chat" exact element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/create-account" element={<Signup />} />

@@ -8,7 +8,7 @@ import {
   verificationCodeUrl,
   verifyWebTokenUrl,
 } from "../urls/urls";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const AuthContext = createContext({});
 
@@ -29,6 +29,7 @@ export const GetAuthContextProvider = ({ children }) => {
   const [isVerified, setIsVerified] = useState(false);
   const [verifyLoding, setVerifyLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChange = (e) => {
     setFormState((prev) => ({
@@ -179,33 +180,32 @@ export const GetAuthContextProvider = ({ children }) => {
     }
   };
 
-
   // Logs out the user with cleaning localStorage
-  const handleLogout = async ()=> {
+  const handleLogout = async () => {
     const localToken = localStorage.getItem("token");
     try {
       const res = await fetch(baseUrl + logoutUrl, {
         method: "POST",
-        headers: {'Authorization': `Bearer ${localToken}` },
+        headers: { Authorization: `Bearer ${localToken}` },
       });
 
       const resText = await res.json();
 
-   if(res.ok){
-    if(resText.status === 'success'){
-      console.log('res', resText)
-      localStorage.removeItem('token');
-      setToken('');
-    }else{
-      console.log(resText.error_msg);
-    }
-   }else{
-    console.log('server error')
-   }
+      if (res.ok) {
+        if (resText.status === "success") {
+          console.log("res", resText);
+          localStorage.removeItem("token");
+          setToken("");
+        } else {
+          console.log(resText.error_msg);
+        }
+      } else {
+        console.log("server error");
+      }
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -219,36 +219,57 @@ export const GetAuthContextProvider = ({ children }) => {
       try {
         const verifyToken = await fetch(baseUrl + verifyWebTokenUrl, {
           method: "POST",
-          headers: { "Content-Length": 0, 'Authorization': `Bearer ${webToken}` },
+          headers: { "Content-Length": 0, Authorization: `Bearer ${webToken}` },
         });
 
         const res = await verifyToken.json();
         if (res.status === "error" || !res.user_info) {
           navigate("/");
           setShowAlert(res?.error_msg);
-          localStorage.removeItem('token');
+          localStorage.removeItem("token");
         } else {
           navigate("/chat");
-          console.log(res)
+          console.log(res);
           localStorage.setItem("user_info", JSON.stringify(res.user_info));
         }
       } catch (error) {
         console.log(error);
       }
     }
+
     if (localToken) {
+      const url = location.pathname;
+      if (
+        url !== "/chat" &&
+        url !== "/login" &&
+        url !== "/create-account" &&
+        url !== "/forgot-password" &&
+        url !== "/"
+      ) {
+        navigate("/page-not-found");
+        return
+      }
       checkToken(localToken);
       setToken(localToken);
 
       if (localToken === token) {
-        navigate('/chat')
-      } 
-      else {
+        navigate("/chat");
+      } else {
         navigate("/");
       }
+    } else {
+      const url = location.pathname;
+    if (
+      url !== "/chat" &&
+      url !== "/login" &&
+      url !== "/create-account" &&
+      url !== "/forgot-password" &&
+      url !== "/"
+    ) {
+      navigate("/page-not-found");
+      return;
     }
-    else{
-        navigate('/');
+      navigate("/");
     }
   }, [token]);
 
@@ -267,7 +288,7 @@ export const GetAuthContextProvider = ({ children }) => {
         handleResetPass,
         isVerified,
         verifyLoding,
-        handleLogout
+        handleLogout,
       }}
     >
       {children}
