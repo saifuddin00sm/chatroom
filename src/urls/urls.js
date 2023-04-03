@@ -19,5 +19,6 @@ export const uploadMsgImgUrl = 'upload_msg_image';
 export const getChatTaskListUrl = 'get_chat_task_list';
 export const deleteChatUrl = 'delete_chat';
 export const addChatUrl = 'add_chat';
+export const cleanChatContextUrl = 'clean_chat_context';
 
 

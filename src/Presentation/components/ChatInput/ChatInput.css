@@ -128,14 +128,44 @@
   width: 100%;
 }
 
-.replyMsg{
+.replyMsg {
   padding: 7px 11px;
   display: flex;
-    justify-content: space-between;
-    align-items: self-start;
+  justify-content: space-between;
+  align-items: self-start;
 
-    gap: 5px;
-    background: #F2F4F7;
-border-radius: 0px 8px 8px 8px;
-margin: 12px 0px;
+  gap: 5px;
+  background: #f2f4f7;
+  border-radius: 0px 8px 8px 8px;
+  margin: 12px 0px;
 }
+
+
+.clearn-context-5 {
+  align-items: center;
+  background-color: #f6f6f6;
+  border-radius: 24px;
+  display: flex;
+  gap: 8px;
+  height: 42px;
+  justify-content: center;
+  padding: 6px 16px;
+  position: relative;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.frame-337-1 {
+  height: 18px;
+  min-width: 18px;
+  position: relative;
+}
+
+.clean-context-1 {
+  letter-spacing: 0;
+  line-height: 16px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+

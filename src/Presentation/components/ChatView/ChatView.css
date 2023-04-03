@@ -61,10 +61,7 @@
 
 .chat_view_bottom {
   max-width: 100%;
-  padding: 18px 23px;
-  /* position: absolute;
-  left: 0px;
-  right: 0; */
+  padding: 8px 7px;
   bottom: 0px;
 }
 
@@ -77,16 +74,16 @@
   position: relative;
 }
 
-.loading-giff{
+.loading-giff {
   /* position: absolute;
   left: 50%; */
   top: 4px;
   position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
-.msg_container{
+.msg_container {
   margin-top: 30px;
 }
 
@@ -97,13 +94,13 @@
 
 /* Track */
 .msg_box::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 .msg_box::-webkit-scrollbar-thumb {
-  background: black; 
+  background: black;
   border-radius: 10px;
 }
 
@@ -131,43 +128,63 @@
   border: 2px solid #cccc;
 }
 
-.loading_screen{
-font-family: 'Inter';
-font-style: normal;
-font-weight: 700;
-font-size: 28px;
-line-height: 34px;
+.loading_screen {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 34px;
 
-text-align: center;
+  text-align: center;
 
-color: #099250;
-text-transform: uppercase;
+  color: #099250;
+  text-transform: uppercase;
 }
 
-.modal_body_text{
-font-family: 'Inter';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 20px;
-/* or 143% */
+.modal_body_text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  /* or 143% */
 
+  /* Gray/600 */
 
-/* Gray/600 */
-
-color: #475467;
+  color: #475467;
 }
 
-.modal_header_text{
-  font-family: 'Inter';
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-line-height: 28px;
-/* identical to box height, or 156% */
+.modal_header_text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  /* identical to box height, or 156% */
 
+  /* Gray/900 */
 
-/* Gray/900 */
+  color: #101828;
+}
 
-color: #101828;
+.session_container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.session_container .session_text {
+  max-width: 115px;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  font-family: "Inter", Helvetica;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height, or 150% */
+
+  color: #475467;
 }

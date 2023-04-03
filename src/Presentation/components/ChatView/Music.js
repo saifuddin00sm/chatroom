@@ -37,7 +37,7 @@ const Music = ({ file }) => {
 
   useEffect(()=> {
     setTimeout(() => {
-        setDuration(audioRef.current?.duration);
+        setDuration(!audioRef.current?.duration ? 0: audioRef.current.duration);
     }, 2000);
   }, []);
 

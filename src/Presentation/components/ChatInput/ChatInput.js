@@ -16,22 +16,34 @@ import xlsIcon from "../../../assets/img/XLS.png";
 import xlsxIcon from "../../../assets/img/XLSX.png";
 import closeIcon from "../../../assets/img/closeIcon.png";
 import replyIcon from "../../../assets/img/reply-icon.svg";
+import cleanIcon from "../../../assets/img/clean_icon.svg";
 import { baseUrl, uploadMsgFileUrl, uploadMsgImgUrl } from "../../../urls/urls";
 import { useGetChatContext } from "../../../context/getChatContext";
 import { FaRegTimesCircle } from "react-icons/fa";
-import {MdOutlineKeyboardVoice} from 'react-icons/md'
+import { MdOutlineKeyboardVoice } from "react-icons/md";
+import DragDropBox from "./DragDropBox";
 
-const ChatInput = () => {
+const ChatInput = ({handleCleanContext, isCleanLoading}) => {
   const [inputItem, setInputItem] = useState([]);
   const [textInputVal, setTextInputVal] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState([]);
+  const [isDrag, setIsDrag] = useState(false);
   const { chatInfo, socketActions, replyMsg, handleReplyMsg } =
     useGetChatContext();
 
   // Upload the files to the server when user selects any file ex: (img, doc, xls) etc...
-  const handleFiles = async (e) => {
-    const type = e.target.name;
-    const attachment = e.target.files[0];
+  const handleFiles = async (file) => {
+    let type = null;
+    let attachment = null;
+
+    if (file.file && file.type) {
+      type = file.type;
+      attachment = file.file[0];
+    } else {
+      type = file.target.name;
+      attachment = file.target.files[0];
+    }
+
     if (!attachment) return;
     setInputItem([...inputItem, { loading: true, file: attachment }]);
 
@@ -180,150 +192,206 @@ const ChatInput = () => {
       handlMsgSubmit(event);
     }
   };
+  const handleDragOver = (event) => {
+    event.preventDefault();
+    setIsDrag(true);
+  };
+
+  const handleDragEnter = (event) => {
+    event.preventDefault();
+    setIsDrag(true);
+  };
+
+  const handleDragLeave = (event) => {
+    event.preventDefault();
+    setIsDrag(false);
+  };
+
+  const onDropHandler = (e) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files);
+    const obj = {
+      type:
+        files[0].name.includes(".png") ||
+        files[0].name.includes(".jpg") ||
+        files[0].name.includes(".jpeg")
+          ? "image"
+          : "file",
+      file: files,
+    };
+    handleFiles(obj);
+    setIsDrag(false);
+  };
 
   return (
-    <div className="chat_input_container">
-      <form onSubmit={handlMsgSubmit} className="chat_input_content">
-        <textarea
-          value={textInputVal}
-          onKeyDown={handleKeyDown}
-          onChange={(e) => setTextInputVal(e.target.value)}
-          placeholder="Send a message"
-          rows={3}
-        ></textarea>
-        <div className="file_container">
-          {inputItem.length
-            ? inputItem.map((files, index) => (
-                <div key={index} className="file_main">
-                  {files?.loading ? (
-                    <div className="loader"></div>
-                  ) : files?.error ? (
-                    <p className="text-danger">{files.error}</p>
-                  ) : (
-                    <>
-                      <img
-                        className="file_icons"
-                        src={
-                          files.file.name.includes("jpg") ||
-                          files.file.name.includes("png") ||
-                          files.file.name.includes("jpeg")
-                            ? uploadSuccess[index]?.image_url
-                            : files.file.name.includes(".csv")
-                            ? csvIcon
-                            : files.file.name.includes(".doc")
-                            ? docIcon
-                            : files.file.name.includes(".docx")
-                            ? docxIcon
-                            : files.file.name.includes(".pdf")
-                            ? pdfIcon
-                            : files.file.name.includes(".ppt")
-                            ? pptIcon
-                            : files.file.name.includes(".pptx")
-                            ? pptxIcon
-                            : files.file.name.includes(".txt")
-                            ? txtIcon
-                            : files.file.name.includes(".xls")
-                            ? xlsIcon
-                            : files.file.name.includes(".xlsx")
-                            ? xlsxIcon
-                            : otherIcon
-                        }
-                        alt="preview-img"
-                      />
-                      <div>
-                        <div className="file_name">{files.file.name}</div>
-                        <span className="file_kb">
-                          {formatFileSize(files.file.size)}
-                        </span>
+    <div
+      onDragOver={handleDragOver}
+      onDragEnter={handleDragEnter}
+      onDragLeave={handleDragLeave}
+      onDrop={onDropHandler}
+      style={{ height: "156px", borderRadius: "6px" }}
+    >
+      {isDrag ? (
+        <DragDropBox handleFile={handleFiles} handleKeyDown={handleKeyDown} />
+      ) : (
+        <div className="chat_input_container">
+          <form onSubmit={handlMsgSubmit} className="chat_input_content">
+            <textarea
+              value={textInputVal}
+              onKeyDown={handleKeyDown}
+              onChange={(e) => setTextInputVal(e.target.value)}
+              placeholder="Send a message"
+              rows={3}
+            ></textarea>
+            <div className="file_container">
+              {inputItem.length
+                ? inputItem.map((files, index) => (
+                    <div key={index} className="file_main">
+                      {files?.loading ? (
+                        <div className="loader"></div>
+                      ) : files?.error ? (
+                        <p className="text-danger">{files.error}</p>
+                      ) : (
+                        <>
+                          <img
+                            className="file_icons"
+                            src={
+                              files.file.name.includes("jpg") ||
+                              files.file.name.includes("png") ||
+                              files.file.name.includes("jpeg")
+                                ? uploadSuccess[index]?.image_url
+                                : files.file.name.includes(".csv")
+                                ? csvIcon
+                                : files.file.name.includes(".doc")
+                                ? docIcon
+                                : files.file.name.includes(".docx")
+                                ? docxIcon
+                                : files.file.name.includes(".pdf")
+                                ? pdfIcon
+                                : files.file.name.includes(".ppt")
+                                ? pptIcon
+                                : files.file.name.includes(".pptx")
+                                ? pptxIcon
+                                : files.file.name.includes(".txt")
+                                ? txtIcon
+                                : files.file.name.includes(".xls")
+                                ? xlsIcon
+                                : files.file.name.includes(".xlsx")
+                                ? xlsxIcon
+                                : otherIcon
+                            }
+                            alt="preview-img"
+                          />
+                          <div>
+                            <div className="file_name">{files.file.name}</div>
+                            <span className="file_kb">
+                              {formatFileSize(files.file.size)}
+                            </span>
+                          </div>
+                        </>
+                      )}
+                      <div
+                        className="closeIcon"
+                        onClick={() => {
+                          setInputItem(
+                            inputItem.filter((f, ind) => ind !== index)
+                          );
+                          setUploadSuccess(
+                            uploadSuccess.filter((f, ind) => ind !== index)
+                          );
+                        }}
+                      >
+                        <img src={closeIcon} alt="closeIcon" />
                       </div>
-                    </>
+                    </div>
+                  ))
+                : ""}
+            </div>
+            {replyMsg && (
+              <div className="replyMsg">
+                <div className="d-flex gap-2">
+                  <div>
+                    <img src={replyIcon} alt="" />
+                  </div>
+                  {replyMsg.type === "text" ? (
+                    <span>{replyMsg.msg}</span>
+                  ) : replyMsg.type === "image" ? (
+                    <img
+                      style={{ height: "24px", width: "24px" }}
+                      src={replyMsg.msg}
+                      alt={replyMsg.alt}
+                    />
+                  ) : (
+                    replyMsg.type === "file" && <span>{replyMsg.msg}</span>
                   )}
-                  <div
-                    className="closeIcon"
-                    onClick={() => {
-                      setInputItem(inputItem.filter((f, ind) => ind !== index));
-                      setUploadSuccess(
-                        uploadSuccess.filter((f, ind) => ind !== index)
-                      );
-                    }}
-                  >
-                    <img src={closeIcon} alt="closeIcon" />
+                </div>
+                <div
+                  onClick={() => handleReplyMsg(null)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <FaRegTimesCircle style={{ height: "18px", width: "18px" }} />
+                </div>
+              </div>
+            )}
+            <div className="chat_input_btn_container">
+              <div className="chat_input_btn_left">
+                <div className="buttons">
+                  <img src={gallery_icon} alt="" className="img-fluid" />
+                  <input
+                    onChange={handleFiles}
+                    className="file_input"
+                    name="image"
+                    type="file"
+                    accept=".png, .jpg, .jpeg"
+                    onKeyDown={handleKeyDown}
+                  />
+                </div>
+                <div className="buttons">
+                  <img src={attach_icon} alt="" className="img-fluid" />
+                  <input
+                    onChange={handleFiles}
+                    className="file_input"
+                    name="file"
+                    type="file"
+                    accept=".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt, .csv"
+                    onKeyDown={handleKeyDown}
+                  />
+                </div>
+                <div className="buttons">
+                  {/* <img src={attach_icon} alt="" className="img-fluid" /> */}
+                  <MdOutlineKeyboardVoice
+                    style={{ height: "19px", width: "19px" }}
+                  />
+                  <input
+                    disabled
+                    // onChange={handleFiles}
+                    className="file_input"
+                    name="file"
+                    type="file"
+                    // accept=".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt, .csv"
+                    // onKeyDown={handleKeyDown}
+                  />
+                </div>
+                <div className="clearn-context-5" onClick={handleCleanContext}>
+                  <img
+                    className="frame-337-1"
+                    src={cleanIcon}
+                    alt="Frame 337"
+                  />
+                  <div className="clean-context-1 inter-medium-fuscous-gray-12px">
+                    {isCleanLoading ? <div className="loader"></div> : "Clean Context"}
                   </div>
                 </div>
-              ))
-            : ""}
-        </div>
-        {replyMsg && (
-          <div className="replyMsg">
-            <div className="d-flex gap-2">
-              <div>
-                <img src={replyIcon} alt="" />
               </div>
-              {replyMsg.type === "text" ? (
-                <span>{replyMsg.msg}</span>
-              ) : replyMsg.type === "image" ? (
-                <img
-                  style={{ height: "24px", width: "24px" }}
-                  src={replyMsg.msg}
-                  alt={replyMsg.alt}
-                />
-              ) : (
-                replyMsg.type === "file" && <span>{replyMsg.msg}</span>
-              )}
+              <div>
+                <button type="submit" className="send_text_btn buttons">
+                  <img src={send_icon} alt="" className="img-fluid" />
+                </button>
+              </div>
             </div>
-            <div
-              onClick={() => handleReplyMsg(null)}
-              style={{ cursor: "pointer" }}
-            >
-              <FaRegTimesCircle style={{ height: "18px", width: "18px" }} />
-            </div>
-          </div>
-        )}
-
-        <div className="chat_input_btn_container">
-          <div className="chat_input_btn_left">
-            <div className="buttons">
-              <img src={gallery_icon} alt="" className="img-fluid" />
-              <input
-                onChange={handleFiles}
-                className="file_input"
-                name="image"
-                type="file"
-                accept=".png, .jpg, .jpeg"
-                onKeyDown={handleKeyDown}
-              />
-            </div>
-            <div className="buttons">
-              <img src={attach_icon} alt="" className="img-fluid" />
-              <input
-                onChange={handleFiles}
-                className="file_input"
-                name="file"
-                type="file"
-                accept=".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt, .csv"
-                onKeyDown={handleKeyDown}
-              />
-            </div>
-            <div className="buttons">
-              {/* <img src={attach_icon} alt="" className="img-fluid" /> */}
-              <MdOutlineKeyboardVoice style={{height: '19px', width: '19px'}} />
-              <input
-                // onChange={handleFiles}
-                className="file_input"
-                name="file"
-                type="file"
-                // accept=".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt, .csv"
-                // onKeyDown={handleKeyDown}
-              />
-            </div>
-          </div>
-          <div>
-            <button type="submit" className="send_text_btn buttons">
-              <img src={send_icon} alt="" className="img-fluid" />
-            </button>
-          </div>
+          </form>
         </div>
-      </form>
+      )}
     </div>
   );
 };

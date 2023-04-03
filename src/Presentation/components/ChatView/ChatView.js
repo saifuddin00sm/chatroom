@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import ChatInput from "../ChatInput/ChatInput";
 import ChatViewHeader from "./ChatViewHeader";
 import "./ChatView.css";
@@ -6,8 +6,10 @@ import MessageBox from "./MessageBox";
 import { useGetChatContext } from "../../../context/getChatContext";
 import loadingAnim from "../../../assets/img/load-more-msg-anim.gif";
 import chatLoading from "../../../assets/img/chat-loading.gif";
+import { baseUrl, cleanChatContextUrl } from "../../../urls/urls";
 
 const ChatView = () => {
+  const [isCleanLoading, setIsCleanLoading] = useState(false)
   const { chatInfo, chatInfoLoading, loadMoreMsgs, moreMsgLoading } =
     useGetChatContext();
   const { chat_id, bot_id, latest_msg_list, chat_name, pinned } = chatInfo;
@@ -31,6 +33,46 @@ const ChatView = () => {
       });
     }
   }, [chatInfoLoading]);
+
+  const handleCleanContext = async () => {
+    const localToken = localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append("chat_id", chat_id);
+    try {
+      setIsCleanLoading(true);
+      const res = await fetch(baseUrl + cleanChatContextUrl, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${localToken}` },
+        body: formData,
+      });
+      const data = await res.json();
+      if (res.ok) {
+        console.log(data);
+        if (data.status === "success") {
+          //do something
+          console.log('got res')
+          // const sessionEl = document.createElement('div')
+          const msgContainer = document.querySelector(".msg_container");
+          const sessionEl  = document.createElement('div');
+          sessionEl.className = 'session_container';
+          sessionEl.innerHTML = `
+          <hr style="width: 100%;" />
+          <p class="session_text">Session ended</p>
+          <hr style="width: 100%;" />`
+          msgContainer.appendChild(sessionEl);
+          setIsCleanLoading(false)
+        } else {
+          setIsCleanLoading(false)
+          console.log(data.error_msg);
+        }
+      } else {
+        setIsCleanLoading(false)
+        console.log("server error");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div
@@ -148,7 +190,7 @@ const ChatView = () => {
             </div>
           </div>
           <div className="chat_view_bottom">
-            <ChatInput />
+            <ChatInput isCleanLoading={isCleanLoading} handleCleanContext={handleCleanContext} />
           </div>
         </>
       )}

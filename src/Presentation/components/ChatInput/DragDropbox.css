@@ -1,0 +1,60 @@
+.frame-340 {
+    align-items: flex-start;
+    background-color: #f2f4f7;
+    border: 2px solid;
+    border-color: #09914f;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    height: 156px;
+    margin-top: 19px;
+    padding: 16px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .frame-203 {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 121px;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .icon-upload_arrow {
+    height: 24px;
+    min-width: 24px;
+    position: relative;
+  }
+  
+  .drag-drop-or-choose-file-to-upload {
+    /* color: transparent; */
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .span1 {
+    color: #09914f;
+  }
+  
+  .docx-doc-pptx {
+    color: #515151;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+  }
