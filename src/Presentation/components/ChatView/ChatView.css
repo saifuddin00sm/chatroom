@@ -11,13 +11,13 @@
 /* CHAT VIEW HEADER STYLE STARTED HERE  */
 
 .chat_view_header {
-  height: 65px;
+  height: 7vh;
   background: #f9fafb;
   border-bottom: 1px solid #d9d9d9;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 24px;
+  padding: 32px 24px;
 }
 
 .chat_view_header .avatar_container {
@@ -63,12 +63,13 @@
   max-width: 100%;
   padding: 8px 7px;
   bottom: 0px;
+  height: 20vh;
 }
 
 /* CHAT VIEW BOTTOM STYLE ENDED HERE */
 
 .msg_box {
-  height: 70vh;
+  height: 73vh;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 10px;

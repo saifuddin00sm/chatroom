@@ -15,7 +15,7 @@ import xlsxIcon from "../../../assets/img/XLSX.png";
 import replyIcon from "../../../assets/img/reply-icon.svg";
 import Music from "./Music";
 
-const MessageBox = ({ type, position, messageItems, formattedDate }) => {
+const MessageBox = ({ type, position, messageItems, formattedDate, menuOepnHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [sizeOfFile, setSizeOfFile] = useState("");
@@ -55,12 +55,9 @@ const MessageBox = ({ type, position, messageItems, formattedDate }) => {
         const sizes = await getFileSize(messageItems?.file_url);
         setSizeOfFile(sizes);
       })();
+
     }
   }, [messageItems]);
-
-  window.addEventListener("click", function () {
-    setMenusItems(false);
-  });
 
   return (
     <>
@@ -75,14 +72,13 @@ const MessageBox = ({ type, position, messageItems, formattedDate }) => {
           <div
             onContextMenu={(e) => {
               e.preventDefault();
-              if (type === "sender_msg") {
-                setMenusItems(true);
-              }
+              e.stopPropagation();
+              menuOepnHandler(messageItems?.msg_id);
             }}
             className={`msg_main ${type}`}
             style={{ padding: `${messageItems?.msg_type === "image" ? 0 : messageItems?.file_name?.includes(".mp3") && 0}` }}
           >
-            {menusItems && <Menus msgs={messageItems} />}
+            {messageItems?.isMenuOpen && <Menus msgs={messageItems} />}
             {messageItems?.msg_type === "text" ? (
               <p className="msg_text">{messageItems?.text}</p>
             ) : messageItems?.msg_type === "image" ? (

@@ -28,6 +28,7 @@ const ChatInput = ({handleCleanContext, isCleanLoading}) => {
   const [textInputVal, setTextInputVal] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState([]);
   const [isDrag, setIsDrag] = useState(false);
+  const [textAreaRows, setTextAreaRows] = useState(2);
   const { chatInfo, socketActions, replyMsg, handleReplyMsg } =
     useGetChatContext();
 
@@ -229,7 +230,7 @@ const ChatInput = ({handleCleanContext, isCleanLoading}) => {
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDrop={onDropHandler}
-      style={{ height: "156px", borderRadius: "6px" }}
+      style={{ height: "100%", borderRadius: "6px" }}
     >
       {isDrag ? (
         <DragDropBox handleFile={handleFiles} handleKeyDown={handleKeyDown} />
@@ -239,10 +240,27 @@ const ChatInput = ({handleCleanContext, isCleanLoading}) => {
             <textarea
               value={textInputVal}
               onKeyDown={handleKeyDown}
-              onChange={(e) => setTextInputVal(e.target.value)}
+              onChange={(event) => {
+                setTextInputVal(event.target.value);
+                const textareaLineHeight = 30;
+                const previousRows = event.target.rows;
+                event.target.rows = 2;
+                let currentRows = Math.ceil(event.target.scrollHeight / textareaLineHeight);
+                event.target.rows = previousRows;
+                currentRows = Math.min(currentRows, 4)
+                if (currentRows !== textAreaRows) {
+                  setTextAreaRows(currentRows);
+                } else if (event.target.value.length < event.target.selectionStart) {
+                  // the user is deleting text and the number of rows is decreasing
+                  const newRowHeight = Math.ceil(event.target.scrollHeight / textareaLineHeight);
+                  if (newRowHeight < textAreaRows) {
+                    setTextAreaRows(newRowHeight);
+                  }
+                }
+              }}
               placeholder="Send a message"
-              rows={3}
-            ></textarea>
+              rows={textAreaRows}
+            />
             <div className="file_container">
               {inputItem.length
                 ? inputItem.map((files, index) => (
