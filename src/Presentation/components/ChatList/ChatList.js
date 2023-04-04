@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import add_icon from "../../../assets/img/add_icon.png";
-import pin_icon from "../../../assets/img/pin_icon.png";
-import pin_filled_icon from "../../../assets/img/pin-filled.svg";
+// import pin_icon from "../../../assets/img/pin_icon.png";
+// import pin_filled_icon from "../../../assets/img/pin-filled.svg";
 // import ChatListModel from "../../../models/ChatListModel";
 import "./ChatList.css";
 import { useGetChatContext } from "../../../context/getChatContext";
@@ -12,6 +12,7 @@ import inviteIcons from "../../../assets/img/Invite-Outline.png";
 import settingIcons from "../../../assets/img/setting.png";
 import logoutIcons from "../../../assets/img/logout.png";
 import creditIcon from "../../../assets/img/credit1.png";
+import {BsPinAngle, BsPinAngleFill} from 'react-icons/bs';
 
 import UpgradeModal from "./Modals/UpgradeModal";
 import InviteModal from "./Modals/InviteModal";
@@ -115,11 +116,12 @@ const ChatList = () => {
                             : "00:00"}
                         </p>
                         <div>
-                          <img
+                          {/* <img
                             src={pinned ? pin_filled_icon : pin_icon}
                             alt="pin_icon"
                             className="img-fluid pin_icon"
-                          />
+                          /> */}
+                           {pinned ? <BsPinAngleFill color="#087443" style={{display: 'block', height: '16px', width: '16px'}} /> : <BsPinAngle color="#087443" style={{display: 'block', height: '16px', width: '16px'}}/>}
                         </div>
                       </div>
                     </div>

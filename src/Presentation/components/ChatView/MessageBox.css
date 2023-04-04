@@ -128,8 +128,10 @@
 
 .menus {
   position: absolute;
-  right: -30%;
-  top: 50px;
+  right: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 90px;
   background-color: #eaecf0;
   padding: 15px 20px;
   border-radius: 5px;
@@ -147,18 +149,6 @@
   cursor: pointer;
   margin-bottom: 5px;
 }
-
-.menus::after {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 36%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent #c3c7d1 transparent;
-}
-
 .reply_box {
   margin-left: auto;
   margin-top: 5px;

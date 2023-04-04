@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import pin_icon_2 from "../../../assets/img/pin_icon_2.png";
-import pin_filled_icon from "../../../assets/img/pin-filled.svg";
+// import pin_icon_2 from "../../../assets/img/pin_icon_2.png";
+// import pin_filled_icon from "../../../assets/img/pin-filled.svg";
 // import three_dots_icon from "../../../assets/img/three_dots_icon.png";
 // import { IoIosArrowForward } from "react-icons/io";
 import { useGetChatContext } from "../../../context/getChatContext";
@@ -8,6 +8,7 @@ import "./ChatViewHeader";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import {BsPinAngle, BsPinAngleFill} from 'react-icons/bs';
 
 const ChatViewHeader = ({ chatName, agentName, chatId, pinned }) => {
   const [inputVal, setInputVal] = useState("");
@@ -38,18 +39,19 @@ const ChatViewHeader = ({ chatName, agentName, chatId, pinned }) => {
         </div>
         <div className="chat_view_header_right">
           <div onClick={handlePin}>
-            <img
+            {/* <img
               src={pinned ? pin_filled_icon : pin_icon_2}
               alt="pin_icon"
               className="img-fluid w-100 h-100"
-            />
+            /> */}
+            {pinned ? <BsPinAngleFill color="#087443" style={{display: 'block', height: '23px', width: '23px'}} /> : <BsPinAngle color="#087443" style={{display: 'block', height: '23px', width: '23px'}}/>}
           </div>
           <div
             onClick={() => setShowModal({ isOpen: true, chatId: chatId })}
             style={{ cursor: "pointer" }}
           >
             <RiDeleteBin6Line
-              style={{ height: "23px", width: "23px", color: "#747070" }}
+              style={{ height: "23px", width: "23px", color: "#747070", display: 'block' }}
             />
           </div>
         </div>
