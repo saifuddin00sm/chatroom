@@ -63,7 +63,8 @@
   max-width: 100%;
   padding: 8px 7px;
   bottom: 0px;
-  height: 20vh;
+  /* height: 20vh; */
+  height: auto;
 }
 
 /* CHAT VIEW BOTTOM STYLE ENDED HERE */

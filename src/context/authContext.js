@@ -28,6 +28,7 @@ export const GetAuthContextProvider = ({ children }) => {
   const [showAlert, setShowAlert] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   const [verifyLoding, setVerifyLoading] = useState(false);
+  const [isLogout, setIsLogout] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -196,6 +197,7 @@ export const GetAuthContextProvider = ({ children }) => {
           console.log("res", resText);
           localStorage.removeItem("token");
           setToken("");
+          setIsLogout(true);
         } else {
           console.log(resText.error_msg);
         }
@@ -215,6 +217,10 @@ export const GetAuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const localToken = localStorage.getItem("token");
+    if(isLogout) {
+       navigate('/login');
+       return;
+      }
     async function checkToken(webToken) {
       try {
         const verifyToken = await fetch(baseUrl + verifyWebTokenUrl, {

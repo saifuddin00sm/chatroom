@@ -133,11 +133,10 @@
   display: flex;
   justify-content: space-between;
   align-items: self-start;
-
+  width: 500px;
   gap: 5px;
   background: #f2f4f7;
   border-radius: 0px 8px 8px 8px;
-  margin: 12px 0px;
 }
 
 
@@ -174,4 +173,5 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+    gap: 16px;
 }

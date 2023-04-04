@@ -23,7 +23,7 @@ import { FaRegTimesCircle } from "react-icons/fa";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
 import DragDropBox from "./DragDropBox";
 
-const ChatInput = ({handleCleanContext, isCleanLoading}) => {
+const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
   const [inputItem, setInputItem] = useState([]);
   const [textInputVal, setTextInputVal] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState([]);
@@ -237,30 +237,38 @@ const ChatInput = ({handleCleanContext, isCleanLoading}) => {
       ) : (
         <div className="chat_input_container">
           <form onSubmit={handlMsgSubmit} className="chat_input_content">
-            <textarea
-              value={textInputVal}
-              onKeyDown={handleKeyDown}
-              onChange={(event) => {
-                setTextInputVal(event.target.value);
-                const textareaLineHeight = 30;
-                const previousRows = event.target.rows;
-                event.target.rows = 2;
-                let currentRows = Math.ceil(event.target.scrollHeight / textareaLineHeight);
-                event.target.rows = previousRows;
-                currentRows = Math.min(currentRows, 4)
-                if (currentRows !== textAreaRows) {
-                  setTextAreaRows(currentRows);
-                } else if (event.target.value.length < event.target.selectionStart) {
-                  // the user is deleting text and the number of rows is decreasing
-                  const newRowHeight = Math.ceil(event.target.scrollHeight / textareaLineHeight);
-                  if (newRowHeight < textAreaRows) {
-                    setTextAreaRows(newRowHeight);
+            <div className="text_box">
+              <textarea
+                value={textInputVal}
+                onKeyDown={handleKeyDown}
+                onChange={(event) => {
+                  setTextInputVal(event.target.value);
+                  const textareaLineHeight = 30;
+                  const previousRows = event.target.rows;
+                  event.target.rows = 2;
+                  let currentRows = Math.ceil(
+                    event.target.scrollHeight / textareaLineHeight
+                  );
+                  event.target.rows = previousRows;
+                  currentRows = Math.min(currentRows, 4);
+                  if (currentRows !== textAreaRows) {
+                    setTextAreaRows(currentRows);
+                  } else if (
+                    event.target.value.length < event.target.selectionStart
+                  ) {
+                    // the user is deleting text and the number of rows is decreasing
+                    const newRowHeight = Math.ceil(
+                      event.target.scrollHeight / textareaLineHeight
+                    );
+                    if (newRowHeight < textAreaRows) {
+                      setTextAreaRows(newRowHeight);
+                    }
                   }
-                }
-              }}
-              placeholder="Send a message"
-              rows={textAreaRows}
-            />
+                }}
+                placeholder="Send a message"
+                rows={textAreaRows}
+              />
+            </div>
             <div className="file_container">
               {inputItem.length
                 ? inputItem.map((files, index) => (
@@ -301,7 +309,13 @@ const ChatInput = ({handleCleanContext, isCleanLoading}) => {
                             alt="preview-img"
                           />
                           <div>
-                            <div className="file_name">{files.file.name}</div>
+                            <div className="file_name">
+                              {files.file.name.length > 9
+                                ? files.file.name.slice(0, 6).split(".")[0] +
+                                  "... ." +
+                                  files.file.name.split(".")[1]
+                                : files.file.name}
+                            </div>
                             <span className="file_kb">
                               {formatFileSize(files.file.size)}
                             </span>
@@ -332,7 +346,11 @@ const ChatInput = ({handleCleanContext, isCleanLoading}) => {
                     <img src={replyIcon} alt="" />
                   </div>
                   {replyMsg.type === "text" ? (
-                    <span>{replyMsg.msg}</span>
+                    <span>
+                      {replyMsg.msg.length > 50
+                        ? replyMsg.msg.slice(0, 50) + "..."
+                        : replyMsg.msg}
+                    </span>
                   ) : replyMsg.type === "image" ? (
                     <img
                       style={{ height: "24px", width: "24px" }}
@@ -397,7 +415,11 @@ const ChatInput = ({handleCleanContext, isCleanLoading}) => {
                     alt="Frame 337"
                   />
                   <div className="clean-context-1 inter-medium-fuscous-gray-12px">
-                    {isCleanLoading ? <div className="loader"></div> : "Clean Context"}
+                    {isCleanLoading ? (
+                      <div className="loader"></div>
+                    ) : (
+                      "Clean Context"
+                    )}
                   </div>
                 </div>
               </div>
