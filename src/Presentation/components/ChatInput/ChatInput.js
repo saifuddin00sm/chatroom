@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import gallery_icon from "../../../assets/img/gallery_icon.png";
-import attach_icon from "../../../assets/img/attach_icon.png";
+import React, { useState, useRef } from "react";
+// import gallery_icon from "../../../assets/img/gallery_icon.png";
+// import attach_icon from "../../../assets/img/attach_icon.png";
 import send_icon from "../../../assets/img/send_icon.png";
 import "./ChatInput.css";
 import formatFileSize from "../../../utils/formatFileSize";
@@ -21,6 +21,8 @@ import { baseUrl, uploadMsgFileUrl, uploadMsgImgUrl } from "../../../urls/urls";
 import { useGetChatContext } from "../../../context/getChatContext";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { MdOutlineKeyboardVoice } from "react-icons/md";
+import {ImAttachment} from 'react-icons/im';
+import {CiImageOn} from 'react-icons/ci';
 import DragDropBox from "./DragDropBox";
 
 const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
@@ -31,6 +33,8 @@ const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
   const [textAreaRows, setTextAreaRows] = useState(2);
   const { chatInfo, socketActions, replyMsg, handleReplyMsg } =
     useGetChatContext();
+    const imgFileInputRef = useRef(null);
+    const fileInputRef = useRef(null);
 
   // Upload the files to the server when user selects any file ex: (img, doc, xls) etc...
   const handleFiles = async (file) => {
@@ -325,6 +329,12 @@ const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
                       <div
                         className="closeIcon"
                         onClick={() => {
+                          if(imgFileInputRef.current.value){
+                            imgFileInputRef.current.value = null;
+                          }
+                          if(fileInputRef.current.value){
+                            fileInputRef.current.value = null;
+                          }
                           setInputItem(
                             inputItem.filter((f, ind) => ind !== index)
                           );
@@ -371,9 +381,12 @@ const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
             )}
             <div className="chat_input_btn_container">
               <div className="chat_input_btn_left">
+                {/* Image upload input */}
                 <div className="buttons">
-                  <img src={gallery_icon} alt="" className="img-fluid" />
+                  {/* <img src={gallery_icon} alt="" className="img-fluid" /> */}
+                  <CiImageOn style={{height: '19px', width: '19px'}}/>
                   <input
+                    ref={imgFileInputRef}
                     onChange={handleFiles}
                     className="file_input"
                     name="image"
@@ -383,8 +396,11 @@ const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
                   />
                 </div>
                 <div className="buttons">
-                  <img src={attach_icon} alt="" className="img-fluid" />
+                  {/* file upload input */}
+                  {/* <img src={attach_icon} alt="" className="img-fluid" /> */}
+                  <ImAttachment style={{height: '17px', width: '17px'}} color="#515151" />
                   <input
+                    ref={fileInputRef}
                     onChange={handleFiles}
                     className="file_input"
                     name="file"
@@ -395,6 +411,7 @@ const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
                 </div>
                 <div className="buttons">
                   {/* <img src={attach_icon} alt="" className="img-fluid" /> */}
+                  {/* voice file input */}
                   <MdOutlineKeyboardVoice
                     style={{ height: "19px", width: "19px" }}
                   />
