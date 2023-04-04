@@ -227,7 +227,6 @@ const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
     handleFiles(obj);
     setIsDrag(false);
   };
-
   return (
     <div
       onDragOver={handleDragOver}
@@ -277,19 +276,17 @@ const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
               {inputItem.length
                 ? inputItem.map((files, index) => (
                     <div key={index} className="file_main">
-                      {files?.loading ? (
-                        <div className="loader"></div>
-                      ) : files?.error ? (
+                      {files?.error ? (
                         <p className="text-danger">{files.error}</p>
                       ) : (
-                        <>
+                        <div style={{display: 'flex', gap: '8px'}}>
                           <img
                             className="file_icons"
                             src={
                               files.file.name.includes("jpg") ||
                               files.file.name.includes("png") ||
                               files.file.name.includes("jpeg")
-                                ? uploadSuccess[index]?.image_url
+                                ? URL.createObjectURL(files.file)
                                 : files.file.name.includes(".csv")
                                 ? csvIcon
                                 : files.file.name.includes(".doc")
@@ -324,7 +321,7 @@ const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
                               {formatFileSize(files.file.size)}
                             </span>
                           </div>
-                        </>
+                        </div>
                       )}
                       <div
                         className="closeIcon"
@@ -343,7 +340,12 @@ const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
                           );
                         }}
                       >
-                        <img src={closeIcon} alt="closeIcon" />
+                       {files?.loading ? (
+                           <div className="loader" style={{
+                            border: "3px solid #ffffff",
+                            borderTop: "3px solid #0ca386", height: '100%', width: '100%'}}>
+                          </div>
+                      ) : <img src={closeIcon} alt="closeIcon" />}
                       </div>
                     </div>
                   ))
