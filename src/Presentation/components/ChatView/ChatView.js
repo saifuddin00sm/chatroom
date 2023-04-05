@@ -123,15 +123,15 @@ const ChatView = () => {
 
   return (
     <div
-      className={`chat_view_containers ${
-        firstLoadingChat ? "flex-while-loading" : ""
-      }`}
+      className="chat_view_containers"
     >
       {firstLoadingChat ? (
         // <div className="loader" style={{ width: "80px", height: "80px" }}></div>
         <div className="loading_screen">
-          <img className="mb-3" src={chatLoadingAnim} alt="chat loading" />
-          <p>Tasking.ai</p>
+          <div>
+            <img className="mb-3" src={chatLoadingAnim} alt="chat loading" />
+            <p>Tasking.ai</p>
+          </div>
         </div>
       ) : (
         <>

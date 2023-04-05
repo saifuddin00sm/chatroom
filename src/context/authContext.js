@@ -60,6 +60,7 @@ export const GetAuthContextProvider = ({ children }) => {
           localStorage.setItem("user_info", JSON.stringify(data.user_info));
           setToken(data.token);
           setLoading(false);
+          setIsLogout(false);
         }
       } else {
         // Login failed
@@ -96,6 +97,7 @@ export const GetAuthContextProvider = ({ children }) => {
           localStorage.setItem("user_info", JSON.stringify(data.user_info));
           setToken(data.token);
           setLoading(false);
+          setIsLogout(false);
         }
       } else {
         // Login failed

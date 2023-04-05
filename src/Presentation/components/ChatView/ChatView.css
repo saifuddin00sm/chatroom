@@ -107,12 +107,6 @@
   border-radius: 10px;
 }
 
-.flex-while-loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .chat_header_input {
   padding: 10px;
   border: 2px solid #f9fafb;
@@ -137,11 +131,18 @@
   font-weight: 700;
   font-size: 28px;
   line-height: 34px;
-
   text-align: center;
-
+  height: 100vh;
   color: #099250;
   text-transform: uppercase;
+  width: 100vw;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal_body_text {
