@@ -279,9 +279,12 @@ const ChatInput = ({ handleCleanContext, isCleanLoading}) => {
                       {files?.error ? (
                         <p className="text-danger">{files.error}</p>
                       ) : (
-                        <div style={{display: 'flex', gap: '8px'}}>
+                        <div style={{display: 'flex', gap: '8px', alignItems: 'center'}}>
                           <img
-                            className="file_icons"
+                            className={`${ files.file.name.includes("jpg") ||
+                            files.file.name.includes("png") ||
+                            files.file.name.includes("jpeg")
+                              ? 'file_icons' : 'image_file'}`}
                             src={
                               files.file.name.includes("jpg") ||
                               files.file.name.includes("png") ||
@@ -309,7 +312,7 @@ const ChatInput = ({ handleCleanContext, isCleanLoading}) => {
                             }
                             alt="preview-img"
                           />
-                          <div>
+                          <div style={{display: 'flex', flexDirection: 'column'}}>
                             <div className="file_name">
                               {files.file.name.length > 9
                                 ? files.file.name.slice(0, 6).split(".")[0] +
@@ -353,31 +356,31 @@ const ChatInput = ({ handleCleanContext, isCleanLoading}) => {
             </div>
             {replyMsg && (
               <div className="replyMsg">
-                <div className="d-flex gap-2">
+                <div className="d-flex gap-2 align-items-center">
                   <div>
                     <img src={replyIcon} alt="" />
                   </div>
-                  {replyMsg.type === "text" ? (
-                    <span>
-                      {replyMsg.msg.length > 50
-                        ? replyMsg.msg.slice(0, 50) + "..."
-                        : replyMsg.msg}
-                    </span>
-                  ) : replyMsg.type === "image" ? (
+                  {replyMsg.type === "text" || replyMsg.type === "file" ? (
+                    <div className="reply_msg_content">
+                      <span>
+                        {replyMsg.msg.length > 50
+                          ? replyMsg.msg.slice(0, 50) + "..."
+                          : replyMsg.msg}
+                      </span>
+                    </div>
+                  ) : replyMsg.type === "image" && (
                     <img
-                      style={{ height: "24px", width: "24px" }}
+                      style={{ height: "32px", width: "48px", borderRadius: "0px 8px 8px 8px" }}
                       src={replyMsg.msg}
                       alt={replyMsg.alt}
                     />
-                  ) : (
-                    replyMsg.type === "file" && <span>{replyMsg.msg}</span>
                   )}
                 </div>
                 <div
                   onClick={() => handleReplyMsg(null)}
                   style={{ cursor: "pointer" }}
                 >
-                  <FaRegTimesCircle style={{ height: "18px", width: "18px" }} />
+                  <FaRegTimesCircle color="#777777" style={{ height: "18px", width: "18px" }} />
                 </div>
               </div>
             )}

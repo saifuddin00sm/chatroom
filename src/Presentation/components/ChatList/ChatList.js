@@ -121,7 +121,7 @@ const ChatList = () => {
                             alt="pin_icon"
                             className="img-fluid pin_icon"
                           /> */}
-                           {pinned ? <BsPinAngleFill color="#087443" style={{display: 'block', height: '16px', width: '16px'}} /> : <BsPinAngle color="#087443" style={{display: 'block', height: '16px', width: '16px'}}/>}
+                          {pinned && <BsPinAngle color="#087443" style={{display: 'block', height: '16px', width: '16px'}}/>}
                         </div>
                       </div>
                     </div>
