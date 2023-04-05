@@ -7,11 +7,11 @@ import { VscReply } from "react-icons/vsc";
 // import {toast} from 'react-toastify';
 import copyToClipboard from "../../../utils/copyToClipboard";
 
-const Menus = ({ msgs }) => {
+const Menus = ({ msgs, type }) => {
   const { handleReplyMsg } = useGetChatContext();
 
   return (
-    <div className="menus">
+    <div className="menus" style={{left: type === 'sender_msg' ? '18%' : '', right: type === 'receiver_msg' ? '-8%': ''}}>
       <ul>
         {msgs.msg_type === "text" && (
           <li

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
 // import pin_icon_2 from "../../../assets/img/pin_icon_2.png";
 // import pin_filled_icon from "../../../assets/img/pin-filled.svg";
 // import three_dots_icon from "../../../assets/img/three_dots_icon.png";
@@ -14,6 +14,7 @@ const ChatViewHeader = ({ chatName, agentName, chatId, pinned }) => {
   const [inputVal, setInputVal] = useState("");
   const { updateInfo, handleDeleteChat, chatLoading } = useGetChatContext();
   const [showModal, setShowModal] = useState({ isOpen: false, chatId: "" });
+  const [isFocused, setIsFocused] = useState(false);
 
   const handlePin = () => {
     const pins = pinned ? false : true;
@@ -23,6 +24,24 @@ const ChatViewHeader = ({ chatName, agentName, chatId, pinned }) => {
   useEffect(() => {
     setInputVal(chatName);
   }, [chatName, pinned]);
+
+
+  useEffect(() => {
+    const handleClick = () => {
+      if(isFocused){
+        console.log('window clicked', inputVal);
+        updateInfo(null, inputVal, chatId, "name");
+
+        setIsFocused(false);
+      }
+    }
+
+    window.addEventListener('click', handleClick);
+
+    return () => {
+      window.removeEventListener('click', handleClick);
+    }
+  }, [isFocused, inputVal]);
 
   return (
     <>
@@ -34,11 +53,15 @@ const ChatViewHeader = ({ chatName, agentName, chatId, pinned }) => {
               className="chat_header_input"
               value={inputVal}
               style={{ width: "230px" }}
+              onClick={(e)=> {
+                e.stopPropagation();
+              }}
+              onFocus={()=> setIsFocused(true)}
             />
           </form>
         </div>
         <div className="chat_view_header_right">
-          <div onClick={handlePin}>
+          <div onClick={handlePin} style={{cursor: 'pointer'}}>
             {/* <img
               src={pinned ? pin_filled_icon : pin_icon_2}
               alt="pin_icon"

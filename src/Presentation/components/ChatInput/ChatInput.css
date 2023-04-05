@@ -86,6 +86,8 @@
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 3px;
+  max-height: 60px;
+  overflow-y: auto;
 }
 
 .file_main {
@@ -96,7 +98,7 @@
   width: 100%;
   height: 55px;
   background: #f6f6f6;
-  padding: 10px 8px;
+  padding: 8px 8px;
   border-radius: 7px;
   overflow: hidden;
 }
@@ -104,7 +106,7 @@
   height: 40px;
   width: 44px;
   object-fit: contain;
-  border-radius: 2px;
+  border-radius: 7px;
 }
 
 .file_name {

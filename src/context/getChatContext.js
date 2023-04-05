@@ -1,9 +1,9 @@
-import { useContext, createContext, useState, useEffect } from "react";
+import { useContext, createContext, useState, useEffect, useRef } from "react";
 import {
   addChatUrl,
   baseUrl,
   deleteChatUrl,
-  getChatInfoUrl,
+  // getChatInfoUrl,
   getChatListUrl,
   getMsgsUrl,
   updateChatInfoUrl,
@@ -25,6 +25,7 @@ export const GetChatContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
   const [replyMsg, setReplyMsg] = useState(null);
+  const divRef = useRef(null);
   // const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleReplyMsg = (msg) => {
@@ -41,59 +42,14 @@ export const GetChatContextProvider = ({ children }) => {
 
   const handleChat = async (chatId) => {
     if (chatId === chatInfo?.chat_id) return;
-    const token = localStorage.getItem("token");
-    const formData = new FormData();
-    formData.append("chat_id", chatId);
-    if (token) {
-      try {
-        setChatInfoLoading(true);
-        const data = await fetch(baseUrl + getChatInfoUrl, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          body: formData,
-        });
-        const res = await data.json();
-        if (data?.ok) {
-          if (res.status === "success") {
-            let msgs = Array.isArray(res.chat_info.latest_msg_list)
-              ? res.chat_info.latest_msg_list.reverse()
-              : null;
-            setChatInfo({ ...res.chat_info, latest_msg_list: msgs });
-            setChatInfoLoading(false);
-            handleReplyMsg(null);
-          } else {
-            toast.error(res.error_msg, {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-            });
-            setChatInfoLoading(false);
-          }
-        } else {
-          toast.error(res.error_msg, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-          });
-          setChatInfoLoading(false);
-        }
-      } catch (error) {
-        console.log(error);
-        setChatInfoLoading(false);
-      }
-    }
+
+    const chat = chatList.find((f) => f.chat_id === chatId);
+    let msgs = Array.isArray(chat.latest_msg_list)
+      ? chat.latest_msg_list.reverse()
+      : null;
+
+    setChatInfo({ ...chat, latest_msg_list: msgs });
+    handleReplyMsg(null);
   };
 
   const getChatList = async () => {
@@ -120,6 +76,7 @@ export const GetChatContextProvider = ({ children }) => {
         const res = await data.json();
         if (res.status === "success") {
           setChatlist(res.chat_list);
+          console.log(res.chat_list);
           setChatLoading(false);
         } else {
           toast.error(res.error_msg, {
@@ -227,6 +184,8 @@ export const GetChatContextProvider = ({ children }) => {
       e.preventDefault();
     }
 
+    console.log(val, chatId, property);
+
     const token = localStorage.getItem("token");
     const formData = new FormData();
     formData.append("chat_id", chatId);
@@ -277,47 +236,53 @@ export const GetChatContextProvider = ({ children }) => {
     }
   };
 
-
-
-  const addNewChat = async ()=> {
-    const userInfo = JSON.parse(localStorage.getItem('user_info'));
-    const localToken = localStorage.getItem('token');
+  const addNewChat = async () => {
+    const userInfo = JSON.parse(localStorage.getItem("user_info"));
+    const localToken = localStorage.getItem("token");
 
     const spaceId = userInfo?.current_space_id;
 
     const formData = new FormData();
 
-    formData.append('space_id', spaceId);
-    formData.append('bot_id', 'tfajwm1qko0prx82');
-    formData.append('chat_name', 'new chat');
+    formData.append("space_id", spaceId);
+    formData.append("bot_id", "tfajwm1qko0prx82");
+    formData.append("chat_name", "new chat");
 
     try {
       const res = await fetch(baseUrl + addChatUrl, {
-        method: 'POST',
+        method: "POST",
         headers: {
           Authorization: `Bearer ${localToken}`,
         },
-        body: formData
+        body: formData,
       });
 
-      
-      if(res.ok){
+      if (res.ok) {
         const data = await res.json();
-        if(data.status === 'success'){
+        if (data.status === "success") {
           getChatList();
-        }else{
-          toast.error(data?.error_msg, {position:'top-center', theme:'colored', autoClose: 3000})
+        } else {
+          toast.error(data?.error_msg, {
+            position: "top-center",
+            theme: "colored",
+            autoClose: 3000,
+          });
         }
-      }else{
-        toast.error('server error', {position:'top-center', theme:'colored', autoClose: 3000})
+      } else {
+        toast.error("server error", {
+          position: "top-center",
+          theme: "colored",
+          autoClose: 3000,
+        });
       }
-
     } catch (error) {
-      
-      toast.error(error.message, {position:'top-center', theme:'colored', autoClose: 3000})
-      
+      toast.error(error.message, {
+        position: "top-center",
+        theme: "colored",
+        autoClose: 3000,
+      });
     }
-  }
+  };
 
   const handleDeleteChat = async (chatId) => {
     const localToken = localStorage.getItem("token");
@@ -328,33 +293,54 @@ export const GetChatContextProvider = ({ children }) => {
 
     try {
       const res = await fetch(baseUrl + deleteChatUrl, {
-        method: 'POST',
+        method: "POST",
         headers: { Authorization: `Bearer ${localToken}` },
         body: formData,
       });
 
       const data = await res.json();
 
-      if(res.ok){
-        if(data.status === 'success'){
-            setChatlist(chatList.filter((f)=> (f.chat_id !== chatId)));
+      if (res.ok) {
+        if (data.status === "success") {
+          setChatlist(chatList.filter((f) => f.chat_id !== chatId));
 
-            toast.success('Chat deleted', {position: 'top-center', autoClose:2000})
-            setChatLoading(false)
-
-        }else {
-          toast.error(data?.error_msg, {position:'top-center', theme:'colored', autoClose: 3000})
-              setChatLoading(false)
+          toast.success("Chat deleted", {
+            position: "top-center",
+            autoClose: 2000,
+          });
+          setChatLoading(false);
+        } else {
+          toast.error(data?.error_msg, {
+            position: "top-center",
+            theme: "colored",
+            autoClose: 3000,
+          });
+          setChatLoading(false);
         }
-      }else {
-        toast.error('server error', {position:'top-center', theme:'colored', autoClose: 3000})
-            setChatLoading(false)
+      } else {
+        toast.error("server error", {
+          position: "top-center",
+          theme: "colored",
+          autoClose: 3000,
+        });
+        setChatLoading(false);
       }
     } catch (error) {
-      toast.error(error.message, {position:'top-center', theme:'colored', autoClose: 3000});
-          setChatLoading(false)
+      toast.error(error.message, {
+        position: "top-center",
+        theme: "colored",
+        autoClose: 3000,
+      });
+      setChatLoading(false);
     }
   };
+
+  const scrollBottom = ()=> {
+    const { scrollHeight, clientHeight } = divRef.current;
+    divRef.current.scrollTo({
+      top: scrollHeight - clientHeight,
+    });
+  }
 
   useEffect(() => {
     if (chatList.length) {
@@ -378,7 +364,8 @@ export const GetChatContextProvider = ({ children }) => {
       console.log("Connected to server");
     });
 
-    skt.on("message", function (msg) {
+    skt.on("message", function (msg) 
+    {
       setChatInfo((prev) => {
         if (
           prev.latest_msg_list !== null &&
@@ -398,6 +385,8 @@ export const GetChatContextProvider = ({ children }) => {
           return { ...prev, latest_msg_list: [...msg.msg_list] };
         }
       });
+
+      scrollBottom();
     });
   };
 
@@ -416,6 +405,7 @@ export const GetChatContextProvider = ({ children }) => {
         handleChat,
         chatInfo,
         chatInfoLoading,
+        divRef,
         updateInfo,
         socketActions,
         connectSocket,
@@ -425,7 +415,7 @@ export const GetChatContextProvider = ({ children }) => {
         handleDeleteChat,
         handleReplyMsg,
         replyMsg,
-        addNewChat
+        addNewChat,
       }}
     >
       {children}

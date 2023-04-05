@@ -11,11 +11,11 @@ import moment from "moment";
 
 const ChatView = () => {
   const [isCleanLoading, setIsCleanLoading] = useState(false);
-  const { chatInfo, chatInfoLoading, loadMoreMsgs, moreMsgLoading } =
+  const { chatInfo, chatInfoLoading, loadMoreMsgs, moreMsgLoading, divRef } =
     useGetChatContext();
   const { chat_id, bot_id, latest_msg_list, chat_name, pinned } = chatInfo;
   const userData = JSON.parse(localStorage.getItem("user_info"));
-  const divRef = useRef(null);
+  // const divRef = useRef(null);
   const [msgObj, setMsgObj] = useState([]);
   const [preventScroll, setPreventScroll] = useState(false);
 
@@ -32,16 +32,6 @@ const ChatView = () => {
       loadMoreMsgs();
     }
   };
-
-  useEffect(() => {
-    // This will automatically scroll to the bottom of the div when it loads or updates
-    if (!chatInfoLoading) {
-      const { scrollHeight, clientHeight } = divRef.current;
-      divRef.current.scrollTo({
-        top: scrollHeight - clientHeight,
-      });
-    }
-  }, [chatInfoLoading]);
 
   const handleCleanContext = async () => {
     const localToken = localStorage.getItem("token");
@@ -119,12 +109,17 @@ const ChatView = () => {
     }
   };
 
-  window.addEventListener("click", function () {
-    closeMenuHandler();
-  });
-  window.addEventListener("contextmenu", function () {
-    closeMenuHandler();
-  });
+  useEffect(() => {
+  window.addEventListener("click", closeMenuHandler);
+  window.addEventListener("contextmenu",closeMenuHandler);
+
+    return () => {
+      window.removeEventListener('click', closeMenuHandler);
+      window.removeEventListener('contextmenu', closeMenuHandler);
+    }
+  })
+  
+
 
   return (
     <div

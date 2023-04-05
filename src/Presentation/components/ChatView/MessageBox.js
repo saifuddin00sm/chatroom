@@ -19,7 +19,6 @@ const MessageBox = ({ type, position, messageItems, formattedDate, menuOepnHandl
   const [isOpen, setIsOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [sizeOfFile, setSizeOfFile] = useState("");
-  const [menusItems, setMenusItems] = useState(false);
 
   const handleModal = (url) => {
     setIsOpen(true);
@@ -78,7 +77,7 @@ const MessageBox = ({ type, position, messageItems, formattedDate, menuOepnHandl
             className={`msg_main ${type}`}
             style={{ padding: `${messageItems?.msg_type === "image" ? 0 : messageItems?.file_name?.includes(".mp3") && 0}` }}
           >
-            {messageItems?.isMenuOpen && <Menus msgs={messageItems} />}
+            {messageItems?.isMenuOpen && <Menus type={type} msgs={messageItems} />}
             {messageItems?.msg_type === "text" ? (
               <p className="msg_text">{messageItems?.text}</p>
             ) : messageItems?.msg_type === "image" ? (

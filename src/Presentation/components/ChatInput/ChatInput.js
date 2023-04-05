@@ -25,7 +25,7 @@ import {ImAttachment} from 'react-icons/im';
 import {CiImageOn} from 'react-icons/ci';
 import DragDropBox from "./DragDropBox";
 
-const ChatInput = ({ handleCleanContext, isCleanLoading }) => {
+const ChatInput = ({ handleCleanContext, isCleanLoading}) => {
   const [inputItem, setInputItem] = useState([]);
   const [textInputVal, setTextInputVal] = useState("");
   const [uploadSuccess, setUploadSuccess] = useState([]);
