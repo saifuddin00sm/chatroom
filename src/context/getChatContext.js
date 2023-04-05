@@ -20,7 +20,7 @@ export const useGetChatContext = () => {
 export const GetChatContextProvider = ({ children }) => {
   const [chatList, setChatlist] = useState([]);
   const [chatLoading, setChatLoading] = useState(false);
-  const [chatInfoLoading, setChatInfoLoading] = useState(false);
+  const [firstLoadingChat, setFirstLoadingChat] = useState(false);
   const [chatInfo, setChatInfo] = useState({});
   const [socket, setSocket] = useState(null);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
@@ -52,7 +52,7 @@ export const GetChatContextProvider = ({ children }) => {
     handleReplyMsg(null);
   };
 
-  const getChatList = async () => {
+  const getChatList = async (param) => {
     const userInfo = JSON.parse(localStorage.getItem("user_info"));
     const token = localStorage.getItem("token");
     if (userInfo && token) {
@@ -64,6 +64,9 @@ export const GetChatContextProvider = ({ children }) => {
       formData.append("space_id", current_space_id);
 
       try {
+        if(param){
+          setFirstLoadingChat(true);
+        }
         setChatLoading(true);
         const data = await fetch(baseUrl + getChatListUrl, {
           method: "POST",
@@ -78,6 +81,9 @@ export const GetChatContextProvider = ({ children }) => {
           setChatlist(res.chat_list);
           console.log(res.chat_list);
           setChatLoading(false);
+          if(param){
+            setFirstLoadingChat(false);
+          }
         } else {
           toast.error(res.error_msg, {
             position: "top-center",
@@ -91,10 +97,16 @@ export const GetChatContextProvider = ({ children }) => {
           });
           setChatlist([]);
           setChatLoading(false);
+           if(param){
+      setFirstLoadingChat(false);
+    }
         }
       } catch (error) {
         console.log(error);
         setChatLoading(false);
+         if(param){
+      setFirstLoadingChat(false);
+    }
       }
     }
   };
@@ -404,7 +416,7 @@ export const GetChatContextProvider = ({ children }) => {
         chatLoading,
         handleChat,
         chatInfo,
-        chatInfoLoading,
+        firstLoadingChat,
         divRef,
         updateInfo,
         socketActions,

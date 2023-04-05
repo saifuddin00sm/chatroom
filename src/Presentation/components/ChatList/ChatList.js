@@ -26,7 +26,7 @@ const ChatList = () => {
   const userInfo = JSON.parse(localStorage.getItem("user_info"));
 
   useEffect(() => {
-    getChatList();
+    getChatList('firstLoad');
   }, []);
 
   return (

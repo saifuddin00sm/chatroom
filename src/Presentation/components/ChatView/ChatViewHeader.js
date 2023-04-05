@@ -29,9 +29,9 @@ const ChatViewHeader = ({ chatName, agentName, chatId, pinned }) => {
   useEffect(() => {
     const handleClick = () => {
       if(isFocused){
-        console.log('window clicked', inputVal);
+       if(chatName !== inputVal){
         updateInfo(null, inputVal, chatId, "name");
-
+       }
         setIsFocused(false);
       }
     }

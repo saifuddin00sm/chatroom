@@ -5,13 +5,13 @@ import "./ChatView.css";
 import MessageBox from "./MessageBox";
 import { useGetChatContext } from "../../../context/getChatContext";
 import loadingAnim from "../../../assets/img/load-more-msg-anim.gif";
-import chatLoading from "../../../assets/img/chat-loading.gif";
+import chatLoadingAnim from "../../../assets/img/chat-loading.gif";
 import { baseUrl, cleanChatContextUrl } from "../../../urls/urls";
 import moment from "moment";
 
 const ChatView = () => {
   const [isCleanLoading, setIsCleanLoading] = useState(false);
-  const { chatInfo, chatInfoLoading, loadMoreMsgs, moreMsgLoading, divRef } =
+  const { chatInfo, firstLoadingChat, loadMoreMsgs, moreMsgLoading, divRef } =
     useGetChatContext();
   const { chat_id, bot_id, latest_msg_list, chat_name, pinned } = chatInfo;
   const userData = JSON.parse(localStorage.getItem("user_info"));
@@ -124,13 +124,13 @@ const ChatView = () => {
   return (
     <div
       className={`chat_view_containers ${
-        chatInfoLoading ? "flex-while-loading" : ""
+        firstLoadingChat ? "flex-while-loading" : ""
       }`}
     >
-      {chatInfoLoading ? (
+      {firstLoadingChat ? (
         // <div className="loader" style={{ width: "80px", height: "80px" }}></div>
         <div className="loading_screen">
-          <img className="mb-3" src={chatLoading} alt="chat loading" />
+          <img className="mb-3" src={chatLoadingAnim} alt="chat loading" />
           <p>Tasking.ai</p>
         </div>
       ) : (
