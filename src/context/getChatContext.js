@@ -117,8 +117,9 @@ export const GetChatContextProvider = ({ children }) => {
       const topMsgIndex = Array.isArray(latest_msg_list)
         ? latest_msg_list[0].msg_index
         : 0;
-
-      if (topMsgIndex < 1) return;
+        const isMsgFirst = latest_msg_list?.some((f)=> (f.msg_index === 0));
+        
+      if (isMsgFirst) return;
       setMoreMsgLoading(true);
       const token = localStorage.getItem("token");
       const formData = new FormData();

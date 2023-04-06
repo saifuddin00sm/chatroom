@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./MessageBox.css";
-import { Lightbox } from "react-modal-image";
 import Menus from "./Menus";
 import csvIcon from "../../../assets/img/CSV.png";
 import docIcon from "../../../assets/img/DOC.png";
@@ -14,6 +13,7 @@ import xlsIcon from "../../../assets/img/XLS.png";
 import xlsxIcon from "../../../assets/img/XLSX.png";
 import replyIcon from "../../../assets/img/reply-icon.svg";
 import Music from "./Music";
+import ImageLightBox from "./ImageLightBox";
 
 const MessageBox = ({ type, position, messageItems, formattedDate, menuOepnHandler }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -168,12 +168,9 @@ const MessageBox = ({ type, position, messageItems, formattedDate, menuOepnHandl
           )}
       </div>
       {isOpen && (
-        <Lightbox
-          large={imgUrl}
-          alt=""
+        <ImageLightBox
+          url={imgUrl}
           onClose={handleModalClose}
-          hideDownload={true}
-          hideZoom={true}
         />
       )}
     </>
