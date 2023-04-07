@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { contextMenu} from "react-contexify";
+import "react-contexify/dist/ReactContexify.css";
 import "./MessageBox.css";
 import Menus from "./Menus";
 import csvIcon from "../../../assets/img/CSV.png";
@@ -15,7 +17,8 @@ import replyIcon from "../../../assets/img/reply-icon.svg";
 import Music from "./Music";
 import ImageLightBox from "./ImageLightBox";
 
-const MessageBox = ({ type, position, messageItems, formattedDate, menuOepnHandler }) => {
+
+const MessageBox = ({ type, position, messageItems, formattedDate, setPreventScroll}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [imgUrl, setImgUrl] = useState("");
   const [sizeOfFile, setSizeOfFile] = useState("");
@@ -69,15 +72,21 @@ const MessageBox = ({ type, position, messageItems, formattedDate, menuOepnHandl
         </p>
         <div className={`message ${position}`}>
           <div
-            onContextMenu={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              menuOepnHandler(messageItems?.msg_id);
+            onContextMenu={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              contextMenu.show({
+                id: messageItems?.msg_id,
+                event: event,
+                props: {
+                  key: "value"
+                }
+              });
+              setPreventScroll(true)
             }}
             className={`msg_main ${type}`}
-            style={{ padding: `${messageItems?.msg_type === "image" ? 0 : messageItems?.file_name?.includes(".mp3") && 0}` }}
+            style={{position: 'relative', padding: `${messageItems?.msg_type === "image" ? 0 : messageItems?.file_name?.includes(".mp3") && 0}` }}
           >
-            {messageItems?.isMenuOpen && <Menus type={type} msgs={messageItems} />}
             {messageItems?.msg_type === "text" ? (
               <p className="msg_text">{messageItems?.text}</p>
             ) : messageItems?.msg_type === "image" ? (
@@ -93,7 +102,6 @@ const MessageBox = ({ type, position, messageItems, formattedDate, menuOepnHandl
             ) : messageItems?.msg_type === "file" &&
               messageItems?.file_name.includes(".mp3") ? (
               <div>
-                {/* <audio controls src={messageItems?.file_url} /> */}
                 <Music file={messageItems?.file_url}/>
               </div>
             ) : (
@@ -137,6 +145,8 @@ const MessageBox = ({ type, position, messageItems, formattedDate, menuOepnHandl
               </a>
             )}
           </div>
+
+          <Menus menuId={messageItems?.msg_id} msgs={messageItems}/>
         </div>
         {type === "receiver_msg" &&
           messageItems.reply_to_msg_content &&

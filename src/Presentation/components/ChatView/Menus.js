@@ -6,49 +6,52 @@ import { useGetChatContext } from "../../../context/getChatContext";
 import { VscReply } from "react-icons/vsc";
 // import {toast} from 'react-toastify';
 import copyToClipboard from "../../../utils/copyToClipboard";
+import {Menu, Item } from "react-contexify";
 
-const Menus = ({ msgs, type }) => {
+const Menus = ({menuId, msgs}) => {
   const { handleReplyMsg } = useGetChatContext();
 
   return (
-    <div className="menus" style={{left: type === 'sender_msg' ? '18%' : '', right: type === 'receiver_msg' ? '-8%': ''}}>
-      <ul>
+    <Menu id={menuId} animation={false}>
         {msgs.msg_type === "text" && (
-          <li
+          <Item
             onClick={() => copyToClipboard(msgs.text)}
-            className="d-flex gap-2 align-items-center"
           >
-            <div>
-              <img src={copyIcon} alt="" />
+            <div className="d-flex gap-2 align-items-center">
+              <div>
+                <img src={copyIcon} alt="" />
+              </div>
+              <div>
+                <span>Copy</span>
+              </div>
             </div>
-            <div>
-              <span>Copy</span>
-            </div>
-          </li>
+          </Item>
         )}
         {msgs.msg_type === "image" || msgs.msg_type === "file" ? (
-          <li className="d-flex gap-2 align-items-center">
-            <div>
-              <img src={downloadIcon} alt="" />
+          <Item>
+            <div className="d-flex gap-2 align-items-center">
+              <div>
+                <img src={downloadIcon} alt="" />
+              </div>
+              <div>
+                <a
+                  style={{ color: "unset", textDecoration: "none" }}
+                  href={
+                    msgs.msg_type === "image"
+                      ? msgs.image_url
+                      : msgs.msg_type === "file" && msgs.file_url
+                  }
+                  download
+                >
+                  Download
+                </a>
+              </div>
             </div>
-            <div>
-              <a
-                style={{ color: "unset", textDecoration: "none" }}
-                href={
-                  msgs.msg_type === "image"
-                    ? msgs.image_url
-                    : msgs.msg_type === "file" && msgs.file_url
-                }
-                download
-              >
-                Download
-              </a>
-            </div>
-          </li>
+          </Item>
         ) : (
           ""
         )}
-        <li
+        <Item
           onClick={() =>
             handleReplyMsg(
               msgs.msg_type === "text"
@@ -58,18 +61,17 @@ const Menus = ({ msgs, type }) => {
                 : msgs.msg_type === 'file' && {msg: msgs.file_name, type: 'file', msgId: msgs.msg_id}
             )
           }
-          className="d-flex gap-2 align-items-center"
         >
-          <div>
-            <VscReply />
+          <div className="d-flex gap-2 align-items-center">
+            <div>
+              <VscReply />
+            </div>
+            <div>
+              <span>Reply</span>
+            </div>
           </div>
-          <div>
-            <span>Reply</span>
-          </div>
-        </li>
-        {/* <li>Download</li> */}
-      </ul>
-    </div>
+        </Item>
+    </Menu>
   );
 };
 

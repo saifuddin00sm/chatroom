@@ -16,16 +16,9 @@ const ChatView = () => {
   const { chat_id, bot_id, latest_msg_list, chat_name, pinned } = chatInfo;
   const userData = JSON.parse(localStorage.getItem("user_info"));
   // const divRef = useRef(null);
-  const [msgObj, setMsgObj] = useState([]);
   const [preventScroll, setPreventScroll] = useState(false);
 
   const handleScroll = () => {
-    const hasOpenMenu = msgObj.some(obj => obj.isMenuOpen);
-    if(hasOpenMenu){
-      setPreventScroll(true)
-    }else{
-      setPreventScroll(false);
-    }
     const { scrollTop } = divRef.current;
     if (scrollTop === 0) {
       // User has scrolled to the top of the div
@@ -71,55 +64,23 @@ const ChatView = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  };  
+
 
   useEffect(() => {
-    const msgs = Array.isArray(latest_msg_list)
-      ? latest_msg_list.map((item) => ({ ...item, isMenuOpen: false }))
-      : [];
-    setMsgObj(msgs);
-  }, [latest_msg_list]);
-
-
-  const menuOepnHandler = (msgId) => {
-    const messages = [...msgObj];
-
-    for (let i = 0; i < messages.length; i++) {
-      const msg = messages[i];
-      if (msg?.msg_id === msgId) {
-        msg.isMenuOpen = true;
-      } else {
-        msg.isMenuOpen = false;
-      }
+    const handleClick = ()=> {
+      setPreventScroll(false);
     }
 
-    setMsgObj(messages);
-  };
-
-  const closeMenuHandler = () => {
-    const msgs = [...msgObj];
-    for (let i = 0; i < msgs.length; i++) {
-      const msg = msgs[i];
-      if (msg.isMenuOpen) {
-        msg.isMenuOpen = false;
-
-        setMsgObj(msgs);
-        setPreventScroll(false);
-      }
-    }
-  };
-
-  useEffect(() => {
-  window.addEventListener("click", closeMenuHandler);
-  window.addEventListener("contextmenu",closeMenuHandler);
-
-    return () => {
-      window.removeEventListener('click', closeMenuHandler);
-      window.removeEventListener('contextmenu', closeMenuHandler);
-    }
-  })
+    window.addEventListener('click', handleClick);
+    window.addEventListener('contextmenu', handleClick);
   
-
+    return () => {
+      window.removeEventListener('click', handleClick);
+      window.removeEventListener('contextmenu', handleClick);
+    }
+  }, [])
+  
 
   return (
     <div
@@ -159,8 +120,8 @@ const ChatView = () => {
               </div>
             )}
             <div className="msg_container">
-              {msgObj.length ? (
-                msgObj.map((item) => {
+              {Array.isArray(latest_msg_list) ? (
+                 latest_msg_list.map((item) => {
                   let msg;
 
                   const formatDate = () => {
@@ -193,7 +154,7 @@ const ChatView = () => {
                         position="left"
                         messageItems={item}
                         formattedDate={formatDate}
-                        menuOepnHandler={menuOepnHandler}
+                        setPreventScroll={setPreventScroll}
                       />
                     );
                   } else {
@@ -204,7 +165,7 @@ const ChatView = () => {
                         position="right"
                         messageItems={item}
                         formattedDate={formatDate}
-                        menuOepnHandler={menuOepnHandler}
+                        setPreventScroll={setPreventScroll}
                       />
                     );
                   }
