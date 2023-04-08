@@ -9,11 +9,15 @@ import chatLoadingAnim from "../../../assets/img/chat-loading.gif";
 import { baseUrl, cleanChatContextUrl } from "../../../urls/urls";
 import moment from "moment";
 
-
 const ChatView = () => {
   const [isCleanLoading, setIsCleanLoading] = useState(false);
-  const { chatInfo, firstLoadingChat, loadMoreMsgs, moreMsgLoading, isLoadMoreMsg } =
-    useGetChatContext();
+  const {
+    chatInfo,
+    firstLoadingChat,
+    loadMoreMsgs,
+    moreMsgLoading,
+    isLoadMoreMsg,
+  } = useGetChatContext();
   const { chat_id, bot_id, latest_msg_list, chat_name, pinned } = chatInfo;
   const userData = JSON.parse(localStorage.getItem("user_info"));
   // const divRef = useRef(null);
@@ -67,42 +71,34 @@ const ChatView = () => {
     } catch (error) {
       console.log(error);
     }
-  };  
-
+  };
 
   useEffect(() => {
-    const handleClick = ()=> {
+    const handleClick = () => {
       setPreventScroll(false);
-    }
+    };
 
-    window.addEventListener('click', handleClick);
-    window.addEventListener('contextmenu', handleClick);
-  
+    window.addEventListener("click", handleClick);
+    window.addEventListener("contextmenu", handleClick);
+
     return () => {
-      window.removeEventListener('click', handleClick);
-      window.removeEventListener('contextmenu', handleClick);
-    }
+      window.removeEventListener("click", handleClick);
+      window.removeEventListener("contextmenu", handleClick);
+    };
   }, []);
 
-
-  
   useEffect(() => {
-    if(!isLoadMoreMsg){
-          // This will automatically scroll to the bottom of the div when it loads or updates
-          divRef.current?.scrollTo({
-            top: divRef?.current?.scrollHeight - divRef?.current?.clientHeight,
-            behavior: 'smooth'
-          });
+    if (!isLoadMoreMsg) {
+      // This will automatically scroll to the bottom of the div when it loads or updates
+      divRef.current?.scrollTo({
+        top: divRef?.current?.scrollHeight - divRef?.current?.clientHeight,
+        behavior: "smooth",
+      });
     }
-    
   }, [latest_msg_list]);
-  
-  
 
   return (
-    <div
-      className="chat_view_containers"
-    >
+    <div className="chat_view_containers">
       {firstLoadingChat ? (
         // <div className="loader" style={{ width: "80px", height: "80px" }}></div>
         <div className="loading_screen">
@@ -113,13 +109,20 @@ const ChatView = () => {
         </div>
       ) : (
         <>
-          <ChatViewHeader
-            chatName={chat_name}
-            agentName={bot_id}
-            chatId={chat_id}
-            pinned={pinned}
-          />
-          <div className="msg_box" style={{overflowY: preventScroll ? 'hidden': 'auto'}} ref={divRef} onScroll={handleScroll}>
+          <div className="app_header">
+            <ChatViewHeader
+              chatName={chat_name}
+              agentName={bot_id}
+              chatId={chat_id}
+              pinned={pinned}
+            />
+          </div>
+          <div
+            className="msg_box"
+            style={{ overflowY: preventScroll ? "hidden" : "auto" }}
+            ref={divRef}
+            onScroll={handleScroll}
+          >
             {moreMsgLoading && (
               <div className="d-flex justify-center align-center gap-2 loading-giff">
                 <img
@@ -138,7 +141,7 @@ const ChatView = () => {
             )}
             <div className="msg_container">
               {Array.isArray(latest_msg_list) ? (
-                 latest_msg_list.map((item) => {
+                latest_msg_list.map((item) => {
                   let msg;
 
                   const formatDate = () => {
@@ -195,11 +198,15 @@ const ChatView = () => {
               )}
             </div>
           </div>
-          <div className="chat_view_bottom">
-            <ChatInput
-              isCleanLoading={isCleanLoading}
-              handleCleanContext={handleCleanContext}
-            />
+          <div
+            className="bottom_items"
+          >
+            <div className="chat_view_bottom">
+              <ChatInput
+                isCleanLoading={isCleanLoading}
+                handleCleanContext={handleCleanContext}
+              />
+            </div>
           </div>
         </>
       )}

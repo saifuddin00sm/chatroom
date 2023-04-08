@@ -1,23 +1,34 @@
 .chat_view_containers {
   width: 100%;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   /* position: fixed;
   top: 0;
   left: 376px; */
   background-color: white;
   font-family: "Inter", sans-serif;
+  /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    height: 100vh;
+    width: 100%;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 /* CHAT VIEW HEADER STYLE STARTED HERE  */
 
 .chat_view_header {
-  height: 7vh;
+  /* height: 7vh; */
   background: #f9fafb;
   border-bottom: 1px solid #d9d9d9;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 32px 24px;
+  padding: 8px 24px;
 }
 
 .chat_view_header .avatar_container {
@@ -64,13 +75,17 @@
   padding: 8px 7px;
   bottom: 0px;
   /* height: 20vh; */
+  /* position: absolute;
+  width: 100%;
+  bottom: 0; */
+  /* right: 0; */
   height: auto;
 }
 
 /* CHAT VIEW BOTTOM STYLE ENDED HERE */
 
 .msg_box {
-  height: 73vh;
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 10px;
