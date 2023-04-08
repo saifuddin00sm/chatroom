@@ -8,14 +8,17 @@ import { VscReply } from "react-icons/vsc";
 import copyToClipboard from "../../../utils/copyToClipboard";
 import {Menu, Item } from "react-contexify";
 
-const Menus = ({menuId, msgs}) => {
+const Menus = ({menuId, msgs, setPreventScroll}) => {
   const { handleReplyMsg } = useGetChatContext();
 
   return (
     <Menu id={menuId} animation={false}>
         {msgs.msg_type === "text" && (
           <Item
-            onClick={() => copyToClipboard(msgs.text)}
+            onClick={() => {
+              copyToClipboard(msgs.text);
+              setPreventScroll(false)
+            }}
           >
             <div className="d-flex gap-2 align-items-center">
               <div>
@@ -28,7 +31,7 @@ const Menus = ({menuId, msgs}) => {
           </Item>
         )}
         {msgs.msg_type === "image" || msgs.msg_type === "file" ? (
-          <Item>
+          <Item onClick={()=> setPreventScroll(false)}>
             <div className="d-flex gap-2 align-items-center">
               <div>
                 <img src={downloadIcon} alt="" />
@@ -53,13 +56,15 @@ const Menus = ({menuId, msgs}) => {
         )}
         <Item
           onClick={() =>
-            handleReplyMsg(
+    {        handleReplyMsg(
               msgs.msg_type === "text"
                 ? {msg: msgs.text, type: 'text', msgId: msgs.msg_id}
                 : msgs.msg_type === "image"
                 ? {msg: msgs.image_url, type: 'image', alt: msgs.image_name, msgId: msgs.msg_id}
                 : msgs.msg_type === 'file' && {msg: msgs.file_name, type: 'file', msgId: msgs.msg_id}
-            )
+            );
+            setPreventScroll(false);
+          }
           }
         >
           <div className="d-flex gap-2 align-items-center">

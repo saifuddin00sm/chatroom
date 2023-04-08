@@ -146,7 +146,7 @@ const MessageBox = ({ type, position, messageItems, formattedDate, setPreventScr
             )}
           </div>
 
-          <Menus menuId={messageItems?.msg_id} msgs={messageItems}/>
+          <Menus setPreventScroll={setPreventScroll} menuId={messageItems?.msg_id} msgs={messageItems}/>
         </div>
         {type === "receiver_msg" &&
           messageItems.reply_to_msg_content &&
