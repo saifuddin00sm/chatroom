@@ -1,4 +1,4 @@
-import { useContext, createContext, useState, useEffect, useRef } from "react";
+import { useContext, createContext, useState, useEffect } from "react";
 import {
   addChatUrl,
   baseUrl,
@@ -25,14 +25,14 @@ export const GetChatContextProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
   const [replyMsg, setReplyMsg] = useState(null);
-  const divRef = useRef(null);
-  // const [deleteLoading, setDeleteLoading] = useState(false);
+  const [isLoadMoreMsg, setIsLoadMoreMsg] = useState(false);
 
   const handleReplyMsg = (msg) => {
     setReplyMsg(msg);
   };
 
   const socketActions = async (message) => {
+    setIsLoadMoreMsg(false);
     if (socket) {
       await socket.emit("message", message, function () {
         console.log("Text message sent successfully.");
@@ -112,6 +112,7 @@ export const GetChatContextProvider = ({ children }) => {
   };
 
   const loadMoreMsgs = async () => {
+    setIsLoadMoreMsg(true);
     try {
       const { chat_id, latest_msg_list } = chatInfo;
       const topMsgIndex = Array.isArray(latest_msg_list)
@@ -348,13 +349,6 @@ export const GetChatContextProvider = ({ children }) => {
     }
   };
 
-  const scrollBottom = ()=> {
-    const { scrollHeight, clientHeight } = divRef.current;
-    divRef.current.scrollTo({
-      top: scrollHeight - clientHeight,
-    });
-  }
-
   useEffect(() => {
     if (chatList.length) {
       let msgs = Array.isArray(chatList[0].latest_msg_list)
@@ -379,6 +373,8 @@ export const GetChatContextProvider = ({ children }) => {
 
     skt.on("message", function (msg) 
     {
+      console.log('msg runs')
+      setIsLoadMoreMsg(false);
       setChatInfo((prev) => {
         if (
           prev.latest_msg_list !== null &&
@@ -398,8 +394,6 @@ export const GetChatContextProvider = ({ children }) => {
           return { ...prev, latest_msg_list: [...msg.msg_list] };
         }
       });
-
-      scrollBottom();
     });
   };
 
@@ -418,7 +412,7 @@ export const GetChatContextProvider = ({ children }) => {
         handleChat,
         chatInfo,
         firstLoadingChat,
-        divRef,
+        isLoadMoreMsg,
         updateInfo,
         socketActions,
         connectSocket,

@@ -24,14 +24,16 @@ const Music = ({ file }) => {
   function handleTimeUpdate() {
     const currentTime = audioRef.current.currentTime;
     setCurrentTime(currentTime);
-    const el = chartRef.current.querySelectorAll('.play_chart');
+    const el = chartRef?.current.querySelectorAll('.play_chart');
     const width = Math.floor((currentTime / duration) * 45);
 
     for(let i=0; i < width; i++){
-        el[i].classList.add('green');
+        el[i]?.classList?.add('green');
     }
-    if(currentTime === duration){
+    if(currentTime > 0 && duration > 0){
+      if(currentTime === duration){
         setIsPlaying(!isPlaying);
+      }
     }
   }
 
@@ -46,7 +48,7 @@ const Music = ({ file }) => {
     if(currentTime === 0){
         const el = chartRef.current.querySelectorAll('.play_chart');
         el.forEach((elem)=> {
-            elem.classList.remove('green')
+            elem?.classList?.remove('green')
         })
     }
   }, [currentTime])

@@ -82,7 +82,7 @@ const MessageBox = ({ type, position, messageItems, formattedDate, setPreventScr
                   key: "value"
                 }
               });
-              setPreventScroll(true)
+              setPreventScroll(true);
             }}
             className={`msg_main ${type}`}
             style={{position: 'relative', padding: `${messageItems?.msg_type === "image" ? 0 : messageItems?.file_name?.includes(".mp3") && 0}` }}

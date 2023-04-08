@@ -9,14 +9,17 @@ import chatLoadingAnim from "../../../assets/img/chat-loading.gif";
 import { baseUrl, cleanChatContextUrl } from "../../../urls/urls";
 import moment from "moment";
 
+
 const ChatView = () => {
   const [isCleanLoading, setIsCleanLoading] = useState(false);
-  const { chatInfo, firstLoadingChat, loadMoreMsgs, moreMsgLoading, divRef } =
+  const { chatInfo, firstLoadingChat, loadMoreMsgs, moreMsgLoading, isLoadMoreMsg } =
     useGetChatContext();
   const { chat_id, bot_id, latest_msg_list, chat_name, pinned } = chatInfo;
   const userData = JSON.parse(localStorage.getItem("user_info"));
   // const divRef = useRef(null);
   const [preventScroll, setPreventScroll] = useState(false);
+
+  const divRef = useRef();
 
   const handleScroll = () => {
     const { scrollTop } = divRef.current;
@@ -79,7 +82,21 @@ const ChatView = () => {
       window.removeEventListener('click', handleClick);
       window.removeEventListener('contextmenu', handleClick);
     }
-  }, [])
+  }, []);
+
+
+  
+  useEffect(() => {
+    if(!isLoadMoreMsg){
+          // This will automatically scroll to the bottom of the div when it loads or updates
+          divRef.current?.scrollTo({
+            top: divRef?.current?.scrollHeight - divRef?.current?.clientHeight,
+            behavior: 'smooth'
+          });
+    }
+    
+  }, [latest_msg_list]);
+  
   
 
   return (
