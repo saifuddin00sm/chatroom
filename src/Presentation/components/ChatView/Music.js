@@ -130,7 +130,7 @@ const Music = ({ file }) => {
             <div className="play_chart rectangle-1-3"></div>
           </div>
         </div>
-        <div className="text-3 inter-bold-jewel-14px" style={{color: '#087443', fontWeight: 'bold'}}>{currentTime  === 0 ? '00' : currentTime.toFixed()}:{duration?.toFixed()}</div>
+        <div className="text-3 inter-bold-jewel-14px" style={{color: 'var(--color-primary)', fontWeight: 'bold'}}>{currentTime  === 0 ? '00' : currentTime.toFixed()}:{duration?.toFixed()}</div>
       </div>
     </div>
   );

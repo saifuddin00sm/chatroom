@@ -43,7 +43,7 @@ const Dashboard = () => {
 
   return (
     <div style={{display: 'flex'}}>
-      {/* <SIdeMenu /> */}
+      <SIdeMenu />
       <ChatList />
       <ChatView />
     </div>

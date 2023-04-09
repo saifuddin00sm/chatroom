@@ -345,7 +345,7 @@ const ChatInput = ({ handleCleanContext, isCleanLoading}) => {
                       >
                        {files?.loading ? (
                            <div className="loader" style={{
-                            border: "3px solid #ffffff",
+                            border: "3px solid var(--color-background)",
                             borderTop: "3px solid #0ca386", height: '100%', width: '100%'}}>
                           </div>
                       ) : <img src={closeIcon} alt="closeIcon" />}

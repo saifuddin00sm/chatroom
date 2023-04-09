@@ -39,7 +39,7 @@ const UpgradeModal = ({ isOpen, setUpgradeModal }) => {
                     }}
                     className="d-flex justify-content-center align-items-center"
                   >
-                    <GiCheckMark style={{ color: "#099250" }} />
+                    <GiCheckMark style={{ color: "var(--color-success)" }} />
                   </div>
                   <div>Multimodal input and output</div>
                 </li>
@@ -53,7 +53,7 @@ const UpgradeModal = ({ isOpen, setUpgradeModal }) => {
                     }}
                     className="d-flex justify-content-center align-items-center"
                   >
-                    <GiCheckMark style={{ color: "#099250" }} />
+                    <GiCheckMark style={{ color: "var(--color-success)" }} />
                   </div>
                   <div>Task-oriented chatting</div>
                 </li>
@@ -136,7 +136,7 @@ const UpgradeModal = ({ isOpen, setUpgradeModal }) => {
                     }}
                     className="d-flex justify-content-center align-items-center"
                   >
-                    <GiCheckMark style={{ color: "#099250" }} />
+                    <GiCheckMark style={{ color: "var(--color-success)" }} />
                   </div>
                   <div>Multimodal input and output</div>
                 </li>
@@ -150,7 +150,7 @@ const UpgradeModal = ({ isOpen, setUpgradeModal }) => {
                     }}
                     className="d-flex justify-content-center align-items-center"
                   >
-                    <GiCheckMark style={{ color: "#099250" }} />
+                    <GiCheckMark style={{ color: "var(--color-success)" }} />
                   </div>
                   <div>Task-oriented chatting</div>
                 </li>
@@ -164,7 +164,7 @@ const UpgradeModal = ({ isOpen, setUpgradeModal }) => {
                     }}
                     className="d-flex justify-content-center align-items-center"
                   >
-                    <GiCheckMark style={{ color: "#099250" }} />
+                    <GiCheckMark style={{ color: "var(--color-success)" }} />
                   </div>
                   <div>Up to 2 chats</div>
                 </li>
@@ -178,7 +178,7 @@ const UpgradeModal = ({ isOpen, setUpgradeModal }) => {
                     }}
                     className="d-flex justify-content-center align-items-center"
                   >
-                    <GiCheckMark style={{ color: "#099250" }} />
+                    <GiCheckMark style={{ color: "var(--color-success)" }} />
                   </div>
                   <div>100 tasking credits</div>
                 </li>
@@ -192,7 +192,7 @@ const UpgradeModal = ({ isOpen, setUpgradeModal }) => {
                     }}
                     className="d-flex justify-content-center align-items-center"
                   >
-                    <GiCheckMark style={{ color: "#099250" }} />
+                    <GiCheckMark style={{ color: "var(--color-success)" }} />
                   </div>
                   <div>Prioritize processing requests </div>
                 </li>
@@ -206,7 +206,7 @@ const UpgradeModal = ({ isOpen, setUpgradeModal }) => {
                     }}
                     className="d-flex justify-content-center align-items-center"
                   >
-                    <GiCheckMark style={{ color: "#099250" }} />
+                    <GiCheckMark style={{ color: "var(--color-success)" }} />
                   </div>
                   <div>Early access to new features</div>
                 </li>

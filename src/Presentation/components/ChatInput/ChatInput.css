@@ -1,7 +1,7 @@
 .chat_input_container {
   padding: 16px;
   height: 100%;
-  background: #ffffff;
+  background: var(--color-background);
   border: 1px solid #eaecf0;
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
   border-radius: 8px;
@@ -78,7 +78,7 @@
 }
 
 .chat_input_btn_container button.send_text_btn {
-  background: #099250;
+  background: var(--color-success);
 }
 
 .file_container {

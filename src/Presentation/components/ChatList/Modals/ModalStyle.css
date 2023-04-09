@@ -53,8 +53,8 @@
 
 .footer_button {
   width: 100%;
-  background: #099250;
-  border: 1px solid #099250;
+  background: var(--color-success);
+  border: 1px solid var(--color-success);
   /* Shadow/xs */
 
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
@@ -69,7 +69,7 @@
 
   /* Base/White */
 
-  color: #ffffff;
+  color: var(--color-background);
   outline: none;
 }
 
@@ -89,7 +89,7 @@
 
   text-align: center;
 
-  color: #2b2b2b;
+  color: var(--color-text-primary);
 }
 
 .header {
@@ -103,7 +103,7 @@
   text-align: center;
   letter-spacing: -0.02em;
 
-  color: #2b2b2b;
+  color: var(--color-text-primary);
 }
 
 /* invite modal stylings */
@@ -125,7 +125,7 @@
 
   text-align: center;
 
-  color: #2b2b2b;
+  color: var(--color-text-primary);
 }
 
 .input_container button {
@@ -137,8 +137,8 @@
   width: 137px;
   height: 44px;
 
-  background: #099250;
-  border: 1px solid #099250;
+  background: var(--color-success);
+  border: 1px solid var(--color-success);
   /* Shadow/xs */
   gap: 6px;
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
@@ -168,5 +168,5 @@ line-height: 30px;
 
 text-align: center;
 
-color: #2B2B2B;
+color: var(--color-text-primary);
 }

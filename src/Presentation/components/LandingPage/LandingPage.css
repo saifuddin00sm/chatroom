@@ -29,13 +29,13 @@
 }
 
 .signup_btn {
-  background-color: #099250;
+  background-color: var(--color-success);
   color: #fff;
 }
 
 .landing_heading > .landing_logo {
   text-transform: uppercase;
-  color: #2b2b2b;
+  color: var(--color-text-primary);
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
@@ -54,7 +54,7 @@ line-height: 76px;
 text-align: center;
 letter-spacing: -0.02em;
 
-color: #2B2B2B;
+color: var(--color-text-primary);
 }
 .hero_text{
     margin: 60px 0;
@@ -83,8 +83,8 @@ padding: 16px 32px;
 width: 201px;
 height: 59px;
 
-background: #099250;
-border: 1px solid #099250;
+background: var(--color-success);
+border: 1px solid var(--color-success);
 /* Shadow/xs */
 
 box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);

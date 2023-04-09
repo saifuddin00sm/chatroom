@@ -67,7 +67,7 @@ const ChatViewHeader = ({ chatName, agentName, chatId, pinned }) => {
               alt="pin_icon"
               className="img-fluid w-100 h-100"
             /> */}
-            {pinned ? <BsPinAngleFill color="#087443" style={{display: 'block', height: '23px', width: '23px'}} /> : <BsPinAngle color="#087443" style={{display: 'block', height: '23px', width: '23px'}}/>}
+            {pinned ? <BsPinAngleFill color="var(--color-primary)" style={{display: 'block', height: '23px', width: '23px'}} /> : <BsPinAngle color="var(--color-primary)" style={{display: 'block', height: '23px', width: '23px'}}/>}
           </div>
           <div
             onClick={() => setShowModal({ isOpen: true, chatId: chatId })}

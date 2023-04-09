@@ -17,7 +17,7 @@ const PageNotFound = () => {
     >
       <div>
         <img src={illustration} alt="" />
-        <h5 style={{ color: "#099250", marginTop: "20px", fontWeight: 700 }}>
+        <h5 style={{ color: "var(--color-success)", marginTop: "20px", fontWeight: 700 }}>
           TASKING.AI
         </h5>
         <p className="mb-0">
@@ -37,7 +37,7 @@ const PageNotFound = () => {
           }}
           style={{
             padding: "10px 15px",
-            background: "#099250",
+            background: "var(--color-success)",
             borderRadius: "5px",
             color: "#fff",
             border: "none",

@@ -12,7 +12,7 @@ import inviteIcons from "../../../assets/img/Invite-Outline.png";
 import settingIcons from "../../../assets/img/setting.png";
 import logoutIcons from "../../../assets/img/logout.png";
 import creditIcon from "../../../assets/img/credit1.png";
-import {BsPinAngle, BsPinAngleFill} from 'react-icons/bs';
+import {BsPinAngle} from 'react-icons/bs';
 
 import UpgradeModal from "./Modals/UpgradeModal";
 import InviteModal from "./Modals/InviteModal";
@@ -121,7 +121,7 @@ const ChatList = () => {
                             alt="pin_icon"
                             className="img-fluid pin_icon"
                           /> */}
-                          {pinned && <BsPinAngle color="#087443" style={{display: 'block', height: '16px', width: '16px'}}/>}
+                          {pinned && <BsPinAngle color="var(--color-primary)" style={{display: 'block', height: '16px', width: '16px'}}/>}
                         </div>
                       </div>
                     </div>

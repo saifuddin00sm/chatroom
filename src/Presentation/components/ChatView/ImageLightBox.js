@@ -10,7 +10,7 @@ const ImageLightBox = ({ url, onClose }) => {
         <div className="image_lightBox-close_icon">
           <button onClick={() => onClose(false)}>
             <VscChromeClose
-              color="#FFFFFF"
+              color="var(--color-background)"
               style={{ height: "24px", width: "24px" }}
             />
           </button>
@@ -42,7 +42,7 @@ const ImageLightBox = ({ url, onClose }) => {
               >
                 <div>
                   <TfiDownload
-                    color="#FFFFFF"
+                    color="var(--color-background)"
                     style={{ width: "30px", height: "30px" }}
                   />
                 </div>
@@ -53,7 +53,7 @@ const ImageLightBox = ({ url, onClose }) => {
                     fontWeight: "600",
                     fontSize: "20px",
                     lineHeight: "24px",
-                    color: "#FFFFFF",
+                    color: "var(--color-background)",
                   }}
                 >
                   Download

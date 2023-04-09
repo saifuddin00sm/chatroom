@@ -1,9 +1,9 @@
 import React from "react";
 import user_avatar from "../../../assets/img/user_avatar_1.jpg";
 import icon_1 from "../../../assets/img/icon_1.png";
-import icon_2 from "../../../assets/img/icon_2.png";
-import icon_3 from "../../../assets/img/icon_3.png";
-import icon_4 from "../../../assets/img/icon_4.png";
+// import icon_2 from "../../../assets/img/icon_2.png";
+import bot_icon from "../../../assets/img/bot-icon.svg";
+// import icon_4 from "../../../assets/img/icon_4.png";
 import "./SIdeMenu.css";
 
 const SideMenuTop = () => {
@@ -17,15 +17,15 @@ const SideMenuTop = () => {
         <li className="nav_link active">
           <img src={icon_1} alt="" className="img-fluid" />
         </li>
-        <li className="nav_link">
+        {/* <li className="nav_link">
           <img src={icon_2} alt="" className="img-fluid" />
-        </li>
+        </li> */}
         <li className="nav_link">
-          <img src={icon_3} alt="" className="img-fluid" />
+          <img src={bot_icon} alt="" className="img-fluid" />
         </li>
-        <li className="nav_link">
+        {/* <li className="nav_link">
           <img src={icon_4} alt="" className="img-fluid" />
-        </li>
+        </li> */}
       </ul>
     </div>
   );
