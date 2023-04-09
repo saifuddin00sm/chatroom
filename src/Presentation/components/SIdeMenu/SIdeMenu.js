@@ -3,10 +3,10 @@ import "./SIdeMenu.css";
 import SideMenuBottom from "./SideMenuBottom";
 import SideMenuTop from "./SideMenuTop";
 
-const SIdeMenu = () => {
+const SIdeMenu = ({setSwitchTab, switchTab}) => {
   return (
     <nav className="side-menu-container">
-      <SideMenuTop />
+      <SideMenuTop setSwitchTab={setSwitchTab} switchTab={switchTab}/>
       <SideMenuBottom />
     </nav>
   );

@@ -45,7 +45,7 @@ export const GetChatContextProvider = ({ children }) => {
 
     const chat = chatList.find((f) => f.chat_id === chatId);
     let msgs = Array.isArray(chat.latest_msg_list)
-      ? chat.latest_msg_list.reverse()
+      ? chat.latest_msg_list.sort((a, b) => new Date(a.backend_utc_timestamp) - new Date(b.backend_utc_timestamp))
       : null;
 
     setChatInfo({ ...chat, latest_msg_list: msgs });
@@ -118,9 +118,10 @@ export const GetChatContextProvider = ({ children }) => {
       const topMsgIndex = Array.isArray(latest_msg_list)
         ? latest_msg_list[0].msg_index
         : 0;
+        console.log(latest_msg_list)
         const isMsgFirst = latest_msg_list?.some((f)=> (f.msg_index === 0));
         
-      if (isMsgFirst) return;
+      if (isMsgFirst || latest_msg_list === null) return;
       setMoreMsgLoading(true);
       const token = localStorage.getItem("token");
       const formData = new FormData();

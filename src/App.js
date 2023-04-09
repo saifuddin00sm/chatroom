@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { ChatList, ChatView, SIdeMenu } from "./Presentation/index";
+import { ChatList, AppLeftView, SIdeMenu } from "./Presentation/index";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { useGetChatContext, GetChatContextProvider} from "./context/getChatContext";
@@ -9,8 +9,10 @@ import Signup from "./Authentication/Signup";
 import ForgotPassword from "./Authentication/ForgotPassword";
 import LandingPage from "./Presentation/components/LandingPage/LandingPage";
 import PageNotFound from "./Presentation/components/PageNotFound/PageNotFound";
+import { useState } from "react";
 
 function App() {
+  const [switchTab, setSwitchTab] = useState('people');
   return (
     <>
       <GetAuthContextProvider>
@@ -18,7 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/page-not-found" element={<PageNotFound />} />
-            <Route path="/chat" exact element={<Dashboard />} />
+            <Route path="/chat" exact element={<Dashboard switchTab={switchTab} setSwitchTab={setSwitchTab} />} />
             <Route path="/login" element={<Login />} />
             <Route path="/create-account" element={<Signup />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -30,7 +32,7 @@ function App() {
   );
 }
 
-const Dashboard = () => {
+const Dashboard = ({switchTab, setSwitchTab}) => {
   const { disconnectSocket, connectSocket } = useGetChatContext();
 
   useEffect(() => {
@@ -43,9 +45,9 @@ const Dashboard = () => {
 
   return (
     <div style={{display: 'flex'}}>
-      <SIdeMenu />
-      <ChatList />
-      <ChatView />
+      <SIdeMenu setSwitchTab={setSwitchTab} switchTab={switchTab}/>
+      <ChatList switchTab={switchTab}/>
+      <AppLeftView switchTab={switchTab}/>
     </div>
   );
 };

@@ -86,7 +86,7 @@ align-items: center;
 
 /* width */
 .all_chats_container .chat_box_main::-webkit-scrollbar {
-  width: 5px;
+  width: 2px;
 }
 
 /* Track */
@@ -97,7 +97,7 @@ align-items: center;
  
 /* Handle */
 .all_chats_container .chat_box_main::-webkit-scrollbar-thumb {
-  background: black; 
+  background: var(--color-text-secondary); 
   border-radius: 10px;
 }
 
@@ -107,8 +107,14 @@ align-items: center;
 }
 
 .chat_list_container .chat_box_container {
-  border-bottom: 1px solid #ebebeb;
+  /* border-bottom: 1px solid #ebebeb; */
   padding: 16px 15px;
+  margin-bottom: 3px;
+}
+
+.chat_box_container.selected{
+  background: var(--color-primary-light);
+  border-radius: 8px;
 }
 
 .chat_list_container .chat_box {
