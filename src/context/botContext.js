@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import { addBotUrl, baseUrl, getBotlistUrl } from "../urls/urls";
+import { addBotUrl, baseUrl, getBotSkillListUrl, getBotlistUrl } from "../urls/urls";
 import { updateBotUrl } from "../urls/urls";
 import { toast } from "react-toastify";
 
@@ -11,9 +11,10 @@ export const useBotContext = () => {
 
 export const BotContextProvider = ({ children }) => {
   const [botList, setBotList] = useState([]);
-  const [botInfo, setBotInfo] = useState(null);
+  const [botInfo, setBotInfo] = useState({});
   const [infoLoading, setInfoLoading] = useState(false);
   const [isAddNewBot, setIsAddNewBot] = useState(false);
+  const [botSkillList, setBotSkillList] = useState([]);
 
   const getUserInfo = () => {
     return JSON.parse(localStorage.getItem("user_info"));
@@ -62,12 +63,12 @@ export const BotContextProvider = ({ children }) => {
   const switchBot = (botId) => {
     const bot = botList.find((f) => f.bot_id === botId);
     setBotInfo(bot);
+    getBotSkillList();
   };
 
   const updateBotInfo = async (nameVal, bioVal, botId, profile_image_url) => {
     const { current_space_id } = getUserInfo();
     const token = localStorage.getItem("token");
-
     const formData = new FormData();
     formData.append("space_id", current_space_id);
     formData.append("name", nameVal);
@@ -191,6 +192,63 @@ export const BotContextProvider = ({ children }) => {
       });
     }
   };
+  
+
+  const getBotSkillList =async ()=> {
+    const { current_space_id } = getUserInfo();
+    const token = localStorage.getItem("token");
+    const {bot_id} = botInfo;
+    const limit = 100;
+    const offset = 0;
+
+    const formData = new FormData();
+
+    formData.append("space_id", current_space_id);
+    formData.append("bot_id", bot_id);
+    formData.append("limit", limit);
+    formData.append("offset", offset);
+
+    try {
+      setInfoLoading(true);
+      const res = await fetch(baseUrl + getBotSkillListUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        if (data.status === "success") {
+          console.log('skill list: ', data.bot_skill_list)
+          setBotSkillList(data.bot_skill_list);
+          setInfoLoading(false);
+        } else {
+          toast.error(data.error_msg, {
+            position: "top-center",
+            theme: "colored",
+            autoClose: 3000,
+          });
+          setInfoLoading(false);
+        }
+      } else {
+        toast.error("server error", {
+          position: "top-center",
+          theme: "colored",
+          autoClose: 3000,
+        });
+        setInfoLoading(false);
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        position: "top-center",
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+  }
 
   useEffect(() => {
     if (botList.length) {
@@ -210,7 +268,9 @@ export const BotContextProvider = ({ children }) => {
         infoLoading,
         addBot,
         isAddNewBot,
-        setIsAddNewBot
+        setIsAddNewBot,
+        botSkillList,
+        getBotSkillList
       }}
     >
       {children}

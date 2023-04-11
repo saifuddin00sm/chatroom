@@ -32,7 +32,7 @@ const BotSettings = () => {
             <div className="bot_profile_pic">
               <img
                 src={
-                  botInfo?.profile_image_url
+                  botInfo.profile_image_url
                     ? botInfo.profile_image_url
                     : user_avatar
                 }

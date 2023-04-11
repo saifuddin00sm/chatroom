@@ -1,3 +1,128 @@
-.bot_skills_container{
-    margin: 24px;
+.bot_skills_container {
+  margin: 24px;
+  display: flex;
+  gap: 30px;
+}
+
+.skill_list {
+  width: 50%;
+}
+
+.skill_list_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.skill_list_head h4 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 34px;
+  color: var(--color-text-primary);
+}
+.skill_list_head p {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  /* or 129% */
+  color: #475467;
+}
+
+.add_skill_btn button {
+  border: none;
+  transition: all 0.2s;
+  outline: none;
+  background: var(--color-primary);
+  color: var(--color-background);
+  padding: 8px 12px;
+  width: 123px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.add_skill_btn button:hover {
+  background-color: var(--color-success);
+}
+
+.add_skill_btn {
+  width: 70%;
+}
+
+.skills {
+  border: 1px solid var(--color-border);
+  margin-top: 30px;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.skill {
+  padding: 12px 16px;
+cursor: pointer;
+  background: var(--color-background);
+  /* background-color: #eee; */
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skill.selected{
+    background: var(--color-primary-light);
+}
+
+.skill_img {
+  height: 48px;
+  width: 48px;
+  border: 1px solid var(--color-primary);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.skill_img img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.skill_title {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 26px;
+  color: var(--color-text-primary);
+}
+
+.skill_desc {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  /* or 129% */
+  color: #475467;
+}
+
+.skill_version {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  color: var(--color-text-primary);
+}
+
+.skill_parent{
+    border-bottom: 1px solid var(--color-border);
+    padding: 6px 0px;
 }
