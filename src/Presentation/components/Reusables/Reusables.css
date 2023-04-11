@@ -1,0 +1,165 @@
+.comp_container {
+  max-width: 720px;
+  height: auto;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  margin: 24px;
+  border-radius: 8px;
+  /* padding: 16px; */
+  margin-bottom: 20px;
+}
+
+.comp_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 16px 15px 24px;
+  background-color: #f9fafb;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.comp_header .header_text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: var(--color-text-primary);
+}
+
+.comp_body {
+  padding: 15px 16px 15px 24px;
+}
+
+.comp_body .profile_img_tag {
+  text-transform: capitalize;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 150%;
+
+  color: #515151;
+}
+
+.comp_profile_pic {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border: 2px dashed var(--color-border);
+  border-radius: 8px;
+  position: relative;
+}
+
+.comp_profile_pic img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.img_upload_input{
+    
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.img_upload_input > p{
+    font-size: 10px;
+    margin-bottom: 0;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 16px;
+}
+.img_upload_input > input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.remove_img_btn {
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: -9px;
+  right: -9px;
+}
+
+.bot_form_control {
+  margin-bottom: 24px;
+}
+
+.bot_form_control input {
+  border: 1px solid var(--color-border);
+  padding: 10px;
+
+  background: var(--color-background);
+
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  width: 100%;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-text-primary);
+}
+
+.bot_form_control label {
+  margin-bottom: 10px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-default);
+}
+
+.bot_form_btns {
+  margin-top: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bot_form_btns > button {
+  border: 1px solid var(--color-primary);
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 8px;
+  padding: 12px 18px;
+  background-color: var(--color-background);
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  transition: all 0.2s;
+  width: 132px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bot_form_btns .save_btn {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
+.bot_form_btns .cancel_btn {
+  color: var(--color-primary);
+}
+.bot_form_btns .cancel_btn:hover {
+  background-color: var(--color-primary-light-hover);
+}
+
+.bot_form_btns .save_btn:hover {
+  background-color: var(--color-success);
+}

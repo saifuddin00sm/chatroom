@@ -10,6 +10,7 @@ import ForgotPassword from "./Authentication/ForgotPassword";
 import LandingPage from "./Presentation/components/LandingPage/LandingPage";
 import PageNotFound from "./Presentation/components/PageNotFound/PageNotFound";
 import { useState } from "react";
+import { BotContextProvider } from "./context/botContext";
 
 function App() {
   const [switchTab, setSwitchTab] = useState('people');
@@ -44,11 +45,13 @@ const Dashboard = ({switchTab, setSwitchTab}) => {
   }, []);
 
   return (
-    <div style={{display: 'flex'}}>
-      <SIdeMenu setSwitchTab={setSwitchTab} switchTab={switchTab}/>
-      <ChatList switchTab={switchTab}/>
-      <AppLeftView switchTab={switchTab}/>
-    </div>
+    <BotContextProvider>
+      <div style={{display: 'flex'}}>
+        <SIdeMenu setSwitchTab={setSwitchTab} switchTab={switchTab}/>
+        <ChatList switchTab={switchTab}/>
+        <AppLeftView switchTab={switchTab}/>
+      </div>
+    </BotContextProvider>
   );
 };
 export default App;

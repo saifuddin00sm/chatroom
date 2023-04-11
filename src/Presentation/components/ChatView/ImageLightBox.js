@@ -6,7 +6,7 @@ import { TfiDownload } from "react-icons/tfi";
 const ImageLightBox = ({ url, onClose }) => {
   return (
     <div className="image_ilghtBox_container" onClick={() => onClose(false)}>
-      <div class="lightBox_main">
+      <div className="lightBox_main">
         <div className="image_lightBox-close_icon">
           <button onClick={() => onClose(false)}>
             <VscChromeClose

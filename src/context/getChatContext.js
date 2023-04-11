@@ -79,7 +79,6 @@ export const GetChatContextProvider = ({ children }) => {
         const res = await data.json();
         if (res.status === "success") {
           setChatlist(res.chat_list);
-          console.log(res.chat_list);
           setChatLoading(false);
           if(param){
             setFirstLoadingChat(false);
@@ -198,8 +197,6 @@ export const GetChatContextProvider = ({ children }) => {
     if (e) {
       e.preventDefault();
     }
-
-    console.log(val, chatId, property);
 
     const token = localStorage.getItem("token");
     const formData = new FormData();

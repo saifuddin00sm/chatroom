@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import ChatInput from "../ChatInput/ChatInput";
 import ChatViewHeader from "./ChatViewHeader";
-import "./ChatView.css";
+// import "./ChatView.css";
 import MessageBox from "./MessageBox";
 import { useGetChatContext } from "../../../context/getChatContext";
 import loadingAnim from "../../../assets/img/load-more-msg-anim.gif";

@@ -21,4 +21,15 @@ export const deleteChatUrl = 'delete_chat';
 export const addChatUrl = 'add_chat';
 export const cleanChatContextUrl = 'clean_chat_context';
 
-
+// Bot info api url
+export const getBotlistUrl = 'get_bot_list';
+export const getBotInfoUrl = 'get_bot_info';
+export const addBotUrl = 'add_bot';
+export const deleteBotUrl = 'delete_bot';
+export const updateBotUrl = 'update_bot_info';
+export const getBotSkillListUrl = 'get_bot_skill_list';
+export const getBotSkillInfoUrl = 'get_bot_skill_info';
+export const updateBotSkillConfigUrl = 'update_bot_skill_config';
+export const queryMarketplaceUrl = 'query_marketplace_list';
+export const queryMarketplaceInfoUrl = 'query_marketplace_info';
+export const manageBotSkillUrl = 'manage_bot_skill';

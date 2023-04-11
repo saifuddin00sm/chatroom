@@ -1,0 +1,232 @@
+.chat_view_containers {
+    width: 100%;
+    /* min-height: 100vh; */
+    /* position: fixed;
+    top: 0;
+    left: 376px; */
+    background-color: white;
+    font-family: "Inter", sans-serif;
+    /* display: flex;
+      flex-direction: column;
+      justify-content: space-between; */
+  
+      display: flex;
+      justify-content: space-between;
+      /* align-items: center; */
+      height: 100vh;
+      width: 100%;
+      flex-direction: column;
+      overflow: hidden;
+  }
+  
+  /* CHAT VIEW HEADER STYLE STARTED HERE  */
+  
+  .chat_view_header {
+    /* height: 7vh; */
+    background: var(--color-bar-background);
+    border-bottom: 1px solid #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 24px;
+  }
+  
+  .chat_view_header .avatar_container {
+    width: 44px;
+    height: 44px;
+    background: #d9d9d9;
+    border-radius: 8px;
+  }
+  
+  .chat_view_header .chat_view_header_left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .chat_view_header .user_name,
+  .chat_name {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 32px;
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+  
+  .chat_view_header .right_arrow_icon {
+    font-size: 22px;
+  }
+  
+  .chat_view_header .chat_view_header_right {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .chat_view_header .chat_view_header_right img {
+    cursor: pointer;
+  }
+  
+  /* CHAT VIEW HEADER STYLE ENDED HERE  */
+  
+  /* CHAT VIEW BOTTOM STYLE STARTED HERE */
+  
+  .chat_view_bottom {
+    max-width: 100%;
+    padding: 8px 7px;
+    bottom: 0px;
+    /* height: 20vh; */
+    /* position: absolute;
+    width: 100%;
+    bottom: 0; */
+    /* right: 0; */
+    height: auto;
+  }
+  
+  /* CHAT VIEW BOTTOM STYLE ENDED HERE */
+  
+  .msg_box {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .loading-giff {
+    /* position: absolute;
+    left: 50%; */
+    top: 4px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+  
+  .msg_container {
+    margin-top: 30px;
+  }
+  
+  /* width */
+  .msg_box::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  /* Track */
+  .msg_box::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+  }
+  
+  /* Handle */
+  .msg_box::-webkit-scrollbar-thumb {
+    background: rgb(160, 160, 160);
+  }
+  
+  .chat_header_input {
+    padding: 10px;
+    border: 2px solid #f9fafb;
+    transition: all 0.2s;
+    border-radius: 7px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 32px;
+    color: var(--color-text-primary);
+  }
+  
+  .chat_header_input:hover {
+    border: 2px solid #cccc;
+  }
+  .chat_header_input:focus {
+    border: 2px solid #cccc;
+  }
+  
+  .loading_screen {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
+    height: 100vh;
+    color: var(--color-success);
+    text-transform: uppercase;
+    width: 100vw;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal_body_text {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    /* or 143% */
+  
+    /* Gray/600 */
+  
+    color: #475467;
+  }
+  
+  .modal_header_text {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    /* identical to box height, or 156% */
+  
+    /* Gray/900 */
+  
+    color: #101828;
+  }
+  
+  .session_container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .session_container .session_text {
+    max-width: 115px;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    font-family: "Inter", Helvetica;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    /* identical to box height, or 150% */
+  
+    color: #475467;
+  }
+  
+
+  /* bot information css */
+  .bot_top_btn{
+        border:none;
+    outline: none;
+    border-radius: 8px;
+    margin: 7px 2px;
+    padding: 5px 12px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    background: var(--color-bar-background);
+  }
+  .bot_top_btn.bot_top_btns_selected{
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+};
+
+.bot_infos{
+  height: 100%;
+  overflow-y: auto;
+}
