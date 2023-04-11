@@ -3,7 +3,7 @@ import add_icon from "../../../assets/img/add_icon.png";
 import user_avatar from "../../../assets/img/user_avatar_1.jpg";
 import { useBotContext } from "../../../context/botContext";
 const BotList = () => {
-  const { botList, botInfo, switchBot } = useBotContext();
+  const { botList, botInfo, switchBot, setIsAddNewBot } = useBotContext();
   return (
     <div className="chat_list_container">
       <div className="search_container">
@@ -17,7 +17,7 @@ const BotList = () => {
             Saif uddin
           </div>
         </div>
-        <button className="add_btn">
+        <button className="add_btn" onClick={()=> setIsAddNewBot(true)}>
           <img src={add_icon} alt="Add_Icon" className="img-fluid" />
         </button>
       </div>

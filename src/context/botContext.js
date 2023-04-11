@@ -1,5 +1,5 @@
 import { useContext, createContext, useState, useEffect } from "react";
-import { baseUrl, getBotlistUrl } from "../urls/urls";
+import { addBotUrl, baseUrl, getBotlistUrl } from "../urls/urls";
 import { updateBotUrl } from "../urls/urls";
 import { toast } from "react-toastify";
 
@@ -13,6 +13,7 @@ export const BotContextProvider = ({ children }) => {
   const [botList, setBotList] = useState([]);
   const [botInfo, setBotInfo] = useState(null);
   const [infoLoading, setInfoLoading] = useState(false);
+  const [isAddNewBot, setIsAddNewBot] = useState(false);
 
   const getUserInfo = () => {
     return JSON.parse(localStorage.getItem("user_info"));
@@ -132,9 +133,62 @@ export const BotContextProvider = ({ children }) => {
     }
   };
 
-  const addBot = ()=> {
-    console.log('bot added')
-  }
+  const addBot =  async (nameVal, bioVal, profile_image_url) => {
+    const { current_space_id } = getUserInfo();
+    const token = localStorage.getItem("token");
+
+    const formData = new FormData();
+    formData.append("space_id", current_space_id);
+    formData.append("name", nameVal);
+    formData.append("bio", bioVal);
+    formData.append("profile_image_url", profile_image_url);
+
+    try {
+      setInfoLoading(true);
+      const res = await fetch(baseUrl + addBotUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        if (data.status === "success") {
+          const newBot = data.bot_info;
+          setBotList((prev)=> ([...prev, newBot]));
+          toast.success('New Bot Added!', {
+            position: 'top-center',
+            autoClose: 2000
+          });
+          setInfoLoading(false);
+          setIsAddNewBot(false);
+        } else {
+          toast.error(data.error_msg, {
+            position: "top-center",
+            theme: "colored",
+            autoClose: 3000,
+          });
+          setInfoLoading(false);
+        }
+      } else {
+        toast.error("server error", {
+          position: "top-center",
+          theme: "colored",
+          autoClose: 3000,
+        });
+        setInfoLoading(false);
+      }
+    } catch (error) {
+      toast.error(error.message, {
+        position: "top-center",
+        theme: "colored",
+        autoClose: 3000,
+      });
+    }
+  };
 
   useEffect(() => {
     if (botList.length) {
@@ -151,7 +205,9 @@ export const BotContextProvider = ({ children }) => {
         switchBot,
         updateBotInfo,
         infoLoading,
-        addBot
+        addBot,
+        isAddNewBot,
+        setIsAddNewBot
       }}
     >
       {children}

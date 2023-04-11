@@ -42,12 +42,12 @@ const BotSettings = () => {
           </div>
           <div className="mb-3">
             <div className="bot_name_tag">Bot's Name</div>
-            <div className="bot_name">{botInfo?.name}</div>
+            <div className="bot_name">{botInfo?.name || ''}</div>
           </div>
           {botInfo.bio && (
             <div>
               <div className="bot_bio_tag">Bio</div>
-              <p className="bot_bio mb-0">{botInfo?.bio}</p>
+              <p className="bot_bio mb-0">{botInfo?.bio || ''}</p>
             </div>
           )}
         </div>

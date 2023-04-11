@@ -37,7 +37,7 @@ const AddOrEditInfo = ({
     if (apiType === "update") {
       updateBotInfo(botName, botBio, botId, profile_image_url);
     } else {
-      addBot();
+      addBot(botName, botBio, profile_image_url);
     }
   };
 
