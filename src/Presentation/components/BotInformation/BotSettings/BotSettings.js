@@ -1,10 +1,10 @@
-import React from "react";
+import { useState} from "react";
 import { useBotContext } from "../../../../context/botContext";
 import user_avatar from "../../../../assets/img/user_avatar_1.jpg";
 import { BiEdit } from "react-icons/bi";
 import "./BotSettings.css";
 import AddOrEditInfo from "../../Reusables/AddOrEditInfo";
-import { useState } from "react";
+
 
 const BotSettings = () => {
   const { botInfo } = useBotContext();
@@ -42,7 +42,7 @@ const BotSettings = () => {
           </div>
           <div className="mb-3">
             <div className="bot_name_tag">Bot's Name</div>
-            <div className="bot_name">{botInfo?.name || ''}</div>
+            <div className="bot_name">{botInfo?.name ? botInfo.name : ''}</div>
           </div>
           {botInfo.bio && (
             <div>

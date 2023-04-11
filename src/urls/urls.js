@@ -33,3 +33,4 @@ export const updateBotSkillConfigUrl = 'update_bot_skill_config';
 export const queryMarketplaceUrl = 'query_marketplace_list';
 export const queryMarketplaceInfoUrl = 'query_marketplace_info';
 export const manageBotSkillUrl = 'manage_bot_skill';
+export const uploadBotProfileUrl = 'upload_profile_image';

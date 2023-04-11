@@ -94,12 +94,13 @@ export const BotContextProvider = ({ children }) => {
             name: nameVal,
             bio: bioVal,
             bot_id: botId,
+            profile_image_url: profile_image_url
           }));
 
           setBotList(
             botList.map((bot) =>
               bot?.bot_id === botId
-                ? { ...bot, name: nameVal, bio: bioVal }
+                ? { ...bot, name: nameVal, bio: bioVal, profile_image_url: profile_image_url }
                 : bot
             )
           );
@@ -107,6 +108,7 @@ export const BotContextProvider = ({ children }) => {
             position: 'top-center',
             autoClose: 2000
           });
+          setIsAddNewBot(false);
           setInfoLoading(false);
         } else {
           toast.error(data.error_msg, {
@@ -196,6 +198,7 @@ export const BotContextProvider = ({ children }) => {
     }
   }, [botList]);
 
+  console.log(botList)
   return (
     <BotCotext.Provider
       value={{

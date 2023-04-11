@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Reusables.css";
+import { toast } from "react-toastify";
 import { CgClose, CgCloseO } from "react-icons/cg";
 // import user_avatar from "../../../assets/img/user_avatar_1.jpg";
 import { useBotContext } from "../../../context/botContext";
+import { baseUrl, uploadBotProfileUrl } from "../../../urls/urls";
 
 const AddOrEditInfo = ({
   botName,
@@ -18,20 +20,67 @@ const AddOrEditInfo = ({
     botBio: "",
     profile_image_url: "",
   });
+  const [isImgLoading, setIsImgLoading] = useState(false);
   const { updateBotInfo, infoLoading, addBot } = useBotContext();
 
-  const handleOnChange = (e) => {
+  const handleOnChange = async (e) => {
     const name = e.target.name;
     let value = e.target.value;
     if (name === "profile_image_url") {
       value = e.target.files[0];
+      const formData = new FormData();
+      formData.append("profile_type", "bot");
+      formData.append("image", value);
+
+      try {
+        const token = localStorage.getItem("token");
+        setIsImgLoading(true);
+        const res = await fetch(baseUrl + uploadBotProfileUrl, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          if (data.status === "success") {
+            value = data.image_url;
+            setIsImgLoading(false);
+          } else {
+            toast.error(data.error_msg, {
+              position: "top-center",
+              theme: "colored",
+              autoClose: 3000,
+            });
+            setIsImgLoading(false);
+          }
+        } else {
+          toast.error("Unknown error", {
+            position: "top-center",
+            theme: "colored",
+            autoClose: 3000,
+          });
+          setIsImgLoading(false);
+          console.log("server error");
+        }
+      } catch (error) {
+        toast.error(error.message, {
+          position: "top-center",
+          theme: "colored",
+          autoClose: 3000,
+        });
+        setIsImgLoading(false);
+        console.log(error.message);
+      }
     }
     setformState((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const { botName, botBio, profile_image_url } = formState;
 
     if (apiType === "update") {
@@ -66,9 +115,16 @@ const AddOrEditInfo = ({
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <div className="profile_img_tag">profile image</div>
-            <div className="mt-3 comp_profile_pic">
-              {profile_image_url ? (
-                <img src={profile_image_url} alt="profle_image" />
+            <div
+              className="mt-3 comp_profile_pic"
+              style={{
+                border: !formState.profile_image_url
+                  ? "2px dashed var(--color-border)"
+                  : "none",
+              }}
+            >
+              {formState.profile_image_url ? (
+                <img src={formState.profile_image_url} alt="profle_image" />
               ) : (
                 <div className="img_upload_input">
                   <input
@@ -77,11 +133,20 @@ const AddOrEditInfo = ({
                     type="file"
                     accept=".png, .jpg, .jpeg"
                   />
-                  <p>Upload Image</p>
+                  {isImgLoading ? (
+                    <div className="loader"></div>
+                  ) : (
+                    <p>Upload Image</p>
+                  )}
                 </div>
               )}
-              {profile_image_url && (
-                <div className="remove_img_btn">
+              {formState.profile_image_url && (
+                <div
+                  className="remove_img_btn"
+                  onClick={() =>
+                    setformState((prev) => ({ ...prev, profile_image_url: "" }))
+                  }
+                >
                   <CgCloseO
                     style={{
                       height: "24px",
