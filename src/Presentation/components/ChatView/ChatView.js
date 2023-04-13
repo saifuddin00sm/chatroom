@@ -46,10 +46,7 @@ const ChatView = () => {
       });
       const data = await res.json();
       if (res.ok) {
-        console.log(data);
         if (data.status === "success") {
-          //do something
-          console.log("got res");
           // const sessionEl = document.createElement('div')
           const msgContainer = document.querySelector(".msg_container");
           const sessionEl = document.createElement("div");

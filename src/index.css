@@ -16,6 +16,7 @@
   --color-bar-background: #fdfdfd;
   --color-background: #FFFFFF;
   --color-text-default: #344054;
+  --color-btn-disable: #EFEFEF;
 }
 
 html {
