@@ -4,6 +4,7 @@ import BotSkillList from "./BotSkillList";
 import BotSkillInfo from "./BotSkillInfo";
 import { useBotContext } from "../../../../context/botContext";
 import { useEffect } from "react";
+import Paginations from "../../Reusables/Paginations";
 const styles = {
   height: "100vh",
   width: "100%",
@@ -30,7 +31,7 @@ const QueryMarketPlaceSkillPopup = ({ closeHandler }) => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    if(!searchInputRef.current.value) return;
+    if (!searchInputRef.current.value) return;
     getQuerySkillList(searchInputRef.current.value);
   };
 
@@ -46,7 +47,7 @@ const QueryMarketPlaceSkillPopup = ({ closeHandler }) => {
     <div style={styles}>
       <div
         className="comp_container"
-        style={{ maxWidth: "1301px", width: "100%", height: "90%" }}
+        style={{ maxWidth: "1301px", width: "100%", height: "80%" }}
       >
         <div className="comp_header">
           <div className="header_text">Skills settings</div>
@@ -93,19 +94,26 @@ const QueryMarketPlaceSkillPopup = ({ closeHandler }) => {
                     className="loader"
                   ></div>
                 ) : queryMakarketSkillList.length > 0 ? (
-                  queryMakarketSkillList.map((skill) => (
-                    <BotSkillList
-                      skillId={skill.skill_id}
-                      title={skill.version_name}
-                      desc={skill.version_description}
-                      version={skill.version}
-                      img={skill.version_profile_image_url}
-                      infoId={queryMakarketSkillInfo?.skill_id}
-                      clickHandler={switchQuerySkill}
-                      isPopup={true}
-                    />
-                  ))
+                  <Paginations
+                    items={queryMakarketSkillList}
+                    skillInfo={queryMakarketSkillInfo}
+                    clickHandler={switchQuerySkill}
+                    isPopup={true}
+                  />
                 ) : (
+                  // queryMakarketSkillList.map((skill, index) => (
+                  //   <BotSkillList
+                  //     key={index}
+                  //     skillId={skill.skill_id}
+                  //     title={skill.version_name}
+                  //     desc={skill.version_description}
+                  //     version={skill.version}
+                  //     img={skill.version_profile_image_url}
+                  //     infoId={queryMakarketSkillInfo?.skill_id}
+                  //     clickHandler={switchQuerySkill}
+                  //     isPopup={true}
+                  //   />
+                  // ))
                   <p>No query skills found!</p>
                 )}
               </div>

@@ -5,6 +5,7 @@ import BotSkillInfo from "./BotSkillInfo";
 import { AiFillPlusCircle } from "react-icons/ai";
 import BotSkillList from "./BotSkillList";
 import QueryMarketPlaceSkillPopup from "./QueryMarketPlaceSkillPopup";
+import Paginations from "../../Reusables/Paginations";
 
 const BotSkills = () => {
   const {
@@ -47,19 +48,25 @@ const BotSkills = () => {
                 style={{ height: "40px", width: "40px" }}
               ></div>
             ) : botSkillList.length > 0 ? (
-              botSkillList.map((skill) => (
-                <div className="skill_parent" key={skill.skill_id}>
-                  <BotSkillList
-                    skillId={skill.skill_id}
-                    title={skill.version_name}
-                    desc={skill.version_description}
-                    version={skill.version}
-                    img={skill.version_profile_image_url}
-                    infoId={botSkillInfo?.skill_id}
-                    clickHandler={switchBotSkill}
-                  />
-                </div>
-              ))
+              <Paginations
+                items={botSkillList}
+                skillInfo={botSkillInfo}
+                clickHandler={switchBotSkill}
+                isPopup={false}
+             />
+              // botSkillList.map((skill) => (
+              //   <div className="skill_parent" key={skill.skill_id}>
+              //     <BotSkillList
+              //       skillId={skill.skill_id}
+              //       title={skill.version_name}
+              //       desc={skill.version_description}
+              //       version={skill.version}
+              //       img={skill.version_profile_image_url}
+              //       infoId={botSkillInfo?.skill_id}
+              //       clickHandler={switchBotSkill}
+              //     />
+              //   </div>
+              // ))
             ) : (
               <p className="mb-0 text-danger">No skills found!</p>
             )}

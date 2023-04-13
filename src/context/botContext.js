@@ -520,7 +520,7 @@ export const BotContextProvider = ({ children }) => {
     const { bot_id } = botInfo;
     const { current_space_id } = getUserInfo();
     const token = localStorage.getItem("token");
-    const limit = 5;
+    const limit = 10;
     const offset = 0;
 
     const formData = new FormData();

@@ -163,3 +163,43 @@
 .bot_form_btns .save_btn:hover {
   background-color: var(--color-success);
 }
+
+/* pagination styles */
+.pagination{
+  display: flex;
+  /* gap: 10px; */
+  max-width: 241px;
+  width: 100%;
+  margin: auto;
+  /* justify-content: space-between; */
+  /* border: 1px solid var(--color-border); */
+  border-radius: 8px;
+  margin-top: 30px;
+}
+
+.pagination li a{
+  height: 100%;
+  width: 100%;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text-primary);
+    text-decoration: none;
+}
+.pagination li {
+  /* padding: 10px; */
+  border: 1px solid var(--color-border);
+width: 40px;
+height: 40px;
+}
+
+.pagination .active{
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}
+.pagination .next{
+  border-radius: 0px 8px 8px 0px;
+}
+.pagination .previous{
+  border-radius: 8px 0px 0px 8px;
+}
