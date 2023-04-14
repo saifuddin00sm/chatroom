@@ -220,7 +220,12 @@
     font-size: 16px;
     line-height: 24px;
     background: var(--color-bar-background);
+    transition: all .2s;
   }
+  .bot_top_btn:hover{
+    background-color: var(--color-list-hover);
+  }
+
   .bot_top_btn.bot_top_btns_selected{
     background-color: var(--color-primary-light);
     color: var(--color-primary);

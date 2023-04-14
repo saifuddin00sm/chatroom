@@ -55,7 +55,7 @@
 .chat_input_btn_container .buttons {
   width: 42px;
   height: 42px;
-  background: #f7f7f7;
+  background: var(--color-list-hover);
   border: 0;
   border-radius: 50%;
   display: flex;

@@ -370,7 +370,7 @@ const ChatInput = ({ handleCleanContext, isCleanLoading}) => {
                     </div>
                   ) : replyMsg.type === "image" && (
                     <img
-                      style={{ height: "32px", width: "48px", borderRadius: "0px 8px 8px 8px" }}
+                      style={{ height: "32px", width: "48px", borderRadius: "0px 8px 8px 8px", objectFit: 'cover' }}
                       src={replyMsg.msg}
                       alt={replyMsg.alt}
                     />
