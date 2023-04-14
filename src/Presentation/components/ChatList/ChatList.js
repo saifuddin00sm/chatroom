@@ -7,7 +7,7 @@ import { useBotContext } from "../../../context/botContext";
 
 const ChatList = ({switchTab}) => {
 const {getChatList} = useGetChatContext();
-const {getBotList, botList} = useBotContext();
+const {getBotList} = useBotContext();
  
   useEffect(() => {
     getChatList('firstLoad');

@@ -64,7 +64,7 @@ export const GetChatContextProvider = ({ children }) => {
       formData.append("space_id", current_space_id);
 
       try {
-        if(param){
+        if(param === 'firstLoad'){
           setFirstLoadingChat(true);
         }
         setChatLoading(true);
@@ -80,7 +80,7 @@ export const GetChatContextProvider = ({ children }) => {
         if (res.status === "success") {
           setChatlist(res.chat_list);
           setChatLoading(false);
-          if(param){
+          if(param === 'firstLoad'){
             setFirstLoadingChat(false);
           }
         } else {
@@ -96,14 +96,14 @@ export const GetChatContextProvider = ({ children }) => {
           });
           setChatlist([]);
           setChatLoading(false);
-           if(param){
+           if(param === 'firstLoad'){
       setFirstLoadingChat(false);
     }
         }
       } catch (error) {
         console.log(error);
         setChatLoading(false);
-         if(param){
+         if(param === 'firstLoad'){
       setFirstLoadingChat(false);
     }
       }
@@ -248,7 +248,7 @@ export const GetChatContextProvider = ({ children }) => {
     }
   };
 
-  const addNewChat = async () => {
+  const addNewChat = async (botName) => {
     const userInfo = JSON.parse(localStorage.getItem("user_info"));
     const localToken = localStorage.getItem("token");
 
@@ -258,7 +258,7 @@ export const GetChatContextProvider = ({ children }) => {
 
     formData.append("space_id", spaceId);
     formData.append("bot_id", "tfajwm1qko0prx82");
-    formData.append("chat_name", "new chat");
+    formData.append("chat_name", `new chat with ${botName}`);
 
     try {
       const res = await fetch(baseUrl + addChatUrl, {

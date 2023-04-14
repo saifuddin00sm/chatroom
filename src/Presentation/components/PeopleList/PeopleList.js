@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import add_icon from "../../../assets/img/add_icon.png";
 // import pin_icon from "../../../assets/img/pin_icon.png";
 // import pin_filled_icon from "../../../assets/img/pin-filled.svg";
@@ -12,7 +12,9 @@ import inviteIcons from "../../../assets/img/Invite-Outline.png";
 import settingIcons from "../../../assets/img/setting.png";
 import logoutIcons from "../../../assets/img/logout.png";
 import creditIcon from "../../../assets/img/credit1.png";
-import {BsPinAngle} from 'react-icons/bs';
+import { BsPinAngle } from "react-icons/bs";
+import BotPopupList from "../BotPopupList/BotPopupList";
+import { useBotContext } from "../../../context/botContext";
 
 import UpgradeModal from "./Modals/UpgradeModal";
 import InviteModal from "./Modals/InviteModal";
@@ -22,34 +24,56 @@ const PeopleList = () => {
   const [isInviteModal, setIsInviteModal] = useState(false);
   const { chatList, chatLoading, handleChat, addNewChat, chatInfo } =
     useGetChatContext();
+  const { botList } = useBotContext();
   const { handleLogout } = useAuthContext();
-  const userInfo = JSON.parse(localStorage.getItem("user_info"));
+  // const userInfo = JSON.parse(localStorage.getItem("user_info"));
+  const [isBotPopup, setIsBotPopup] = useState(false);
+
+  useEffect(() => {
+    const handleClick = () => {
+      setIsBotPopup(false);
+    };
+
+    window.addEventListener("click", handleClick);
+
+    return () => {
+      window.removeEventListener("click", handleClick);
+    };
+  }, []);
 
   return (
     <>
       <div className="chat_list_container">
         <div className="search_container">
           <div className="search_left">
-            <div className="profile_img">
+            {/* <div className="profile_img">
               {userInfo?.first_name?.charAt(0) + userInfo?.last_name?.charAt(0)}
-            </div>
+            </div> */}
             <div className="user_name">
-              {userInfo?.first_name + " " + userInfo?.last_name}
-              {/* Saif uddin */}
+              {/* {userInfo?.first_name + " " + userInfo?.last_name} */}
+              Chat
             </div>
           </div>
-          <button onClick={addNewChat} className="add_btn">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsBotPopup(true);
+            }}
+            className="add_btn"
+          >
             <img src={add_icon} alt="Add_Icon" className="img-fluid" />
           </button>
+
+          {isBotPopup && <BotPopupList clickHandler={addNewChat} />}
         </div>
         {/* CHAT list */}
         <div className="all_chats_container">
           <div
-          className="chat_box_main"
+            className="chat_box_main"
             style={{
               display: chatLoading && "flex",
               justifyContent: chatLoading && "center",
-              overflowY: 'auto'
+              overflowY: "auto",
             }}
           >
             {chatLoading ? (
@@ -68,14 +92,20 @@ const PeopleList = () => {
                 return (
                   <div
                     onClick={() => handleChat(chat_id)}
-                    className={`chat_box_container ${chat_id === chatInfo?.chat_id ? 'selected': ''}`}
+                    className={`chat_box_container ${
+                      chat_id === chatInfo?.chat_id ? "selected" : ""
+                    }`}
                     key={chat_id}
                   >
                     <div className="chat_box">
                       <div className="chat_box_left">
                         <div className="user_avatar_box">
                           <img
-                            src={user_avatar}
+                            src={
+                              botList.find((bot) =>
+                                chat_name.includes(bot?.name)
+                              )?.profile_image_url || user_avatar
+                            }
                             alt="User_Avatar"
                             className="img-fluid"
                           />
@@ -117,7 +147,16 @@ const PeopleList = () => {
                             alt="pin_icon"
                             className="img-fluid pin_icon"
                           /> */}
-                          {pinned && <BsPinAngle color="var(--color-primary)" style={{display: 'block', height: '16px', width: '16px'}}/>}
+                          {pinned && (
+                            <BsPinAngle
+                              color="var(--color-primary)"
+                              style={{
+                                display: "block",
+                                height: "16px",
+                                width: "16px",
+                              }}
+                            />
+                          )}
                         </div>
                       </div>
                     </div>
@@ -129,7 +168,11 @@ const PeopleList = () => {
           <div className="chats_bottom">
             <div className="chat_bottom_items d-flex gap-2 align-items-center">
               <div style={{ width: "36px", height: "36px" }}>
-                <img style={{height: '100%', width: '100%', objectFit: 'cover'}} src={creditIcon} alt="" />
+                <img
+                  style={{ height: "100%", width: "100%", objectFit: "cover" }}
+                  src={creditIcon}
+                  alt=""
+                />
               </div>
               <div className="col-10">
                 <div className="credit_heading d-flex justify-content-between">
@@ -144,13 +187,19 @@ const PeopleList = () => {
               </div>
             </div>
             <div className="chat_bottom_items">
-              <button onClick={()=> setIsUpgradeModal(true)} className="chat_bottom_buttons">
+              <button
+                onClick={() => setIsUpgradeModal(true)}
+                className="chat_bottom_buttons"
+              >
                 <img src={upgradeIcons} alt="" />
                 <span>Upgrade now</span>
               </button>
             </div>
             <div className="chat_bottom_items">
-              <button onClick={()=> setIsInviteModal(true)} className="chat_bottom_buttons">
+              <button
+                onClick={() => setIsInviteModal(true)}
+                className="chat_bottom_buttons"
+              >
                 <img src={inviteIcons} alt="" />
                 <span>Invite a friend</span>
               </button>
@@ -170,8 +219,11 @@ const PeopleList = () => {
           </div>
         </div>
       </div>
-      <UpgradeModal isOpen={isUpgradeModal}  setUpgradeModal={setIsUpgradeModal}/>
-      <InviteModal isOpen={isInviteModal} setIsInviteModal={setIsInviteModal}/>
+      <UpgradeModal
+        isOpen={isUpgradeModal}
+        setUpgradeModal={setIsUpgradeModal}
+      />
+      <InviteModal isOpen={isInviteModal} setIsInviteModal={setIsInviteModal} />
     </>
   );
 };

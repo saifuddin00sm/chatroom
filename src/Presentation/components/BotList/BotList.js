@@ -8,13 +8,13 @@ const BotList = () => {
     <div className="chat_list_container">
       <div className="search_container">
         <div className="search_left">
-          <div className="profile_img">
-            {/* {userInfo?.first_name?.charAt(0) + userInfo?.last_name?.charAt(0)} */}
+          {/* <div className="profile_img">
+            {userInfo?.first_name?.charAt(0) + userInfo?.last_name?.charAt(0)}
             SU
-          </div>
+          </div> */}
           <div className="user_name">
             {/* {userInfo?.first_name + " " + userInfo?.last_name} */}
-            Saif uddin
+            Bot
           </div>
         </div>
         <button className="add_btn" onClick={()=> setIsAddNewBot(true)}>

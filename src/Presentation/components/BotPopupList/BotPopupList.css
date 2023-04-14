@@ -1,0 +1,60 @@
+.botPopup_container {
+  position: absolute;
+  right: 4px;
+  bottom: 0px;
+  padding: 12px;
+  gap: 12px;
+  width: 246px;
+  height: 188px;
+  top: 71px;
+  background: var(--color-background);
+  border: 1px solid #eaecf0;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  z-index: 1000;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/* width */
+.botPopup_container::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+.botPopup_container::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+}
+
+/* Handle */
+.botPopup_container::-webkit-scrollbar-thumb {
+  background: rgb(160, 160, 160);
+}
+
+.botPopup_profile_img {
+  width: 32px;
+  height: 32px;
+}
+
+.botPopup_profile_img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.botPopup_container .popup_bots {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 5px;
+  transition: all .2s;
+}
+
+.botPopup_container .popup_bots:hover{
+    background-color: var(--color-item-hover);
+}

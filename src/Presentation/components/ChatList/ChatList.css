@@ -17,6 +17,7 @@
   padding: 11px 15px;
   border-bottom: 1px solid #d9d9d9;
   gap: 12px;
+  position: relative;
 }
 
 .chat_list_container .search_left {
@@ -116,7 +117,7 @@ align-items: center;
   display: flex;
   justify-content: space-between;
   height: 40px;
-  gap: 36px;
+  /* gap: 36px; */
   cursor: pointer;
 }
 
