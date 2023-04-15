@@ -171,11 +171,11 @@
   /* gap: 10px; */
   max-width: 241px;
   width: 100%;
-  margin: auto;
+  /* margin: auto; */
   /* justify-content: space-between; */
   /* border: 1px solid var(--color-border); */
   border-radius: 8px;
-  margin-top: 30px;
+  /* margin-top: 30px; */
 }
 
 .pagination li a{

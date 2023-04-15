@@ -61,6 +61,11 @@
   margin-top: 30px;
   padding: 12px;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
 .skill {

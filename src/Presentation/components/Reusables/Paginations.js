@@ -28,19 +28,21 @@ function Paginations({ items, skillInfo, clickHandler, isPopup }) {
 console.log('pagination: ',currentItems)
   return (
     <>
-      {currentItems.map((skill, index) => (
-        <BotSkillList
-          key={index}
-          skillId={skill.skill_id}
-          title={skill.version_name}
-          desc={skill.version_description}
-          version={skill.version}
-          img={skill.version_profile_image_url}
-          infoId={skillInfo?.skill_id}
-          clickHandler={clickHandler}
-          isPopup={isPopup}
-        />
-      ))}
+      <div>
+        {currentItems.map((skill, index) => (
+          <BotSkillList
+            key={index}
+            skillId={skill.skill_id}
+            title={skill.version_name}
+            desc={skill.version_description}
+            version={skill.version}
+            img={skill.version_profile_image_url}
+            infoId={skillInfo?.skill_id}
+            clickHandler={clickHandler}
+            isPopup={isPopup}
+          />
+        ))}
+      </div>
       {items.length > 5 && (
         <ReactPaginate
           breakLabel="..."

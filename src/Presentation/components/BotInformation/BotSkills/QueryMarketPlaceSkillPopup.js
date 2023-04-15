@@ -47,7 +47,7 @@ const QueryMarketPlaceSkillPopup = ({ closeHandler }) => {
     <div style={styles}>
       <div
         className="comp_container"
-        style={{ maxWidth: "1301px", width: "100%", height: "80%" }}
+        style={{ maxWidth: "1301px", width: "100%" }}
       >
         <div className="comp_header">
           <div className="header_text">Skills settings</div>
@@ -80,6 +80,13 @@ const QueryMarketPlaceSkillPopup = ({ closeHandler }) => {
                 </form>
               </div>
               <div
+              style={{
+                height: "74vh",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
                 className={`${
                   queryListLoading ? "d-flex justify-content-center" : ""
                 }`}
