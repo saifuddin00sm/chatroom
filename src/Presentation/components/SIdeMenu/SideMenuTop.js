@@ -4,24 +4,53 @@ import icon_1 from "../../../assets/img/icon_1.png";
 // import icon_2 from "../../../assets/img/icon_2.png";
 import bot_icon from "../../../assets/img/bot-icon.svg";
 // import icon_4 from "../../../assets/img/icon_4.png";
+import { NavLink } from "react-router-dom";
 import "./SIdeMenu.css";
 
-const SideMenuTop = ({setSwitchTab, switchTab}) => {
-  const userInfo = JSON.parse(localStorage.getItem('user_info'));
+const SideMenuTop = ({ setSwitchTab, switchTab }) => {
+  const userInfo = JSON.parse(localStorage.getItem("user_info"));
   return (
     <div className="navigation">
       <ul>
         <li className="user_avatar">
-          <img src={userInfo && userInfo.profile_image_url ? userInfo.profile_image_url : user_avatar} alt="User_Avatar" className="img-fluid" />
+          <img
+            src={
+              userInfo && userInfo.profile_image_url
+                ? userInfo.profile_image_url
+                : user_avatar
+            }
+            alt="User_Avatar"
+            className="img-fluid"
+          />
         </li>
-        <li className={`nav_link ${switchTab === 'people' ? 'active': ''}`} onClick={()=> setSwitchTab('people')}>
+        {/* <li className={`nav_link ${switchTab === 'people' ? 'active': ''}`} onClick={()=> setSwitchTab('people')}>
           <img src={icon_1} alt="" className="img-fluid" />
+        </li> */}
+        <li className="nav_link">
+          <NavLink
+            className={({ isActive, isPending }) =>
+            `nav_link ${isPending ? "pending" : isActive ? "active" : ""}`
+            }
+            to="/chat"
+          >
+            <img src={icon_1} alt="" className="img-fluid" />
+          </NavLink>
         </li>
         {/* <li className="nav_link">
           <img src={icon_2} alt="" className="img-fluid" />
         </li> */}
-        <li className={`nav_link ${switchTab === 'bot' ? 'active': ''}`} onClick={()=> setSwitchTab('bot')}>
+        {/* <li className={`nav_link ${switchTab === 'bot' ? 'active': ''}`} onClick={()=> setSwitchTab('bot')}>
           <img src={bot_icon} alt="" className="img-fluid" />
+        </li> */}
+        <li>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              `nav_link ${isPending ? "pending" : isActive ? "active" : ""}`
+            }
+            to="/bot"
+          >
+            <img src={bot_icon} alt="" className="img-fluid" />
+          </NavLink>
         </li>
         {/* <li className="nav_link">
           <img src={icon_4} alt="" className="img-fluid" />

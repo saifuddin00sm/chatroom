@@ -33,6 +33,7 @@ export const BotContextProvider = ({ children }) => {
   const [queryMakarketSkillList, setQueryMakarketSkillList] = useState([]);
   const [queryMakarketSkillInfo, setQueryMakarketSkillInfo] = useState(null);
   const [isEditBot, setIsEditBot] = useState(false);
+  const [addOrUpdateLoading, setAddOrUpdateLoading] = useState(false);
 
   const getUserInfo = () => {
     return JSON.parse(localStorage.getItem("user_info"));
@@ -95,7 +96,7 @@ export const BotContextProvider = ({ children }) => {
     formData.append("profile_image_url", profile_image_url);
 
     try {
-      setInfoLoading(true);
+      setAddOrUpdateLoading(true);
       const res = await fetch(baseUrl + updateBotUrl, {
         method: "POST",
         headers: {
@@ -129,7 +130,7 @@ export const BotContextProvider = ({ children }) => {
             )
           );
           setIsEditBot(false);
-          setInfoLoading(false);
+          setAddOrUpdateLoading(false);
           toast.success("Info Updated!", {
             position: "top-center",
             autoClose: 2000,
@@ -140,7 +141,7 @@ export const BotContextProvider = ({ children }) => {
             theme: "colored",
             autoClose: 3000,
           });
-          setInfoLoading(false);
+          setAddOrUpdateLoading(false);
         }
       } else {
         toast.error("server error", {
@@ -148,7 +149,7 @@ export const BotContextProvider = ({ children }) => {
           theme: "colored",
           autoClose: 3000,
         });
-        setInfoLoading(false);
+        setAddOrUpdateLoading(false);
       }
     } catch (error) {
       toast.error(error.message, {
@@ -170,7 +171,7 @@ export const BotContextProvider = ({ children }) => {
     formData.append("profile_image_url", profile_image_url);
 
     try {
-      setInfoLoading(true);
+      setAddOrUpdateLoading(true);
       const res = await fetch(baseUrl + addBotUrl, {
         method: "POST",
         headers: {
@@ -185,7 +186,7 @@ export const BotContextProvider = ({ children }) => {
         if (data.status === "success") {
           const newBot = data.bot_info;
           setBotList((prev) => [...prev, newBot]);
-          setInfoLoading(false);
+          setAddOrUpdateLoading(false);
           setIsAddNewBot(false);
           toast.success("New Bot Added!", {
             position: "top-center",
@@ -197,7 +198,7 @@ export const BotContextProvider = ({ children }) => {
             theme: "colored",
             autoClose: 3000,
           });
-          setInfoLoading(false);
+          setAddOrUpdateLoading(false);
         }
       } else {
         toast.error("server error", {
@@ -205,7 +206,7 @@ export const BotContextProvider = ({ children }) => {
           theme: "colored",
           autoClose: 3000,
         });
-        setInfoLoading(false);
+        setAddOrUpdateLoading(false);
       }
     } catch (error) {
       toast.error(error.message, {
@@ -609,7 +610,8 @@ export const BotContextProvider = ({ children }) => {
         updateSkillConfig,
         updateConfigLoading,
         setIsEditBot,
-        isEditBot
+        isEditBot,
+        addOrUpdateLoading
       }}
     >
       {children}

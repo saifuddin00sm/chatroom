@@ -21,7 +21,7 @@ const AddOrEditInfo = ({
     profile_image_url: "",
   });
   const [isImgLoading, setIsImgLoading] = useState(false);
-  const { updateBotInfo, infoLoading, addBot } = useBotContext();
+  const { updateBotInfo, addBot,addOrUpdateLoading } = useBotContext();
 
   const handleOnChange = async (e) => {
     const name = e.target.name;
@@ -185,7 +185,7 @@ const AddOrEditInfo = ({
 
           <div className="bot_form_btns">
             <button className="save_btn" type="submit">
-              {infoLoading ? (
+              {addOrUpdateLoading ? (
                 <div
                   style={{
                     height: "25px",

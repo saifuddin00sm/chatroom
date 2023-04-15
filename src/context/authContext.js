@@ -252,6 +252,7 @@ export const GetAuthContextProvider = ({ children }) => {
         url !== "/login" &&
         url !== "/create-account" &&
         url !== "/forgot-password" &&
+        url !== "/bot" &&
         url !== "/"
       ) {
         navigate("/page-not-found");
@@ -269,6 +270,7 @@ export const GetAuthContextProvider = ({ children }) => {
       const url = location.pathname;
     if (
       url !== "/chat" &&
+      url !== "/bot" &&
       url !== "/login" &&
       url !== "/create-account" &&
       url !== "/forgot-password" &&

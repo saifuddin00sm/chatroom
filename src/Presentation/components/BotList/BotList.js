@@ -2,6 +2,7 @@ import React from "react";
 import add_icon from "../../../assets/img/add_icon.png";
 import user_avatar from "../../../assets/img/user_avatar_1.jpg";
 import { useBotContext } from "../../../context/botContext";
+
 const BotList = () => {
   const { botList, botInfo, switchBot, setIsAddNewBot } = useBotContext();
   return (

@@ -1,7 +1,4 @@
-import SIdeMenu from "./components/SIdeMenu/SIdeMenu";
-import ChatList from "./components/ChatList/ChatList";
-// import TaskList from "./components/TaskList/TaskList";
-// import ChatView from "./components/ChatView/ChatView";
-import AppLeftView from "./components/AppLeftView";
+import Bot from "./Pages/Bot";
+import Chat from "./Pages/Chat";
 
-export { SIdeMenu, AppLeftView, ChatList };
+export { Bot, Chat };
