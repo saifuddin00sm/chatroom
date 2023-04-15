@@ -4,11 +4,11 @@ import user_avatar from "../../../../assets/img/user_avatar_1.jpg";
 import { BiEdit } from "react-icons/bi";
 import "./BotSettings.css";
 import AddOrEditInfo from "../../Reusables/AddOrEditInfo";
+import PopupShadow from "../../Reusables/PopupShadow";
 
 
 const BotSettings = () => {
-  const { botInfo } = useBotContext();
-  const [isEdit, setIsEdit] = useState(false);
+  const { botInfo, setIsEditBot, isEditBot } = useBotContext();
   return (
     <>
       <div className="bot_info_container">
@@ -16,7 +16,7 @@ const BotSettings = () => {
           <h5>Profile Information</h5>
           <div
             className="d-flex align-items-center gap-2 bot_info_edit_btn"
-            onClick={() => setIsEdit(true)}
+            onClick={() => setIsEditBot(true)}
           >
             <div>
               <BiEdit style={{ height: "20px", width: "20px" }} />
@@ -52,16 +52,18 @@ const BotSettings = () => {
           )}
         </div>
       </div>
-      {isEdit && (
-        <AddOrEditInfo
-          botName={botInfo?.name}
-          botBio={botInfo?.bio}
-          profile_image_url={botInfo?.profile_image_url}
-          botId={botInfo?.bot_id}
-          closeHandler={setIsEdit}
-          headerText='Profile Information'
-          apiType='update'
-        />
+      {isEditBot && (
+        <PopupShadow>
+          <AddOrEditInfo
+            botName={botInfo?.name}
+            botBio={botInfo?.bio}
+            profile_image_url={botInfo?.profile_image_url}
+            botId={botInfo?.bot_id}
+            closeHandler={setIsEditBot}
+            headerText='Profile Information'
+            apiType='update'
+          />
+        </PopupShadow>
       )}
     </>
   );

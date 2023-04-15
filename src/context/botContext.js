@@ -32,6 +32,7 @@ export const BotContextProvider = ({ children }) => {
   const [botSkillList, setBotSkillList] = useState([]);
   const [queryMakarketSkillList, setQueryMakarketSkillList] = useState([]);
   const [queryMakarketSkillInfo, setQueryMakarketSkillInfo] = useState(null);
+  const [isEditBot, setIsEditBot] = useState(false);
 
   const getUserInfo = () => {
     return JSON.parse(localStorage.getItem("user_info"));
@@ -127,12 +128,12 @@ export const BotContextProvider = ({ children }) => {
                 : bot
             )
           );
+          setIsEditBot(false);
+          setInfoLoading(false);
           toast.success("Info Updated!", {
             position: "top-center",
             autoClose: 2000,
           });
-          setIsAddNewBot(false);
-          setInfoLoading(false);
         } else {
           toast.error(data.error_msg, {
             position: "top-center",
@@ -184,12 +185,12 @@ export const BotContextProvider = ({ children }) => {
         if (data.status === "success") {
           const newBot = data.bot_info;
           setBotList((prev) => [...prev, newBot]);
+          setInfoLoading(false);
+          setIsAddNewBot(false);
           toast.success("New Bot Added!", {
             position: "top-center",
             autoClose: 2000,
           });
-          setInfoLoading(false);
-          setIsAddNewBot(false);
         } else {
           toast.error(data.error_msg, {
             position: "top-center",
@@ -606,7 +607,9 @@ export const BotContextProvider = ({ children }) => {
         queryInfoLoading,
         queryListLoading,
         updateSkillConfig,
-        updateConfigLoading
+        updateConfigLoading,
+        setIsEditBot,
+        isEditBot
       }}
     >
       {children}

@@ -101,7 +101,7 @@ const AddOrEditInfo = ({
   }, [botName, botBio, profile_image_url]);
 
   return (
-    <div className="comp_container">
+    <div className="comp_container" style={{width: '720px'}}>
       <div className="comp_header">
         <div className="header_text">{headerText}</div>
         <div className="header_close_btn" onClick={() => closeHandler(false)}>
