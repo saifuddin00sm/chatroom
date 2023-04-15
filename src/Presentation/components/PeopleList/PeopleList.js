@@ -22,7 +22,7 @@ import InviteModal from "./Modals/InviteModal";
 const PeopleList = () => {
   const [isUpgradeModal, setIsUpgradeModal] = useState(false);
   const [isInviteModal, setIsInviteModal] = useState(false);
-  const { chatList, chatLoading, handleChat, addNewChat, chatInfo } =
+  const { chatList, chatLoading, handleChat, addNewChat, chatInfo, showSettingsMenu } =
     useGetChatContext();
   const { botList } = useBotContext();
   const { handleLogout } = useAuthContext();
@@ -165,65 +165,94 @@ const PeopleList = () => {
               })
             )}
           </div>
-          <div className="chats_bottom">
-            <div className="chat_bottom_items d-flex gap-2 align-items-center">
-              <div style={{ width: "36px", height: "36px" }}>
-                <img
-                  style={{ height: "100%", width: "100%", objectFit: "cover" }}
-                  src={creditIcon}
-                  alt=""
-                />
+          {showSettingsMenu && (
+            <div className="chats_bottom">
+              <div className="chat_bottom_items">
+                <button className="chat_bottom_buttons">
+                  <img src={inviteIcons} alt="" />
+                  <span>User Settings</span>
+                </button>
               </div>
-              <div className="col-10">
-                <div className="credit_heading d-flex justify-content-between">
-                  <p className="mb-0">Credit Left</p>
-                  <p className="mb-0">400/500</p>
+              <div className="chat_bottom_items">
+                <button className="chat_bottom_buttons">
+                  <img src={inviteIcons} alt="" />
+                  <span>Space Settings</span>
+                </button>
+              </div>
+              <div className="chat_bottom_items">
+                <button className="chat_bottom_buttons">
+                  <img src={inviteIcons} alt="" />
+                  <span>Bot Settings</span>
+                </button>
+              </div>
+
+              <div className="chat_bottom_items d-flex gap-2 align-items-center">
+                <div style={{ width: "20px", height: "10px" }}>
+                  <img
+                    style={{
+                      height: "100%",
+                      width: "100%",
+                      objectFit: "cover",
+                    }}
+                    src={creditIcon}
+                    alt=""
+                  />
                 </div>
-                <progress
-                  className="credit_progress"
-                  value="400"
-                  max="500"
-                ></progress>
+                <div className="col-10">
+                  <div
+                    className="credit_heading d-flex justify-content-between"
+                    style={{ fontSize: "14px" }}
+                  >
+                    <p className="mb-0">Credit Left</p>
+                    <p className="mb-0">400/500</p>
+                  </div>
+                  <progress
+                    className="credit_progress"
+                    value="400"
+                    max="500"
+                  ></progress>
+                </div>
+              </div>
+              <hr style={{ margin: "0px 0px" }} />
+              {/* <div className="chat_bottom_items">
+                              <button
+                                onClick={() => setIsUpgradeModal(true)}
+                                className="chat_bottom_buttons"
+                              >
+                                <img src={upgradeIcons} alt="" />
+                                <span>Upgrade now</span>
+                              </button>
+                            </div>
+                            <div className="chat_bottom_items">
+                              <button
+                                onClick={() => setIsInviteModal(true)}
+                                className="chat_bottom_buttons"
+                              >
+                                <img src={inviteIcons} alt="" />
+                                <span>Invite a friend</span>
+                              </button>
+                            </div>
+                            <div className="chat_bottom_items">
+                              <button className="chat_bottom_buttons">
+                                <img src={settingIcons} alt="" />
+                                <span>Settings</span>
+                              </button>
+                            </div> */}
+              <div className="chat_bottom_items">
+                <button onClick={handleLogout} className="chat_bottom_buttons">
+                  <img src={logoutIcons} alt="" />
+                  <span>Logout</span>
+                </button>
               </div>
             </div>
-            <div className="chat_bottom_items">
-              <button
-                onClick={() => setIsUpgradeModal(true)}
-                className="chat_bottom_buttons"
-              >
-                <img src={upgradeIcons} alt="" />
-                <span>Upgrade now</span>
-              </button>
-            </div>
-            <div className="chat_bottom_items">
-              <button
-                onClick={() => setIsInviteModal(true)}
-                className="chat_bottom_buttons"
-              >
-                <img src={inviteIcons} alt="" />
-                <span>Invite a friend</span>
-              </button>
-            </div>
-            <div className="chat_bottom_items">
-              <button className="chat_bottom_buttons">
-                <img src={settingIcons} alt="" />
-                <span>Settings</span>
-              </button>
-            </div>
-            <div className="chat_bottom_items">
-              <button onClick={handleLogout} className="chat_bottom_buttons">
-                <img src={logoutIcons} alt="" />
-                <span>Logout</span>
-              </button>
-            </div>
-          </div>
+          )}
         </div>
       </div>
-      <UpgradeModal
+      {/* <UpgradeModal
         isOpen={isUpgradeModal}
         setUpgradeModal={setIsUpgradeModal}
       />
-      <InviteModal isOpen={isInviteModal} setIsInviteModal={setIsInviteModal} />
+      <InviteModal isOpen={isInviteModal} setIsInviteModal={setIsInviteModal} /> */}
     </>
   );
 };

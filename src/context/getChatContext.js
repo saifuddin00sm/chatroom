@@ -26,6 +26,7 @@ export const GetChatContextProvider = ({ children }) => {
   const [moreMsgLoading, setMoreMsgLoading] = useState(false);
   const [replyMsg, setReplyMsg] = useState(null);
   const [isLoadMoreMsg, setIsLoadMoreMsg] = useState(false);
+  const [showSettingsMenu, setShowSettingsMenu] = useState(false);
 
   const handleReplyMsg = (msg) => {
     setReplyMsg(msg);
@@ -421,6 +422,8 @@ export const GetChatContextProvider = ({ children }) => {
         handleReplyMsg,
         replyMsg,
         addNewChat,
+        showSettingsMenu,
+        setShowSettingsMenu
       }}
     >
       {children}

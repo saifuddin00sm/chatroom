@@ -82,6 +82,7 @@ align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
   gap: 20px 0px;
 }
 
@@ -185,17 +186,37 @@ align-items: center;
 }
 
 .chat_bottom_items{
-  padding: 12px 15px;
-  border-bottom: 1px solid #d9d9d9;
+  padding: 0;
+  font-family: 'Inter';
+  /* margin-bottom: 2px; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-primary);
 }
 /* CHAT BOX STYLE ENDED HERE */
-
+.chats_bottom{
+  border: 1px solid #E4E4E4;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.05);
+    z-index: 100;
+    background: var(--color-background);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    width: 188px;
+    flex-direction: column;
+    gap: 10px 0;
+}
 
 .chats_bottom .chat_bottom_buttons{
   border: none;
   outline: none;
   transition: all .2s;
-  padding: 8px 15px;
+  /* padding: 5px; */
   border-radius: 5px;
   width: 100%;
   text-align: left;
@@ -211,8 +232,7 @@ align-items: center;
 }
 
 .chats_bottom .chat_bottom_buttons:hover{
-  background: var(--color-primary);
-  color: #fff;
+  background: var(--color-list-hover);
 }
 
 .credit_progress {
