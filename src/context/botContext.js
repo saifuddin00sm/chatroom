@@ -522,7 +522,7 @@ export const BotContextProvider = ({ children }) => {
     const { bot_id } = botInfo;
     const { current_space_id } = getUserInfo();
     const token = localStorage.getItem("token");
-    const limit = 10;
+    const limit = 20;
     const offset = 0;
 
     const formData = new FormData();
@@ -549,6 +549,7 @@ export const BotContextProvider = ({ children }) => {
       if (res.ok) {
         if (data.status === "success") {
           setQueryMakarketSkillList(data.skill_list);
+          console.log(data)
           setQueryListLoading(false);
         } else {
           toast.error(data.error_msg, {
