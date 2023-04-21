@@ -118,7 +118,7 @@ export const GetChatContextProvider = ({ children }) => {
       const topMsgIndex = Array.isArray(latest_msg_list)
         ? latest_msg_list[0].msg_index
         : 0;
-        console.log(latest_msg_list)
+        console.log(latest_msg_list, topMsgIndex);
         const isMsgFirst = latest_msg_list?.some((f)=> (f.msg_index === 0));
         
       if (isMsgFirst || latest_msg_list === null) return;

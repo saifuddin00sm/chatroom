@@ -91,16 +91,19 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding: 10px;
-    position: relative;
+    /* position: relative; */
   }
   
   .loading-giff {
     /* position: absolute;
       left: 50%; */
-    top: 4px;
+    /* top: 4px;
     position: absolute;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0); */
+    position: absolute;
+    left: 50%;
+    transform: translate(30%, -17%);
   }
   
   .msg_container {
@@ -237,9 +240,7 @@
     overflow-y: auto;
   }
   
-  
-  
-  
+
   .chat_list_container {
     /* position: fixed; */
     width: 300px;
@@ -492,4 +493,22 @@
   .credit_progress::-webkit-progress-value {
     background-color: var(--color-primary);
     border-radius: 5px;
+  }
+
+  /* .infinite-scroll-component{
+    
+  } */
+
+  .msg_container::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+
+  .msg_container::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+  }
+  
+
+  .msg_container::-webkit-scrollbar-thumb {
+    background: rgb(160, 160, 160);
   }

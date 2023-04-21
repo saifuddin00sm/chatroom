@@ -8,6 +8,7 @@ import loadingAnim from "../../../assets/img/load-more-msg-anim.gif";
 import chatLoadingAnim from "../../../assets/img/chat-loading.gif";
 import { baseUrl, cleanChatContextUrl } from "../../../urls/urls";
 import moment from "moment";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const ChatView = () => {
   const [isCleanLoading, setIsCleanLoading] = useState(false);
@@ -25,13 +26,13 @@ const ChatView = () => {
 
   const divRef = useRef();
 
-  const handleScroll = () => {
-    const { scrollTop } = divRef.current;
-    if (scrollTop === 0) {
-      // User has scrolled to the top of the div
-      loadMoreMsgs();
-    }
-  };
+  // const handleScroll = () => {
+  //   const { scrollTop } = divRef.current;
+  //   if (scrollTop === 0) {
+  //     // User has scrolled to the top of the div
+  //     // loadMoreMsgs();
+  //   }
+  // };
 
   const handleCleanContext = async () => {
     const localToken = localStorage.getItem("token");
@@ -117,8 +118,8 @@ const ChatView = () => {
           <div
             className="msg_box"
             style={{ overflowY: preventScroll ? "hidden" : "auto" }}
-            ref={divRef}
-            onScroll={handleScroll}
+            // ref={divRef}
+            // onScroll={handleScroll}
           >
             {moreMsgLoading && (
               <div className="d-flex justify-center align-center gap-2 loading-giff">
@@ -136,58 +137,70 @@ const ChatView = () => {
                 </p>
               </div>
             )}
-            <div className="msg_container">
+            <div className="msg_container"
+             id="scrollableDiv"
+             ref={divRef}
+             style={{
+               height: '100%',
+               overflow: 'auto',
+               display: 'flex',
+               flexDirection: 'column-reverse',
+               overflowY: preventScroll ? "hidden" : "auto"
+             }}
+            >
               {Array.isArray(latest_msg_list) ? (
-                latest_msg_list.map((item) => {
-                  let msg;
-
-                  const formatDate = () => {
-                    let formattedDate;
-
-                    const dateStr = item?.backend_utc_timestamp;
-                    const utcDate = moment.utc(dateStr);
-                    const localDate = utcDate.local().format();
-
-                    const date = moment(localDate);
-                    const today = moment(new Date()).day();
-                    const mmDate = date.format("h:mma, MMMM D");
-                    const time = date.format("h:mma");
-                    const dayOfWeek = date.day();
-
-                    if (dayOfWeek !== today) {
-                      formattedDate = mmDate;
+                <InfiniteScroll
+                inverse={true}
+                hasMore={true}
+                next={loadMoreMsgs}
+                dataLength={latest_msg_list.length}
+                scrollableTarget="scrollableDiv"
+                >
+                 { latest_msg_list.map((item) => {
+                    let msg;
+                    const formatDate = () => {
+                      let formattedDate;
+                      const dateStr = item?.backend_utc_timestamp;
+                      const utcDate = moment.utc(dateStr);
+                      const localDate = utcDate.local().format();
+                      const date = moment(localDate);
+                      const today = moment(new Date()).day();
+                      const mmDate = date.format("h:mma, MMMM D");
+                      const time = date.format("h:mma");
+                      const dayOfWeek = date.day();
+                      if (dayOfWeek !== today) {
+                        formattedDate = mmDate;
+                      } else {
+                        formattedDate = time;
+                      }
+                      return formattedDate;
+                    };
+                    if (item?.sender_id === userData?.user_id) {
+                      msg = (
+                        <MessageBox
+                          key={item?.msg_id}
+                          type="receiver_msg"
+                          position="left"
+                          messageItems={item}
+                          formattedDate={formatDate}
+                          setPreventScroll={setPreventScroll}
+                        />
+                      );
                     } else {
-                      formattedDate = time;
+                      msg = (
+                        <MessageBox
+                          key={item?.msg_id}
+                          type="sender_msg"
+                          position="right"
+                          messageItems={item}
+                          formattedDate={formatDate}
+                          setPreventScroll={setPreventScroll}
+                        />
+                      );
                     }
-
-                    return formattedDate;
-                  };
-
-                  if (item?.sender_id === userData?.user_id) {
-                    msg = (
-                      <MessageBox
-                        key={item?.msg_id}
-                        type="receiver_msg"
-                        position="left"
-                        messageItems={item}
-                        formattedDate={formatDate}
-                        setPreventScroll={setPreventScroll}
-                      />
-                    );
-                  } else {
-                    msg = (
-                      <MessageBox
-                        key={item?.msg_id}
-                        type="sender_msg"
-                        position="right"
-                        messageItems={item}
-                        formattedDate={formatDate}
-                        setPreventScroll={setPreventScroll}
-                      />
-                    );
-                  }
-                  return msg;
-                })
+                    return msg;
+                  })}
+                </InfiniteScroll>
               ) : (
                 <h5 style={{ textAlign: "center", marginTop: "50px" }}>
                   No Messages found!
