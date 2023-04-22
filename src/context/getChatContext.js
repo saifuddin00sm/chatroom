@@ -360,7 +360,7 @@ export const GetChatContextProvider = ({ children }) => {
   const connectSocket = () => {
     const token = localStorage.getItem("token");
 
-    const skt = io("http://13.56.163.152:5000", {
+    const skt = io("https://api-test.tasking.ai", {
       query: { token: token },
       transports: ["websocket", "polling"],
     }); // replace with your server URL

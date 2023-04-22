@@ -1,4 +1,4 @@
-export const baseUrl = 'http://13.56.163.152:5000/api/v1/';
+export const baseUrl = 'https://api-test.tasking.ai/api/v1/';
 
 // Authentication urls
 export const loginUrl = 'login';
