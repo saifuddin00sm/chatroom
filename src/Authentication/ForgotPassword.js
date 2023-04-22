@@ -75,7 +75,7 @@ const Signup = () => {
                 </div>
               </div>
               <div className="copyright text-center p-4 text-dark">
-                <p>&#64; Copyright, XXX 2023</p>
+                <p>© 2023 TASKING.AI</p>
               </div>
               </div>
             </div>
@@ -101,7 +101,7 @@ const Signup = () => {
                 </label>
                 <InputBox
                   name="email"
-                  label="example@gmail.com"
+                  // label="example@gmail.com"
                   type="email"
                   onChange={handleChange}
                 />
@@ -112,7 +112,7 @@ const Signup = () => {
                   Verification code*
                 </label>
                 <InputBox
-                  label="123456"
+                  // label="123456"
                   name="verification"
                   type="number"
                   onChange={handleChange}
@@ -137,7 +137,7 @@ const Signup = () => {
                   Password*
                 </label>
                 <InputBox
-                  label="******"
+                  // label="******"
                   name="password"
                   type="password"
                   onChange={handleChange}
@@ -149,7 +149,7 @@ const Signup = () => {
                   Confirm New Password*
                 </label>
                 <InputBox
-                  label="******"
+                  // label="******"
                   name="confirmPassword"
                   type="password"
                   onChange={handleChange}

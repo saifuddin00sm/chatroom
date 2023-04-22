@@ -36,7 +36,7 @@ const LandingPage = () => {
       </section>
       <section className="m-auto text-center preview_sect">
         <img src={illustration} alt="teen_image" />
-        <img src={chatPreview} alt="chat preview" />
+        {/*<img src={chatPreview} alt="chat preview" />*/}
       </section>
     </div>
   );

@@ -56,7 +56,7 @@ const Login = () => {
                 </div>
               </div>
               <div className="copyright text-center p-4 text-dark">
-                <p>&#64; Copyright, XXX 2023</p>
+                <p>© 2023 TASKING.AI</p>
               </div>
               </div>
             </div>
@@ -82,7 +82,7 @@ const Login = () => {
                   </label>
                   <InputBox
                     name="email"
-                    label="example@gmail.com"
+                    // label="example@gmail.com"
                     type="email"
                     onChange={handleChange}
                   />
@@ -93,7 +93,7 @@ const Login = () => {
                     Password*
                   </label>
                   <InputBox
-                    label="******"
+                    // label="******"
                     name="password"
                     type="password"
                     onChange={handleChange}
@@ -102,8 +102,8 @@ const Login = () => {
 
                 <div className="forgotBtn mb-3">
                   <div className="checkbox">
-                    <input type="checkbox" style={{ width: "20px" }} />
-                    <label htmlFor="remember">Remember for 30 days</label>
+                    {/*<input type="checkbox" style={{ width: "20px" }} />*/}
+                    {/*<label htmlFor="remember">Remember for 30 days</label>*/}
                   </div>
 
                   <Link to="/forgot-password" className="forgotPass">Forgot Password</Link>
